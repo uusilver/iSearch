@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html ng-app="indexApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1, target-densitydpi=medium-dpi, user-scalable=no">
+<title>井冈密柚</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<style type="text/css">
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	margin:0px auto;
+	font-size:14px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #F50404;
+	border-collapse: collapse;
+	width:100%
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #F50404;
+	color:#FFF;
+	background-color: #CA0202;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #F50404;
+	background-color: #ffffff;
+}
+.control-group{ margin-top:10px;}
+</style>
+<script type="text/javascript" src="js/my_lab.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script src="../../../general-js/angular.js"></script>
+<script charset="gbk" language="JavaScript" type="application/javascript" src="../../../general-js/index.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		;(function(){
+			var oBox = document.getElementById('lists');
+			var aLists = oBox.getElementsByTagName('dl');
+			for(var i=0; i<aLists.length; i++){
+				aLists[i].onclick = function(){
+					var _tar = this;
+					if(hasClass(_tar,'active')){
+						removeClass(_tar,'active');	
+					}else{
+						for(var j=0; j<aLists.length; j++){
+							removeClass(aLists[j],'active');			
+						}
+						addClass(_tar,'active');	
+						scrollToTar(getOffsetPos(_tar).t-10);
+						//document.body.scrollTop = document.documentElement.scrollTop = getOffsetPos(_tar).t-10;
+					}
+				}	
+			}
+		})();
+	}
+	
+</script>
+
+
+</head>
+
+<body ng-controller="indexController">
+	<div id="warp">
+    	<div class="head_area pr">
+        	
+            <img class="fullW" src="images/head_bg.jpg" />        </div>
+		<div class="head_area pr">
+        	
+            <img class="fullW" src="images/banner_bgzx1.jpg" />        </div>
+        <div class="pdp3">
+                        
+                             <div style="font-size:20px; color:#000000; text-align:center; margin:0px auto; width:370px; height:170px;font-weight:bold;line-height:40px;">鲜果防伪溯源身份证唯一编号：{{indentityCode}}<br><span>查询次数：{{queryTimes}}</span>
+ <a href="#P1" style="width:149px;height:44px;  margin:0px auto; display:block; background-image:url(images/buttom.jpg); border:none;"></a>
+</div>
+                        
+                        </div>
+						<div class="head_area pr">
+        	
+            <img class="fullW" src="images/banner_bgzx2.jpg" />        </div>
+        <!--main-->
+        <div id="main">
+        	<div class="pdp3">
+            	<!--lists-->
+                <div id="lists">
+	  <!--产地-->
+        <dl>
+          <dt class="clearfix brR3"> <i class="slid_ico"> <img class="pic1" src="images/ico_down.png" /> <img class="pic2" src="images/ico_up.png" /> </i> <span class="tit"><img src="images/tit2.png" /></span> </dt>
+          <dd>
+            <div class="txtPic clearfix"> <i class="float_l W50"><img src="images/pic4.png" /></i> <span class="float_l W50">我们的井冈蜜柚柚子生长在以柚子品质而知名的井冈山。有着500余年的蜜柚种植历史文化。</span> </div>
+            <div class="txtPic clearfix"> <i class="float_r W50"><img src="images/pic5.jpg" /></i>
+                <div class="float_l W50">
+                  <p>当地阳光和水源充足，气候温和，肥沃的土壤有着最适合蜜柚生长的pH值与有机质及微量元素。</p>
+                  <p>我们井冈蜜柚柚子手工进行收获，挑选，包装然后直接送到门店，全程0中间商，以此确保新鲜与完整的可追溯性。</p>
+                </div>
+            </div>
+          </dd>
+        </dl>
+        <!--口味-->
+        <dl>
+          <dt class="clearfix brR3"> <i class="slid_ico"> <img class="pic1" src="images/ico_down.png" /> <img class="pic2" src="images/ico_up.png" /> </i> <span class="tit"><img src="images/tit1.png" /></span> </dt>
+          <dd>
+            <div class="txtPic clearfix"> <i class="float_l W35"><img src="images/pic1.png" /></i> <span class="float_l W65">我们选择了以肉白，汁多，香甜而知名的蜜柚这一品种。蜜柚色青白至青黄，圆形，平底，皮薄。</span> </div>
+            <div class="txtPic clearfix"> <i class="float_r W35"><img src="images/pic2.png" /></i> <span class="float_l W65">我们井冈蜜柚的橙子仅在最佳成熟度时进行收获——为了确保持久稳定的最佳品质，收获时间不提早，不延迟。</span> </div>
+            <div class="txtPic clearfix"> <i class="float_l W35"><img src="images/pic3.png" /></i> <span class="float_l W65">当质量控制确认所有口感参数达到了规范手册要求的参数才能将其认证为井冈蜜柚柚子。</span> </div>
+          </dd>
+        </dl>
+        
+        <!--食品安全-->
+        <dl>
+          <dt class="clearfix brR3"> <i class="slid_ico"> <img class="pic1" src="images/ico_down.png" /> <img class="pic2" src="images/ico_up.png" /> </i> <span class="tit"><img src="images/tit3.png" /></span> </dt>
+          <dd>
+            <div class="txtPic2">
+              <p>在中国，食品安全是非常受关心的话题，因此，为了提供健康安全的柚   子，我们建立了严格的规范章程。</p>
+              <h6><span class="brR10">可追溯性</span></h6>
+              <p>我们帮助供应商做到从果园到包装厂再到门店的所有信息的登记。每只柚子的最终的产品批号可以追溯到所有它的信息直到果园最初的种植计划。</p>
+              <h6><span class="brR10">采后处理</span></h6>
+              <p>为了避免不必要的化学保鲜剂，我们井冈蜜柚柚子仅在当季收获采摘。</p>
+              <h6><span class="brR10">品质控制</span></h6>
+              <p>通过审查，定期走访考察，检测分析，我们可以保证从果园到餐桌的稳定的食品安全。我们对产品，对供应商，对门店都进行管控，对产品进行验证。</p>
+            </div>
+          </dd>
+        </dl>
+        <!--可持续性-->
+        <dl>
+          <dt class="clearfix brR3"> <i class="slid_ico"> <img class="pic1" src="images/ico_down.png" /> <img class="pic2" src="images/ico_up.png" /> </i> <span class="tit"><img src="images/tit4.png" /></span> </dt>
+          <dd>
+            <div class="txtPic2">
+              <p>为了弘扬可持续发展，井冈蜜柚项目为社会，经济以及生态环境做贡献。我们井冈蜜柚柚子种植过程尊重环境。我们的合作伙伴承诺根据我们的规范手册里的要求进行良好农业操作。</p>
+            </div>
+            <div class="txtPic clearfix"> <i class="float_l W35"><img src="images/pic6.jpg" /></i>
+                <div class="float_r W65">
+                  <p>&middot; 井冈蜜柚精神:为了环境健康，仅在正确的时刻添加所需</p>
+                  <p>&middot; 对灌溉与药肥的施用有严格控制与定额</p>
+                  <p>&middot; 使用至少70%的有机肥</p>
+                  <p>&middot; 提倡手工除草</p>
+                  <p>&middot; 无生长调节剂</p>
+                </div>
+            </div>
+          </dd>
+        </dl>
+        <!--合作关系-->
+        <dl>
+          <dt class="clearfix brR3"> <i class="slid_ico"> <img class="pic1" src="images/ico_down.png" /> <img class="pic2" src="images/ico_up.png" /> </i> <span class="tit"><img src="images/tit5.png" /></span> </dt>
+          <dd>
+            <div class="txtPic2">
+              <p>参与井冈蜜柚项目中的每个人都很重要:井冈蜜柚是农民，包装工与门店之间达成协议的成果，每一步都在不破坏环境的前提下，做了最佳处理。</p>
+              <p>我们井冈蜜柚团队一直与合作伙伴密切协作，为每位合作伙伴提供量身定制的培训，并且定期考察跟踪，为达到井冈蜜柚严格的要求给予大力的支持。</p>
+              <p>合作双方签署了规范章程，进步计划以及价值理念合同。</p>
+              <h6><span class="brR10">我们井冈蜜柚柚子的合作方</span></h6>
+            </div>
+            <div class="txtPic clearfix">
+              <div class="float_l W50">
+                <div class="pdpr3"> <img class="fullW" src="images/pic7.jpg" />
+                    <p class="txt_c pdt5">XXX先生<br />
+                      井冈蜜柚认证果园农场主</p>
+                </div>
+              </div>
+              <div class="float_l W50">
+                <div class="pdpl3"> <img class="fullW" src="images/pic8.jpg" />
+                    <p class="txt_c pdt5">XXX先生<br />
+                      井冈蜜柚认证果园农场主</p>
+                </div>
+              </div>
+            </div>
+          </dd>
+        </dl>
+        <!--要诀与技巧-->
+        <dl>
+          <dt class="clearfix brR3"> <i class="slid_ico"> <img class="pic1" src="images/ico_down.png" /> <img class="pic2" src="images/ico_up.png" /> </i> <span class="tit"><img style="width:120%;" src="images/tit6.png" /></span> </dt>
+          <dd>
+            <div class="txtPic2">
+              <h6><span class="brR10">如何挑选柚子?</span></h6>
+              <p>对于相同品种:</p>
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td><i class="num brR">1</i></td>
+                  <td>看: </td>
+                  <td>选择黄色，个大，均匀对称，头部尖短，底部平宽的柚子。</td>
+                </tr>
+                <tr>
+                  <td><i class="num brR">2</i></td>
+                  <td>摸: </td>
+                  <td>相同大小时，选择分量重的柚子，代表着里面皮薄，果肉果汁密度较大。表面应选择光滑的。</td>
+                </tr>
+                <tr>
+                  <td><i class="num brR">3</i></td>
+                  <td>闻: </td>
+                  <td>成熟的柚子具有浓郁的柚子甜香味。</td>
+                </tr>
+              </table>
+              <h6><span class="brR10">如何存储柚子?</span></h6>
+              <p>柚子适合存储在通风的环境中，温度需要在10度以上。柚子最怕触水，尤其是酒类，容易使其腐烂。</p>
+              <h6><span class="brR10">如何高效又优雅的剥开柚子?</span></h6>
+              <p><img class="fullW" src="images/pic9.png" /></p>
+            </div>
+          </dd>
+        </dl>
+      </div>
+<a name="P1"></a>
+                <div class="fullW">
+                    <div>
+                        <a style="display:block" class="btm_btn brR3" href="#"><img src="images/pic10.jpg" /></a>
+                        <br/>
+                        <div class="pdp3">
+						
+                          <table class="gridtable">
+<tr>
+	<th>产品名称</th><th>规格(每箱10个柚子)</th><th>结算价格</th>
+</tr>
+<tr>
+	<td><input  id="proA" name="opinions"  type="checkbox"  style="width:30px; height:30px;" value="" checked/>
+			<label for="totally" >井冈蜜柚礼盒A</label></td><td>
+			
+			<input id="aNum" name="aNum" type="number" placeholder=""  min="0" value="1" class="leipiplugins" leipiplugins="text" style="border-width: 1px;border-style: solid;border-color: #F50404; width:50px;">
+			箱</td><td>
+			<input id="aUnit" name="leipiNewField" type="number" placeholder=""  value="258" readonly="true" class="leipiplugins" leipiplugins="text" style="border-width: 1px;border-style: solid;border-color: #F50404; width:50px;">
+			元（包邮）</td>
+</tr>
+<tr>
+	<td><input name="" id="proB" type="checkbox" value="" style="width:30px; height:30px;">
+			<label for="totally" >井冈蜜柚礼盒B</label></td>
+                    <td><input id="bNum" name="bNum" type="number" placeholder=""  min="0" value="1" class="leipiplugins" leipiplugins="text" style="border-width: 1px;border-style: solid;border-color: #F50404; width:50px;"> 箱</td>
+                    <td><input id="bUnit" name="leipiNewField" type="text" placeholder=""  value="358" readonly="true" class="leipiplugins" leipiplugins="text" style="border-width: 1px;border-style: solid;border-color: #F50404; width:50px;">
+			元（包邮）</td>
+</tr>
+</table>
+
+
+  <div id="legend" style="height:20px;">
+  </div>
+<div class="control-group">
+  <!-- Text -->
+    <div class="controls">
+  <label class="control-label leipiplugins-orgname" style="font-size:14px; color:#FF0000; font-weight:bold;">收&nbsp;件&nbsp;人:</label>
+    <input id="receivePerson" name="leipiNewField" type="text" placeholder="" title="收件人" value="" class="leipiplugins" leipiplugins="text" style="border-width: 1px;border-style: solid;border-color: #F50404; width:95%; height:25px;">
+  </div>
+
+</div>
+
+    <div class="control-group">
+  <!-- Text -->
+    <div class="controls">
+  <label class="control-label leipiplugins-orgname" style="font-size:14px; color:#FF0000;font-weight:bold;">手&nbsp;机&nbsp;号:</label>
+    <input id="telno" name="leipiNewField" type="text" placeholder="" title="手机号" value="" class="leipiplugins" leipiplugins="text" style="border-width: 1px;border-style: solid;border-color: #F50404;width:95%;height:25px;">
+  </div>
+
+</div><div class="control-group">
+  <!-- Text -->
+    <div class="controls">
+  <label class="control-label leipiplugins-orgname" style="font-size:14px; color:#FF0000;font-weight:bold;">收件地址:</label>
+    <input id="receiveAddr" name="leipiNewField" type="text" placeholder="" title="收件地址" value="" class="leipiplugins" leipiplugins="text" style="border-width: 1px;border-style: solid;border-color: #F50404;width:95%;height:25px;">
+  </div>
+
+</div>
+
+    <div class="control-group">
+  <!-- Textarea -->
+    <div class="controls">
+  <label class="control-label leipiplugins-orgname" style="font-size:14px; color:#FF0000;font-weight:bold;">备注信息:</label>
+          <textarea id="comment" title="备注信息" name="leipiNewField" class="leipiplugins" leipiplugins="textarea" orgname="备注信息" style="border-width: 1px;border-style: solid;border-color: #F50404;width:95%;height:65px;"> </textarea>
+    </div>
+  </div>
+</div>
+        
+<div style="width:220px;height:62px; margin:20px auto 0px auto;"><button id="submitOrder" style="width:220px;height:62px;border-radius: 50px 50px 50px 50px;background-color:#cf171f;-moz-border-radius: 50px 50px 50px 50px;-webkit-border-radius: 50px 50px 50px 50px;color:#FFFFFF; border:0px;font-size:28px; letter-spacing:2px; text-align:center; line-height:62px; ">提交订单</button></div>
+                    </div>
+                    <div class="fullW">
+        <div><img class="fullW pdt20" src="images/top_line.png" /><img src="images/Nipic_3863359_20141108171859174351.jpg" class="fullW pdt20"></div>
+  
+  </div>
+                         </div>
+				<p style="text-align:center;color:#909090; line-height:30px; font-size:14px;">Copyright © 2015井冈蜜柚协会监制 江西硕丰果业版权所有 <br/>All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        //点击种类
+        $(".type").bind("touchstart",function(e){
+            $(".type").removeClass("active");
+            $(e.srcElement).addClass("active");
+        });
+
+        $("#meet").bind("touchstart",function(e){
+            $(".fruit").hide();
+            $(".meet").show();
+        });
+        $("#fruit").bind("touchstart",function(e){
+            $(".meet").hide();
+            $(".fruit").show();
+        });
+        $(".fruit").css("display", "block");
+        $(".meet").css("display", "none");
+
+        $(function(){
+            $.ajaxSetup({
+                contentType: "application/x-www-form-urlencoded; charset=utf-8"
+            });
+           $("#submitOrder").click(function(){
+               var numberA = 0;
+               var numberB = 0;
+               if($("#proA").is(':checked')){
+                    numberA = $("#aNum").val();
+               }
+               if($("#proB").is(':checked')){
+                   numberB = $("#bNum").val();
+               }
+               //judge
+               if(!$("#proA").is(':checked')&&!$("#proB").is(':checked')){
+                   alert("请选择一款产品");
+               }else{
+                   var receivePerson = $("#receivePerson").val();
+                   var telno = $("#telno").val();
+                   var receiveAddr = $("#receiveAddr").val();
+                   var comment = $("#comment").val();
+                   var productId = window.location.href.split("?")[1].split("&")[0].split("=")[1];
+
+                   $.post("makeOrderViaEmailServlet",
+                           {
+                               numberA:numberA,
+                               numberB:numberB,
+                               receivePerson:receivePerson,
+                               telno:telno,
+                               receiveAddr:receiveAddr,
+                               comment:comment,
+                               productId:productId
+                           },
+                           function(data){
+
+                           })
+               }
+           })
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html ng-app="indexApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1, target-densitydpi=medium-dpi, user-scalable=no">
+<title>扳倒井</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<style type="text/css">
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	margin:0px auto;
+	font-size:14px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #fa6205;
+	border-collapse: collapse;
+	width:100%
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #fa6205;
+	color:#FFF;
+	background-color: #fa6205;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #fa6205;
+	background-color: #ffffff;
+}
+.control-group{ margin-top:10px;}
+</style>
+<script type="text/javascript" src="js/my_lab.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script src="../../../general-js/angular.js"></script>
+<script charset="gbk" language="JavaScript" type="application/javascript" src="../../../general-js/index.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		;(function(){
+			var oBox = document.getElementById('lists');
+			var aLists = oBox.getElementsByTagName('dl');
+			for(var i=0; i<aLists.length; i++){
+				aLists[i].onclick = function(){
+					var _tar = this;
+					if(hasClass(_tar,'active')){
+						removeClass(_tar,'active');	
+					}else{
+						for(var j=0; j<aLists.length; j++){
+							removeClass(aLists[j],'active');			
+						}
+						addClass(_tar,'active');	
+						scrollToTar(getOffsetPos(_tar).t-10);
+						//document.body.scrollTop = document.documentElement.scrollTop = getOffsetPos(_tar).t-10;
+					}
+				}	
+			}
+		})();
+	}
+	
+</script>
+
+
+</head>
+
+<body ng-controller="indexController">
+	<div id="warp">
+    	<div class="head_area pr">
+        	
+            <img class="fullW" src="images/head_bg.jpg" />        </div>
+		<div class="head_area pr">
+        	
+            <img class="fullW" src="images/banner_bgzx1.jpg" />        </div>
+        <div class="pdp3">
+                        
+                             <div style="font-size:20px; color:#f2ca2c; text-align:center; margin:0px auto; width:370px; height:170px;font-weight:bold;line-height:40px;">扳倒井防伪溯源身份证唯一编号：{{indentityCode}}<br><span>查询次数：{{queryTimes}}</span>
+ <a href="#P1" style="width:151px;height:48px;  margin:0px auto; display:block; background-image:url(images/buttom.jpg); border:none;"></a>
+</div>
+                        
+                        </div>
+						<div class="head_area pr">
+        	
+            <img class="fullW" src="images/banner_bgzx2.jpg" />        </div>
+        <!--main-->
+        <div id="main">
+        	<div class="pdp3">
+            	<!--lists-->
+                <div id="lists">
+	  <!--产地-->
+        <dl>
+          <dt class="clearfix brR3"> <i class="slid_ico"> <img class="pic1" src="images/ico_down.png" /> <img class="pic2" src="images/ico_up.png" /> </i> <span class="tit"><img src="images/tit2.png" /></span> </dt>
+          <dd>
+            <div class="txtPic clearfix"> <i class="float_l W50"><img src="images/pic4.png" /></i> <span class="float_l W50">  扳倒井于中国酿酒文化起源地、酒祖仪狄故里、中国白酒名城高青拥有中国唯一井窖工艺、世界最大酿酒车间、中国白酒行业首个院士工作站、中国白酒行业唯一国家级技能大师工作室、中国第一品酒师、中国唯一白酒微生物菌种库等七项中国第一。</span> </div>
+            <div class="txtPic clearfix"> <i class="float_r W50"><img src="images/pic5.jpg" /></i>
+                <div class="float_l W50">
+                  <p>每一款酒庄酒，选取当季新鲜粮食，从饱满程度，水分含量，淀粉含量等多维度甄选。</p>
+                  <p>六粮酿造，扳倒井香，基于浓香型大类在配料中加入小米结合扳倒井传统的井窖工艺酿出的适合大众饮用的浓香型</p>
+                </div>
+				
+            </div>
+			
+		   <p style="color:#f2ca2c; margin-top:20px;">我们井窖工艺流程:井窖坊，运用独有的内部环境发酵酿制，在原有酿酒原料上。加入适量小米，一定程度上可以增加酒水中的蛋白质，其工艺历史悠久，在实践中形成了自身的特色。</p>
+              <p><img class="fullW" src="images/pic9.png" /></p>	
+          </dd>
+        </dl>
+        <!--口味-->
+        <dl>
+          <dt class="clearfix brR3"> <i class="slid_ico"> <img class="pic1" src="images/ico_down.png" /> <img class="pic2" src="images/ico_up.png" /> </i> <span class="tit"><img src="images/tit1.png" /></span> </dt>
+          <dd>
+            <div class="txtPic clearfix"> <i class="float_l W35"><img src="images/pic1.png" /></i> <span class="float_l W65">一品三味，国井天香。国井香型集六粮与复粮芝麻香型之特点，兼有浓、清、酱三种香型之所长，故有"一品三味"之美誉。</span> </div>
+            <div class="txtPic clearfix"> <i class="float_r W35"><img src="images/pic2.png" /></i> <span class="float_l W65">用陶坛储存陈年基酒，有"过气不过液"的特点，酒可以在坛内自由呼吸，因此被誉为“会呼吸的陶坛”，自然老熟的白酒，口感更醇和，品质更陈香。</span> </div>
+            <div class="txtPic clearfix"> <i class="float_l W35"><img src="images/pic3.png" /></i> <span class="float_l W65">好酒所在，必有佳水，扳倒井位于山东高青县，地处黄河之滨、大芦湖畔，拥有国内良好的酿酒用水源。</span> </div>
+          </dd>
+        </dl>
+        
+        <!--食品安全-->
+        <dl>
+          <dt class="clearfix brR3"> <i class="slid_ico"> <img class="pic1" src="images/ico_down.png" /> <img class="pic2" src="images/ico_up.png" /> </i> <span class="tit"><img src="images/tit3.png" /></span> </dt>
+          <dd>
+            <div class="txtPic2">
+              <p>在中国，食品安全是非常受关心的话题，因此，为了提供健康安全的白酒，我们建立了严格的规范章程。</p>
+              <h6><span class="brR10">可追溯性</span></h6>
+              <p>我们帮助供应商做到从酒窖到包装厂再到门店的所有信息的登记。我的每一瓶酒的最终的产品批号可以追溯到所有它的信息直到井窖最初的酿造计划。</p>
+              <h6><span class="brR10">酿制过程</span></h6>
+              <p>为了避免不必要的化学保鲜剂，我们的每一瓶酒的仅选取当季新鲜粮食酿造。</p>
+              <h6><span class="brR10">品质控制</span></h6>
+              <p>通过审查，定期走访考察，检测分析，我们可以保证从井窖到餐桌的稳定的食品安全。我们对产品，对供应商，对门店都进行管控，对产品进行验证。</p>
+            </div>
+          </dd>
+        </dl>
+        <!--可持续性-->
+        <dl>
+          <dt class="clearfix brR3"> <i class="slid_ico"> <img class="pic1" src="images/ico_down.png" /> <img class="pic2" src="images/ico_up.png" /> </i> <span class="tit"><img src="images/tit4.png" /></span> </dt>
+          <dd>
+            <div class="txtPic2">
+              <p>为了弘扬可持续发展，扳倒井为社会，经济以及生态环境做贡献。我们扳倒井酿制过程尊重环境，所以采用井窖酿造。我们的合作伙伴承诺根据我们的规范手册里的要求进行良好酿制操作。</p>
+            </div>
+            <div class="txtPic clearfix"> <i class="float_l W35"><img src="images/pic6.jpg" /></i>
+                <div class="float_r W65">
+                  <p>&middot; 扳倒井精神:时刻比别人努力十倍！</p>
+                  <p>&middot; 采用井窖工艺和集团自主研发“DMADV酒体设计控制技术”</p>
+                  <p>&middot; 全部使用纯天然植物酿造</p>
+                  <p>&middot; 传统手工艺和现代生态酿造相结合</p>
+             
+                </div>
+            </div>
+          </dd>
+        </dl>
+        <!--合作关系-->
+        <dl>
+          <dt class="clearfix brR3"> <i class="slid_ico"> <img class="pic1" src="images/ico_down.png" /> <img class="pic2" src="images/ico_up.png" /> </i> <span class="tit"><img src="images/tit5.png" /></span> </dt>
+          <dd>
+            <div class="txtPic2">
+              <p>参与扳倒井中的每个人都很重要:大师才有大手笔由中国品酒技能大赛“品酒状元”，国井集团副总裁、总工程师张锋国，强大的技术支持严格的质量把关。以及中国酿酒大师，山东扳倒井董事长、总经理赵纪文荣共同打造扳倒井。</p>
+              <p>我们扳倒井团队的每一位员工以诚信、责任、友爱、共赢、创新为核心价值观，并且定期考察跟踪，为达到严格的要求给予努力。</p>
+             
+              <h6><span class="brR10">扳倒井的大师制作</span></h6>
+            </div>
+            <div class="txtPic clearfix">
+              <div class="float_l W50">
+                <div class="pdpr3"> <img class="fullW" src="images/pic7.jpg" />
+                    <p class="txt_c pdt5">张锋国<br />
+                     中国品酒大师</p>
+                </div>
+              </div>
+              <div class="float_l W50">
+                <div class="pdpl3"> <img class="fullW" src="images/pic8.jpg" />
+                    <p class="txt_c pdt5">赵纪文荣<br />
+                      中国酿酒大师</p>
+                </div>
+              </div>
+            </div>
+          </dd>
+        </dl>
+        <!--要诀与技巧-->
+        <dl>
+          <dt class="clearfix brR3"> <i class="slid_ico"> <img class="pic1" src="images/ico_down.png" /> <img class="pic2" src="images/ico_up.png" /> </i> <span class="tit"><img style="width:120%;" src="images/tit6.png" /></span> </dt>
+          <dd>
+            <div class="txtPic2">
+              <h6><span class="brR10">如何品尝白酒?</span></h6>
+              <p>方法及步骤:</p>
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td><i class="num brR">1</i></td>
+                  <td>望： </td>
+                  <td>将酒倒入杯中，观其色泽。
+端起酒杯，观望杯中那水晶一般的液体轻轻荡漾，清澈澄明、晶莹剔透接着，再逆时针转动酒杯。
+但见酒体均匀挂于杯壁，款款下落，如丝绸般柔顺、润滑……越好，越有年头的白酒，酒体更为粘绸润滑。</td>
+                </tr>
+                <tr>
+                  <td><i class="num brR">2</i></td>
+                  <td>闻： </td>
+                  <td>酒杯微微倾斜，轻嗅其香味。
+酒杯呈30度角靠近鼻尖，自然吸气，但闻一股浓郁幽雅的芳香飘然钻入鼻息，伴随着幽雅芬芳的酱香陈香，心神如繁花绚烂，层层绽放…</td>
+                </tr>
+                <tr>
+                  <td><i class="num brR">3</i></td>
+                  <td>品： </td>
+                  <td>先以纯净水清口，让味蕾焕然一新。
+轻酌一口酒液，让酒香溢满嘴巴口腔，香气在蔓延，细细品味感受味蕾间尽情绽放。
+真正的顶级酱香白酒就像一曲完美和谐的交响乐，每一个音符、每一个音调的精妙神韵都清晰可辨……</td>
+                </tr>
+              </table>
+              <h6><span class="brR10">注意事项</span></h6>
+              <p>不能猛喝，应该一小口一小口的慢慢品味。品味精髓，物尽芳华。</p>
+              
+            </div>
+          </dd>
+        </dl>
+      </div>
+<a name="P1"></a>
+                <div class="fullW">
+                    <div>
+                        <a style="display:block" class="btm_btn brR3" href="#"><img src="images/pic10.jpg" /></a>
+                        <br/>
+                        <div class="pdp3">
+						
+                          <table class="gridtable">
+<tr>
+	<th>产品名称</th><th>规格(每箱6瓶)</th><th>结算价格</th>
+</tr>
+<tr>
+	<td><input  name="opinions"  type="checkbox"  style="width:30px; height:30px;" value="" checked/>
+			<label for="totally" >国井礼盒A</label></td><td>
+			
+			<input name="leipiNewField" type="text" placeholder=""  value="1" class="leipiplugins" leipiplugins="text" style="border-width: 1px;border-style: solid;border-color: #fa6205; width:50px;">
+			箱</td><td>
+			<input name="leipiNewField" type="text" placeholder=""  value="258" class="leipiplugins" leipiplugins="text" style="border-width: 1px;border-style: solid;border-color: #fa6205; width:50px;">
+			元（包邮）</td>
+</tr>
+<tr>
+	<td><input name="" type="checkbox" value="" style="width:30px; height:30px;">
+			<label for="totally" >国井礼盒B</label></td><td><input name="leipiNewField" type="text" placeholder=""  value="1" class="leipiplugins" leipiplugins="text" style="border-width: 1px;border-style: solid;border-color: #fa6205; width:50px;"> 箱</td><td><input name="leipiNewField" type="text" placeholder=""  value="358" class="leipiplugins" leipiplugins="text" style="border-width: 1px;border-style: solid;border-color: #fa6205; width:50px;">
+			元（包邮）</td>
+</tr>
+</table>
+
+
+  <div id="legend" style="height:20px;">
+  </div>
+<div class="control-group">
+  <!-- Text -->
+    <div class="controls">
+  <label class="control-label leipiplugins-orgname" style="font-size:14px; color:#f2ca2c; font-weight:bold;">收&nbsp;件&nbsp;人:</label>
+    <input name="leipiNewField" type="text" placeholder="" title="收件人" value="" class="leipiplugins" leipiplugins="text" style="border-width: 1px;border-style: solid;border-color: #fa6205; width:95%; height:25px;">
+  </div>
+
+</div>
+
+    <div class="control-group">
+  <!-- Text -->
+    <div class="controls">
+  <label class="control-label leipiplugins-orgname" style="font-size:14px; color:#f2ca2c;font-weight:bold;">手&nbsp;机&nbsp;号:</label>
+    <input name="leipiNewField" type="text" placeholder="" title="手机号" value="" class="leipiplugins" leipiplugins="text" style="border-width: 1px;border-style: solid;border-color: #fa6205;width:95%;height:25px;">
+  </div>
+
+</div><div class="control-group">
+  <!-- Text -->
+    <div class="controls">
+  <label class="control-label leipiplugins-orgname" style="font-size:14px; color:#f2ca2c;font-weight:bold;">收件地址:</label>
+    <input name="leipiNewField" type="text" placeholder="" title="收件地址" value="" class="leipiplugins" leipiplugins="text" style="border-width: 1px;border-style: solid;border-color: #fa6205;width:95%;height:25px;">
+  </div>
+
+</div>
+
+    <div class="control-group">
+  <!-- Textarea -->
+    <div class="controls">
+  <label class="control-label leipiplugins-orgname" style="font-size:14px; color:#f2ca2c;font-weight:bold;">备注信息:</label>
+          <textarea title="备注信息" name="leipiNewField" class="leipiplugins" leipiplugins="textarea" orgname="备注信息" style="border-width: 1px;border-style: solid;border-color: #fa6205;width:95%;height:65px;"> </textarea>
+    </div>
+  </div>
+</div>
+        
+<div style="width:220px;height:62px; margin:20px auto 0px auto;"><button style="width:220px;height:62px;border-radius: 50px 50px 50px 50px;background-color:#fa6205;-moz-border-radius: 50px 50px 50px 50px;-webkit-border-radius: 50px 50px 50px 50px;color:#FFFFFF; border:0px;font-size:28px; letter-spacing:2px; text-align:center; line-height:62px; ">提交订单</button></div>
+                    </div>
+                    <div class="fullW">
+					
+        <div><img class="fullW pdt20" src="images/top_line.png" /><img src="images/Nipic_3863359_20141108171859174351.jpg" class="fullW pdt20"></div>
+  
+  </div>
+                         </div>
+				<p style="text-align:center;color:#909090; line-height:30px; font-size:14px;">Copyright © 2015国井集团版权所有 <br/>All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+	
+</div>
+    <script>
+        //点击种类
+        $(".type").bind("touchstart",function(e){
+            $(".type").removeClass("active");
+            $(e.srcElement).addClass("active");
+        });
+
+        $("#meet").bind("touchstart",function(e){
+            $(".fruit").hide();
+            $(".meet").show();
+        });
+        $("#fruit").bind("touchstart",function(e){
+            $(".meet").hide();
+            $(".fruit").show();
+        });
+        $(".fruit").css("display", "block");
+        $(".meet").css("display", "none");
+    </script>
+</body>
+</html>
