@@ -22,7 +22,7 @@ public class DBUtil {
 		try {
 			p = new Properties();
 			InputStream in = DBUtil.class
-					.getResourceAsStream("dbcp.properties");
+					.getResourceAsStream("/dbcp.properties");
 			p.load(in);
 			ds = BasicDataSourceFactory.createDataSource(p);
 		} catch (FileNotFoundException e) {
@@ -31,7 +31,7 @@ public class DBUtil {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}// Õâ¸öÊÇÄãµÄÅäÖÃÎÄ¼þÃû
+		}// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
