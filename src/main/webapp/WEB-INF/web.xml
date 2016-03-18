@@ -30,4 +30,13 @@
         <url-pattern>/m/r/y/makeOrderViaEmailServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>WebQueryServlet</servlet-name>
+        <servlet-class>com.tmind.qrcode.servlet.WebQueryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WebQueryServlet</servlet-name>
+        <url-pattern>/webQueryServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>
