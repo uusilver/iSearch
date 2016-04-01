@@ -31,7 +31,7 @@ public class DBUtil {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}// �������������ļ���
+		}//
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

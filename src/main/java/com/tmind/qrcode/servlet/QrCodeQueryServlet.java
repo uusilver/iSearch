@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.tmind.qrcode.util.DBUtil;
+import com.tmind.qrcode.util.Ehcache;
 
 public class QrCodeQueryServlet extends HttpServlet{
 	/**
@@ -26,36 +27,42 @@ public class QrCodeQueryServlet extends HttpServlet{
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)  
             throws IOException, ServletException {  
-        response.setContentType("text/html;charset=gbk");  
+        response.setContentType("text/html;charset=gbk");
+		//获取唯一标示码
         String unique = request.getParameter("uniqueKey");
-        System.out.println("unique:"+unique);
-        //
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Integer queryTimes = null;
-        Integer id = null;
-		String query_date = null;
-		String productId = null;
-		String batchNo = null;
-        try{
-        	conn = DBUtil.getConnection();
-        	String sql = "select id, query_times, product_id, query_date, product_batch from M_USER_QRCODE where query_match=?";
-        	ps = conn.prepareStatement(sql);
-        	String para = unique;
-        	ps.setString(1, para);
-        	rs = ps.executeQuery();
-        	if(rs.next())
-        		id = rs.getInt("id");
-        		queryTimes = rs.getInt("query_times");
-			    query_date = rs.getString("query_date");
+//        System.out.println("unique:"+unique);
+		PrintWriter pw = response.getWriter();
+		//最终返回结果
+		String result = "<a class='STYLE1'>错误</a>，数据不存在!";
+		//TODO 未来缓存策略放开,
+		//@see Ehcache.class
+		if(Ehcache.getCache1(unique)==null){
+//		if(true){
+			Connection conn = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			Integer queryTimes = null;
+			Integer id = null;
+			String query_date = null;
+			String productId = null;
+			String batchNo = null;
+			try{
+				conn = DBUtil.getConnection();
+				String sql = "select id, query_times, product_id, query_date, product_batch from M_USER_QRCODE where query_match=?";
+				ps = conn.prepareStatement(sql);
+				String para = unique;
+				ps.setString(1, para);
+				rs = ps.executeQuery();
+				if(rs.next())
+					id = rs.getInt("id");
+				queryTimes = rs.getInt("query_times");
+				query_date = rs.getString("query_date");
 				productId = rs.getString("product_id");
 				batchNo = rs.getString("product_batch");
-	        	//获得用户IP
-	        	String vistorIP = getRemoteUserIpAddr(request);
-	        	System.out.println(vistorIP);
-	        	if(updateQueryTimes(queryTimes, id, vistorIP)){
-	            	PrintWriter pw = response.getWriter();
+				//获得用户IP
+				String vistorIP = getRemoteUserIpAddr(request);
+				System.out.println(vistorIP);
+				if(updateQueryTimes(queryTimes, id, vistorIP)){
 					//鲜果防伪溯源身份证唯一编号：{{indentityCode}}<br><span>查询次数：{{queryTimes}}
 					StringBuilder sb = new StringBuilder();
 					sb.append("<font size='1'>防伪溯源身份证唯一编号：");
@@ -97,18 +104,24 @@ public class QrCodeQueryServlet extends HttpServlet{
 					}
 					sb.append("</font>");
 					//最终结果
-					System.out.println(sb.toString());
-	                pw.print(sb.toString());
-	                pw.close();
-	            }
-	        	
-        }catch(Exception e){
-        	System.out.println(e.getMessage());
-        	
-        }finally{
-        	DBUtil.closeConnect(rs, ps, conn);
-        }
-         
+
+//					System.out.println(sb.toString());
+					result = sb.toString();
+					Ehcache.setCache1(unique,result);
+				}
+
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+
+			}finally{
+				DBUtil.closeConnect(rs, ps, conn);
+			}
+		}else{
+			result = Ehcache.getCache1(unique);
+		}
+
+		pw.print(result);
+		pw.close();
     }  
 	
 	private boolean updateQueryTimes(Integer currentQueryTimes, Integer id, String ipAddr){

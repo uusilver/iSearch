@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html ng-app="indexApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1, target-densitydpi=medium-dpi, user-scalable=no">
+    <title>南京市麒麟科技创新园科技创新服务平台</title>
+    <link rel="shortcut icon" href="../../../general-images/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <style type="text/css">
+        table.gridtable {
+            font-family: verdana, arial, sans-serif;
+            margin: 0px auto;
+            font-size: 14px;
+            color: #333333;
+            border-width: 1px;
+            border-color: #F50404;
+            border-collapse: collapse;
+            width: 100%
+        }
+
+        table.gridtable th {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #F50404;
+            color: #FFF;
+            background-color: #CA0202;
+        }
+
+        table.gridtable td {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #F50404;
+            background-color: #ffffff;
+        }
+
+        .control-group {
+            margin-top: 10px;
+        }
+    </style>
+    <script type="text/javascript" src="js/my_lab.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="../../../general-js/angular.js"></script>
+    <script charset="gbk" language="JavaScript" type="application/javascript"
+            src="../../../general-js/index.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            ;
+            (function () {
+                var oBox = document.getElementById('lists');
+                var aLists = oBox.getElementsByTagName('dl');
+                for (var i = 0; i < aLists.length; i++) {
+                    aLists[i].onclick = function () {
+                        var _tar = this;
+                        if (hasClass(_tar, 'active')) {
+                            removeClass(_tar, 'active');
+                        } else {
+                            for (var j = 0; j < aLists.length; j++) {
+                                removeClass(aLists[j], 'active');
+                            }
+                            addClass(_tar, 'active');
+                            scrollToTar(getOffsetPos(_tar).t - 10);
+                            //document.body.scrollTop = document.documentElement.scrollTop = getOffsetPos(_tar).t-10;
+                        }
+                    }
+                }
+            })();
+        }
+
+    </script>
+
+
+</head>
+
+<body ng-controller="indexController">
+<div id="warp">
+    <div class="head_area pr">
+
+        <img class="fullW" src="images/head_bg.jpg"/></div>
+    <div class="head_area pr">
+
+        <img class="fullW" src="images/loading.gif" data-original="images/banner_bg.jpg"/></div>
+    
+   
+    <!--main-->
+    <div id="main">
+        <div class="pdp3">
+            <!--lists-->
+            <div id="lists">
+                <!--介绍-->
+                <dl>
+                    <dt class="clearfix brR3"><i class="slid_ico"> <img class="pic1" src="images/ico_down.png"/> <img
+                            class="pic2" src="images/ico_up.png"/> </i> <span class="tit"><img
+                            src="images/tit2.png"/></span></dt>
+                    <dd>
+                        <div class="fullW">
+                    <img src="images/yq1.jpg" class="fullW">
+					<img src="images/loading.gif" data-original="images/yq2.jpg" class="fullW">
+					</div>
+                    </dd>
+                </dl>
+                <!--规划-->
+                <dl>
+                    <dt class="clearfix brR3"><i class="slid_ico"> <img class="pic1" src="images/ico_down.png"/> <img
+                            class="pic2" src="images/ico_up.png"/> </i> <span class="tit"><img
+                            src="images/tit1.png"/></span></dt>
+                    <dd>
+                       <div class="fullW">
+                    <img src="images/gh1.jpg" class="fullW">
+					<img src="images/loading.gif" data-original="images/gh2.jpg" class="fullW">
+					</div>
+                    </dd>
+                </dl>
+
+                <!--生态环境-->
+                <dl>
+                    <dt class="clearfix brR3"><i class="slid_ico"> <img class="pic1" src="images/ico_down.png"/> <img
+                            class="pic2" src="images/ico_up.png"/> </i> <span class="tit"><img
+                            src="images/tit3.png"/></span></dt>
+                    <dd>
+                      <div class="fullW">
+                    <img src="images/st1.jpg" class="fullW">
+					
+					</div>
+                    </dd>
+                </dl>
+                <!--可持续性-->
+                <dl>
+                    <dt class="clearfix brR3"><i class="slid_ico"> <img class="pic1" src="images/ico_down.png"/> <img
+                            class="pic2" src="images/ico_up.png"/> </i> <span class="tit"><img
+                            src="images/tit4.png"/></span></dt>
+                    <dd>
+                      <div class="fullW">
+                    <img src="images/cx1.jpg" class="fullW">
+					
+					</div>
+                    </dd>
+                </dl>
+                <!--发展-->
+                <dl>
+                    <dt class="clearfix brR3"><i class="slid_ico"> <img class="pic1" src="images/ico_down.png"/> <img
+                            class="pic2" src="images/ico_up.png"/> </i> <span class="tit"><img
+                            src="images/tit5.png"/></span></dt>
+                    <dd>
+                       <div class="fullW">
+                    <img src="images/mb1.jpg" class="fullW">
+					<img src="images/loading.gif" data-original="images/mb2.jpg" class="fullW">
+					<img src="images/loading.gif" data-original="images/mb3.jpg" class="fullW">
+					<img src="images/loading.gif" data-original="images/mb4.jpg" class="fullW">
+					<img src="images/loading.gif" data-original="images/mb5.jpg" class="fullW">
+					<img src="images/loading.gif" data-original="images/mb6.jpg" class="fullW">
+					<img src="images/loading.gif" data-original="images/mb7.jpg" class="fullW">
+					</div>
+                    </dd>
+                </dl>
+                <!--要诀与技巧-->
+                <dl>
+                    <dt class="clearfix brR3"><i class="slid_ico"> <img class="pic1" src="images/ico_down.png"/> <img
+                            class="pic2" src="images/ico_up.png"/> </i> <span class="tit"><img 
+                                                                                               src="images/tit6.png"/></span>
+                    </dt>
+                    <dd>
+                        <div class="txtPic2">
+                            <div class="fullW">
+                    <img src="images/fc1.jpg" class="fullW">
+					<img src="images/loading.gif" data-original="images/fc2.jpg" class="fullW">
+					<img src="images/loading.gif" data-original="images/fc3.jpg" class="fullW">
+					<img src="images/loading.gif" data-original="images/fc4.jpg" class="fullW">
+					<img src="images/loading.gif" data-original="images/fc5.jpg" class="fullW">
+					<img src="images/loading.gif" data-original="images/fc6.jpg" class="fullW">
+					<img src="images/loading.gif" data-original="images/fc7.jpg" class="fullW">
+                </div>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+            <a name="P1"></a>
+
+            <div class="fullW">
+                
+                <div class="fullW">
+                    <div><img src="images/loading.gif" data-original="images/dibu.jpg" class="fullW pdt20"></div>
+
+                </div>
+            </div>
+            <p style="text-align:center;color:#909090; line-height:30px; font-size:14px;">南京市麒麟科技创新园科技创新服务平台<br/>Copyright © 2016版权所有 <br/>All Rights Reserved 315快查技术支持（www.315kc.com）</p>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
+<SCRIPT src="js/jquery.lazyload.js" type=text/javascript></SCRIPT>
+<script type="text/javascript" charset="utf-8">
+      $(function() {
+          $("img").lazyload({ 
+                 effect: "fadeIn"
+           });  
+      });
+</script>

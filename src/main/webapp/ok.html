@@ -24,7 +24,11 @@
 		var u = window.location.href.split("?")[1];
 		$("#unquie_code").attr("placeholder",u);
 		$.get("/webQueryServlet"+"?uniqueKey="+u,function(data){
-			$("#result").html(data);
+			if(data){
+				$("#result").html(data.replace("?",""));
+			}else{
+				$("#result").html("<a class='STYLE1'>错误</a>，数据不存在!");
+			}
 		});
 		$("#search").click(function(){
 			var unquie_code = $("#unquie_code").val();
@@ -57,8 +61,7 @@
 			</form>
 		</div>
 		<div class="liucheng2"><span style="font-size:14px; text-align:center; line-height:30px;"><br/>
-		查询结果：<span class="STYLE1">正确</span>（315快查联盟数据库中存在本次数据）<br/>
-
+		查询结果：
 				</span>
 			<span style="text-align:center" id="result"></span>
 
