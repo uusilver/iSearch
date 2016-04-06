@@ -39,6 +39,10 @@ angular.module("indexApp",[])
         if(cFlag){
             queryFactory.connectServerToFindOutQueryTimes(uniqueKey).then(function(result){
                 if(result){
+                    if(parseInt(result.data.queryTimes)>1){
+                        var txt=  "此二维码已被查询过!";
+                        window.wxc.xcConfirm(txt, window.wxc.xcConfirm.typeEnum.error);
+                    }
                     $("#queryResult").append(result.data.queryContent);
                 }
 

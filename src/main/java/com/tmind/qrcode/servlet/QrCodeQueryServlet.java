@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.tmind.qrcode.util.DBUtil;
 import com.tmind.qrcode.util.Ehcache;
 
@@ -28,6 +31,9 @@ public class QrCodeQueryServlet extends HttpServlet{
 	public void doGet(HttpServletRequest request, HttpServletResponse response)  
             throws IOException, ServletException {  
         response.setContentType("text/html;charset=gbk");
+
+		Map responseMap = new HashMap();
+
 		//获取唯一标示码
         String unique = request.getParameter("uniqueKey");
 //        System.out.println("unique:"+unique);
@@ -71,7 +77,9 @@ public class QrCodeQueryServlet extends HttpServlet{
 					if(rs.getInt("query_times")==0){
 						sb.append("初次查询");
 					}else{
-						sb.append(String.valueOf(rs.getInt("query_times")));
+						String queryTimesFromDatabase = String.valueOf(rs.getInt("query_times"));
+						sb.append(queryTimesFromDatabase);
+						responseMap.put("queryTimes", queryTimesFromDatabase);
 					}
 					sb.append("<br/>");
 					//拼接动态参数
@@ -107,7 +115,8 @@ public class QrCodeQueryServlet extends HttpServlet{
 
 //					System.out.println(sb.toString());
 					result = sb.toString();
-					Ehcache.setCache1(unique,result);
+					responseMap.put("queryContent",result);
+					Ehcache.setCache1(unique,responseMap);
 				}
 
 			}catch(Exception e){
@@ -117,10 +126,12 @@ public class QrCodeQueryServlet extends HttpServlet{
 				DBUtil.closeConnect(rs, ps, conn);
 			}
 		}else{
-			result = Ehcache.getCache1(unique);
+			responseMap = Ehcache.getCache1(unique);
 		}
 
-		pw.print(result);
+	//用Gson构建最后的返回内容
+		Gson gson = new Gson();
+		pw.print(gson.toJson(responseMap));
 		pw.close();
     }  
 	

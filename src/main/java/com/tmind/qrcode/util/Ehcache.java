@@ -4,10 +4,14 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
+import java.util.Map;
+
 /**
+ * 利用范型在构造缓存对象时来指定存放的数据类型
+ *
  * Created by lijunying on 16/3/19.
  */
-public class Ehcache {
+public class Ehcache<T> {
 
     private static  CacheManager manager = null;
 
@@ -27,26 +31,18 @@ public class Ehcache {
         cache1 = manager.getCache(names[0]);
     }
 
-    public static void setCache1(String key, String value){
+    public static<T> void setCache1(String key, T value){
         cache1.put(new Element(key, value));
     }
 
-    public static String getCache1(String key){
+    public static<T> T getCache1(String key){
         Element element = cache1.get(key);
         if(element!=null)
-            return element.getObjectValue().toString();
+            return (T)element.getObjectValue();
         else
             return null;
 
     }
 
-    public static void main(String[] args) throws InterruptedException {
 
-        Ehcache.setCache1("test","lijunying");
-        System.out.println(Ehcache.getCache1("test"));
-        if(Ehcache.getCache1("aaa") == null){
-            System.out.println("Empty");
-
-        }
-    }
 }
