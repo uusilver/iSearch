@@ -1,5 +1,10 @@
 /**
  * Created by lijunying on 15/10/24.
+ * 除了queryResult外
+ * <html ng-app="indexApp">
+ * <body ng-controller="indexController">
+ * 这两个不能少
+ *
  */
 var cFlag = true;
 angular.module("indexApp",[])
