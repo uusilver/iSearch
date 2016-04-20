@@ -22,6 +22,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>CommonTemplateQueryServlet</servlet-name>
+        <servlet-class>com.tmind.qrcode.servlet.CommonTemplateQueryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommonTemplateQueryServlet</servlet-name>
+        <url-pattern>/commonTemplateQueryServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>MakeOrderViaEmailServlet</servlet-name>
         <servlet-class>com.tmind.qrcode.servlet.MakeOrderViaEmailServlet</servlet-class>
     </servlet>

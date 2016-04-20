@@ -24,12 +24,12 @@ import com.tmind.qrcode.util.Ehcache;
 
 public class QrCodeQueryServlet extends HttpServlet{
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)  
-            throws IOException, ServletException {  
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
         response.setContentType("text/html;charset=gbk");
 
 		Map responseMap = new HashMap();
@@ -102,7 +102,10 @@ public class QrCodeQueryServlet extends HttpServlet{
 									sb.append("产品指定经销商:" + rs.getString("sellArthor") + "<br/>");
 								}
 								if (s.equals("lqd")) {
-									sb.append("上次查询时间:" + query_date + "<br/>");
+									if(query_date!=null && !query_date.equals("null") && query_date.length()>0)
+										sb.append("上次查询时间:" + query_date + "<br/>");
+									else
+										sb.append("无上次查询时间<br/>");
 
 								}
 							}
@@ -133,8 +136,8 @@ public class QrCodeQueryServlet extends HttpServlet{
 		Gson gson = new Gson();
 		pw.print(gson.toJson(responseMap));
 		pw.close();
-    }  
-	
+    }
+
 	private boolean updateQueryTimes(Integer currentQueryTimes, Integer id, String ipAddr){
 		Connection conn = null;
         PreparedStatement ps = null;
@@ -145,7 +148,7 @@ public class QrCodeQueryServlet extends HttpServlet{
 	        String sql = "update M_USER_QRCODE set query_times=?, query_date=?, vistor_ip_addr=? where id=?";
 	        ps = conn.prepareStatement(sql);
 	        ps.setInt(1, currentQueryTimes+1);
-	        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:SS"); 
+	        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
 	        ps.setString(2, sdf.format(new Date()));
 	        ps.setString(3, ipAddr);
 	        ps.setInt(4, id);
@@ -165,7 +168,7 @@ public class QrCodeQueryServlet extends HttpServlet{
         	DBUtil.closeConnect(rs, ps, conn);
         }
 	}
-	
+
 	private String getRemoteUserIpAddr(HttpServletRequest request){
 		String remoteAddr = request.getRemoteAddr();
         String forwarded = request.getHeader("X-Forwarded-For");

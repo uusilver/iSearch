@@ -88,7 +88,10 @@ public class WebQueryServlet extends HttpServlet {
                                     sb.append("产品指定经销商:" + rs.getString("sellArthor") + "<br/>");
                                 }
                                 if (s.equals("lqd")) {
-                                    sb.append("上次查询时间:" + query_date + "<br/>");
+                                    if(query_date!=null && !query_date.equals("null") && query_date.length()>0)
+                                        sb.append("上次查询时间:" + query_date + "<br/>");
+                                    else
+                                        sb.append("无上次查询时间<br/>");
 
                                 }
                             }

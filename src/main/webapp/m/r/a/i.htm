@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
-<html ng-app="indexApp">
+<html ng-app="commonApp">
 <head>
     <meta http-equiv="pragma" content="no-cache"/>
     <meta http-equiv="cache-control" content="no-cache"/>
@@ -15,7 +15,7 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <script src="../../../general-js/angular.js"></script>
     <script charset="gbk" language="JavaScript" type="application/javascript"
-            src="../../../general-js/index.js"></script>
+            src="../../../general-js/common-template.js"></script>
     <script language="javascript">
         $(document).ready(function () {
             function RWidth() {
@@ -40,17 +40,18 @@
         -->
     </style>
 </head>
-<body ng-controller="indexController">
+<body ng-controller="commonController">
 <header class='d'>
     <h1 class="header">中国315快查联盟防伪溯源信息查询</h1>
 </header>
 
 <article style="padding:0 10px">
     <aside class="result">查询结果</aside>
-    <!--<div class="panel">-->
-        <!--<h2>商品官方溯源信息</h2>-->
-        <!-- -->
-    <!--</div>-->
+    <div class="panel">
+        <h2>商品官方溯源信息</h2>
+        <div id="productResult">
+        </div>
+    </div>
 
     <div class="panel bggray">
         <h2>防伪查询结果</h2>
