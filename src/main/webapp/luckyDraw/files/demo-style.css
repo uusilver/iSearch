@@ -1,0 +1,53 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+	margin: 0;
+	padding: 0;color: #444444;
+	font: 14px/1.5 Microsoft YaHei, Helvitica, Verdana, Arial, san-serif;
+}
+#spinner {
+	width : 400px;
+	max-width: 400px;
+	height: 400px;
+	margin: 0 auto;
+	align-content: center;
+	vertical-align: middle;
+	/*top: 20px;*/
+	/*margin-bottom: 20px;*/
+	/* -moz-transform: rotate(-5deg);
+	-webkit-transform: rotate(-5deg);
+	-o-transform: rotate(-5deg);
+	-ms-transform: rotate(-5deg);
+	transform: rotate(-5deg); */
+}
+#inner-cont {
+	position: absolute;
+	width: inherit;
+	top: 120px;
+	/* -moz-transform: rotate(-5deg);
+	-webkit-transform: rotate(-5deg);
+	-o-transform: rotate(-5deg);
+	-ms-transform: rotate(-5deg);
+	transform: rotate(-5deg); */
+}
+#inner {
+	width : 112px;
+	max-width: 112px;
+	height: 142px;
+	margin: 0 auto;
+	cursor: pointer;
+}
+#result{
+	width: inherit;
+	text-align: center;
+	font-size: 20px;
+	color:#F36000;
+}
+.content {
+	margin:0px 0 15px 0;
+}
+.boxyellow{
+	background-color: #F0EFD2;
+}
+.boxwhite{
+	background-color: #ffffff;
+}
+input::-moz-placeholder, textarea::-moz-placeholder { color: #999;}
