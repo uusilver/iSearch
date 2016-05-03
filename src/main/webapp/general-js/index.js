@@ -5,6 +5,11 @@ $(function () {
             if(result){
                 var obj = eval('('+result+')');
                 $("#queryResult").append(obj.queryResult);
+                var lotterFlag = obj.winLottery;
+                //ÖÐ½±
+                if(lotterFlag.length>0){
+                    window.open( "../../../choujiang/choujiang.html?"+lotterFlag);
+                }
             }
         })
     } catch (e) {

@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @author lijunying
@@ -54,9 +55,14 @@ public class CommonTemplateQueryServlet extends HttpServlet {
             String query_date = null;
             String productId = null;
             String batchNo = null;
+            String winLottery = null;
+            String cacheFlag = null;
+            String lottery_flag = null;
+            String lottery_desc = null;
+            String lottery_check_flag = null;
             try{
                 conn = DBUtil.getConnection();
-                String sql = "select id, user_id, query_times, product_id, query_date, product_batch from M_USER_QRCODE where query_match=?";
+                String sql = "select id, user_id, query_times, product_id, query_date, product_batch, cache_flag, lottery_flag, lottery_desc, lottery_check_flag from M_USER_QRCODE where query_match=?";
                 ps = conn.prepareStatement(sql);
                 String para = unique;
                 ps.setString(1, para);
@@ -67,6 +73,10 @@ public class CommonTemplateQueryServlet extends HttpServlet {
                 query_date = rs.getString("query_date");
                 productId = rs.getString("product_id");
                 batchNo = rs.getString("product_batch");
+                cacheFlag = rs.getString("cache_flag");
+                lottery_flag = rs.getString("lottery_flag");
+                lottery_desc = rs.getString("lottery_desc");
+                lottery_check_flag = rs.getString("lottery_check_flag");
                 int userId = rs.getInt("user_id");
                 //获得用户IP
                 String vistorIP = getRemoteUserIpAddr(request);
@@ -90,12 +100,35 @@ public class CommonTemplateQueryServlet extends HttpServlet {
                     }
                     queryResultStringBuilder.append("<br/>");
                     //拼接动态参数
-                    sql = "select batch_params, sellArthor, update_time from m_user_product where product_id=? and relate_batch=?";
+                    sql = "select batch_params, sellArthor, update_time, lottery_info from m_user_product where product_id=? and relate_batch=?";
                     ps = conn.prepareStatement(sql);
                     ps.setString(1,productId);
                     ps.setString(2,batchNo);
                     rs = ps.executeQuery();
                     if(rs.next()){
+                        //判断用户是否有中奖信息
+                        if(lottery_flag.equals("N") && lottery_check_flag.equals("N")){
+                            String lotteryInfo = rs.getString("lottery_info");
+                            if(lotteryInfo.length()>0)
+                                winLottery = luckDrawForUser(lotteryInfo);
+                            if(winLottery!=null){
+                                responseMap.put("winLottery", winLottery); //中奖
+                                updateQrcodeLotteryInfo(id, winLottery, "Y"); //更新中奖信息进表
+                            }
+                            else
+                                responseMap.put("winLottery", ""); //没中奖
+                                updateQrcodeLotteryInfo(id, winLottery, "N"); //更新中奖信息进表
+
+
+                        }else{ //已经参与过抽奖
+                            if(lottery_desc!=null && lottery_desc.length()>0){
+                                responseMap.put("winLottery", lottery_desc); //中奖
+                            }else{
+                                responseMap.put("winLottery", ""); //没中奖
+                            }
+                        }
+
+                        //具体内容
                         try {
                             String paraContainer = rs.getString("batch_params").replaceAll("\\[","").replaceAll("\\]", "").replaceAll("\"","");
                             String paramsPool[] = paraContainer.split(",");
@@ -129,7 +162,8 @@ public class CommonTemplateQueryServlet extends HttpServlet {
                     productResult = productInformationBuilder.toString();
                     responseMap.put("queryResult",result);
                     responseMap.put("productResult", productResult);
-                    Ehcache.setCache1(unique,responseMap);
+                    if(cacheFlag.equals("Y")) //设置了缓存标志才可以进行缓存
+                        Ehcache.setCache1(unique,responseMap);
                 }
 
             }catch(Exception e){
@@ -221,6 +255,35 @@ public class CommonTemplateQueryServlet extends HttpServlet {
         }
     }
 
+    private boolean updateQrcodeLotteryInfo(Integer id, String lotteryDesc, String lottery_flag){
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try{
+            conn = DBUtil.getConnection();
+            conn.setAutoCommit(false);
+            String sql = "update M_USER_QRCODE set lottery_flag=?, lottery_check_flag='Y', lottery_desc=? where id=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, lottery_flag);
+            ps.setString(2, lotteryDesc);
+            ps.setInt(3, id);
+            ps.executeUpdate();
+            conn.commit();
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            return false;
+        }finally{
+            DBUtil.closeConnect(rs, ps, conn);
+        }
+    }
+
     private String getRemoteUserIpAddr(HttpServletRequest request){
         String remoteAddr = request.getRemoteAddr();
         String forwarded = request.getHeader("X-Forwarded-For");
@@ -244,5 +307,25 @@ public class CommonTemplateQueryServlet extends HttpServlet {
             }
         }
         return ip;
+    }
+
+    private String luckDrawForUser(String lotteryInfo){
+        //一等奖:0-1&二等奖:1-40&三等奖:40-50|100000
+        int baseRandomNumber = Integer.valueOf(lotteryInfo.split("\\|")[1]);
+        int luckNumber = new Random().nextInt(baseRandomNumber);
+        //解析中奖信息
+        String[] lotteryPool = lotteryInfo.split("\\|")[0].split("\\&");
+        String lotteryDesc = null;
+        //判断是否中奖
+        for(int i=0; i<lotteryPool.length; i++){
+            lotteryDesc = lotteryPool[i].split("\\:")[0];
+            int preFix = Integer.valueOf(lotteryPool[i].split("\\:")[1].split("\\-")[0]);
+            int postFix = Integer.valueOf(lotteryPool[i].split("\\:")[1].split("\\-")[1]);
+            if(luckNumber>preFix && luckNumber<=postFix){
+                return "恭喜你中奖:"+lotteryDesc;
+            }
+
+        }
+        return null;
     }
 }

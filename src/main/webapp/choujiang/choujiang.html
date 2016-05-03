@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="pragma" content="no-cache"/>
+	<meta http-equiv="cache-control" content="no-cache"/>
+	<meta http-equiv="expires" content="0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width"></meta>
+<title>中国315快查联盟防伪溯源信息查询</title>
+	<link rel="stylesheet" type="text/css" href="css/1.css" />
+	<link rel="stylesheet" type="text/css" href="css/2.css" />
+		<link rel="stylesheet" href="css/3.css">
+<link rel="stylesheet" href="css/csshake.min.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/zepto.min.js"></script>
+<script src="js/red.js"></script>
+	<script language="javascript">
+		$(document).ready(function(){
+		function RWidth(){
+		var W=$(window).width();
+		$(".list_in").find("li.right").css("width",parseInt(W)-20-90);
+		$(".content").css("width",parseInt(W)-20);
+		$("h1.header").css("width",parseInt(W)-90);
+		}
+		RWidth()
+		$(window).resize(function(){RWidth()});
+
+            //加载抽奖信息
+            var info = decodeURI(window.location.href.split("?")[1]);
+            $("#lotteryInfo").append(info);
+
+            $("#iBack").click(function(){
+                window.close();
+            });
+		});
+	</script>
+    <style type="text/css">
+<!--
+.STYLE1 {color: #FF0000}
+-->
+    </style>
+</head>
+<body style=" background-image:url(images/bodybg2.png)">
+<header class='d'>
+	<h1 class="header">中国315快查联盟防伪溯源信息查询</h1>
+</header>
+
+  <article style="padding:0 10px">
+  
+   <div class="panel">
+
+<!-- 红包 -->
+<div class="red"><!-- shake-chunk -->
+    <span style="background-image: url(img/red-w.png);"></span>
+    <button class="redbutton" type="领取红包" style="font-size:20px;">拆红包</button>
+    <div class="red-jg" id="lotteryInfo">
+
+
+    </div>
+</div>
+<!-- End 红包 -->
+<!-- 按钮 -->
+<div class="t-btn">
+    <button id="iBack">关闭</button>
+</div>
+<!-- End 按钮 -->
+
+  </div>
+
+   <div style="clear:both;"></div>
+   <footer><p>温馨提示：用户凭中奖信息联系相关企业进行奖品兑换。</p>
+   <p>中国315快查联盟官网:WWW.315KC.COM</p>
+   </footer>
+  </article>
+
+</body>
+</html>

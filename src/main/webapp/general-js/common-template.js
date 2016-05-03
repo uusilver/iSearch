@@ -10,6 +10,11 @@ $(function () {
                 var obj = eval('('+result+')');
                     $("#queryResult").append(obj.queryResult);
                     $("#productResult").append(obj.productResult);
+                    var lotterFlag = obj.winLottery;
+                    //中奖
+                    if(lotterFlag.length>0){
+                        window.open( "../../../choujiang/choujiang.html?"+lotterFlag);
+                    }
                 }
         })
     } catch (e) {
