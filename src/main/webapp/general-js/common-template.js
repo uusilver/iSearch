@@ -13,21 +13,13 @@ $(function () {
                     var lotterFlag = obj.winLottery;
                 //中奖
                 if(lotterFlag.length>0){
-                    var txt=  "点击领取红包";
-                    var option = {
-                        title: "红包到！",
-                        btn: parseInt("0011",2),
-                        onOk: function(){
-                            window.location.href = "../../../choujiang/choujiang.html?"+lotterFlag
-                        },
-                        onCancel:function(){
-
-                        },
-                        onClose:function(){
-
-                        }
-                    }
-                    window.wxc.xcConfirm(txt, "custom", option);
+                    $("#FloatDIV").click(function(){
+                        window.location.href = "../../../choujiang/choujiang.html?"+lotterFlag;
+                    })
+                }else{
+                    $("#FloatDIV").click(function(){
+                        window.location.href = "../../../choujiang/choujiang.html?很遗憾，您未能中奖!";
+                    })
                 }
                 }
         })
