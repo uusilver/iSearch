@@ -1,6 +1,5 @@
 package com.tmind.qrcode.servlet;
 
-import com.sun.corba.se.spi.ior.ObjectKey;
 import com.tmind.qrcode.util.DBUtil;
 
 import java.io.IOException;
