@@ -1,5 +1,7 @@
 package com.tmind.qrcode.servlet;
 
+import com.tmind.qrcode.service.CommonService;
+import com.tmind.qrcode.service.UpdateService;
 import com.tmind.qrcode.util.DBUtil;
 import com.tmind.qrcode.util.Ehcache;
 
@@ -54,9 +56,9 @@ public class WebQueryServlet extends HttpServlet {
                 productId = rs.getString("product_id");
                 batchNo = rs.getString("product_batch");
                 //获得用户IP
-                String vistorIP = getRemoteUserIpAddr(request);
+                String vistorIP = CommonService.getInstance().getRemoteUserIpAddr(request);
 //            System.out.println(vistorIP);
-                if (updateQueryTimes(queryTimes, id, vistorIP)) {
+                if (UpdateService.getInstance().updateQueryTimes(queryTimes, id, vistorIP)) {
                     //鲜果防伪溯源身份证唯一编号：{{indentityCode}}<br><span>查询次数：{{queryTimes}}
                     StringBuilder sb = new StringBuilder();
                     sb.append("<font size='1'>防伪溯源身份证唯一编号：");
@@ -120,59 +122,5 @@ public class WebQueryServlet extends HttpServlet {
         pw.close();
     }
 
-    private boolean updateQueryTimes(Integer currentQueryTimes, Integer id, String ipAddr){
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try{
-            conn = DBUtil.getConnection();
-            conn.setAutoCommit(false);
-            String sql = "update M_USER_QRCODE set website_query_times=?, website_query_date=?, vistor_ip_addr=? where id=?";
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, currentQueryTimes+1);
-            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
-            ps.setString(2, sdf.format(new Date()));
-            ps.setString(3, ipAddr);
-            ps.setInt(4, id);
-            ps.executeUpdate();
-            conn.commit();
-            return true;
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-            try {
-                conn.rollback();
-            } catch (SQLException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-            return false;
-        }finally{
-            DBUtil.closeConnect(rs, ps, conn);
-        }
-    }
 
-    private String getRemoteUserIpAddr(HttpServletRequest request){
-        String remoteAddr = request.getRemoteAddr();
-        String forwarded = request.getHeader("X-Forwarded-For");
-        String realIp = request.getHeader("X-Real-IP");
-
-        String ip = null;
-        if (realIp == null) {
-            if (forwarded == null) {
-                ip = remoteAddr;
-            } else {
-                ip = remoteAddr + "/" + forwarded.split(",")[0];
-            }
-        } else {
-            if (realIp.equals(forwarded)) {
-                ip = realIp;
-            } else {
-                if(forwarded != null){
-                    forwarded = forwarded.split(",")[0];
-                }
-                ip = realIp + "/" + forwarded;
-            }
-        }
-        return ip;
-    }
 }

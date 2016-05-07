@@ -11,6 +11,10 @@ $(function () {
                     $("#queryResult").append(obj.queryResult);
                     $("#productResult").append(obj.productResult);
                     var lotterFlag = obj.winLottery;
+
+                //TODO Ìæ»»µã»÷¹ºÂò±êÇ©
+                $('#purchaseLink').attr('href','http://www.taobao.com');
+
                 //ÖÐ½±
                 if(lotterFlag.length>0){
                     $("#FloatDIV").click(function(){
