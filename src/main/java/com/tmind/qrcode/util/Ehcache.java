@@ -31,11 +31,11 @@ public class Ehcache<T> {
         cache1 = manager.getCache(names[0]);
     }
 
-    public static<T> void setCache1(String key, T value){
+    public static<T> void setCache(String key, T value){
         cache1.put(new Element(key, value));
     }
 
-    public static<T> T getCache1(String key){
+    public static<T> T getCache(String key){
         Element element = cache1.get(key);
         if(element!=null)
             return (T)element.getObjectValue();

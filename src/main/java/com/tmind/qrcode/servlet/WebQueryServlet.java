@@ -30,7 +30,7 @@ public class WebQueryServlet extends HttpServlet {
 //        System.out.println("unique:"+unique);
         PrintWriter pw = response.getWriter();
         String result = " <a class='STYLE1'>错误</a>，数据不存在!";
-        if(Ehcache.getCache1(webUniqueKey)==null) {
+        if(Ehcache.getCache(webUniqueKey)==null) {
             //
             Connection conn = null;
             PreparedStatement ps = null;
@@ -103,7 +103,7 @@ public class WebQueryServlet extends HttpServlet {
                     //最终结果
 //                    System.out.println(sb.toString());
                     result = sb.toString();
-                    Ehcache.setCache1(webUniqueKey,result);
+                    Ehcache.setCache(webUniqueKey,result);
 
                 }
 
@@ -114,7 +114,7 @@ public class WebQueryServlet extends HttpServlet {
                 DBUtil.closeConnect(rs, ps, conn);
             }
         }else{
-            result = Ehcache.getCache1(webUniqueKey);
+            result = Ehcache.getCache(webUniqueKey);
         }
         pw.print(result);
         pw.close();

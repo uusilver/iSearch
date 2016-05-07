@@ -25,28 +25,28 @@ import java.util.Random;
  * @desc 二维码扫码查询servlet
  */
 public class GeneralQrCodeQueryServlet extends HttpServlet {
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
+    /**
+     * @see com.tmind.qrcode.util.Ehcache
+     * @see com.tmind.qrcode.model.UserQrCodeModel
+     *
+     */
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         response.setContentType("text/html;charset=gbk");
 
+        //init
         Map responseMap = new HashMap();
-
+        PrintWriter pw = response.getWriter();
         //获取唯一标示码
         String unique = request.getParameter("uniqueKey");
-//        System.out.println("unique:"+unique);
-        PrintWriter pw = response.getWriter();
         //最终返回结果
         String result = "<a class='STYLE1'>错误</a>，数据不存在!";
         String productResult = "<a class='STYLE1'>错误</a>，数据不存在!";
-        //TODO 未来缓存策略放开,
-        //@see Ehcache.class
-        if(Ehcache.getCache1(unique)==null){
-//		if(true){
+
+        if(Ehcache.getCache(unique)==null){
             Connection conn = null;
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -60,6 +60,7 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
             String lottery_flag = null;
             String lottery_desc = null;
             String lottery_check_flag = null;
+            int userId = 0;
             try{
                 conn = DBUtil.getConnection();
                 String sql = "select id, user_id, query_times, product_id, query_date, product_batch, cache_flag, lottery_flag, lottery_desc, lottery_check_flag from M_USER_QRCODE where query_match=?";
@@ -77,7 +78,7 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
                 lottery_flag = rs.getString("lottery_flag");
                 lottery_desc = rs.getString("lottery_desc");
                 lottery_check_flag = rs.getString("lottery_check_flag");
-                int userId = rs.getInt("user_id");
+                userId = rs.getInt("user_id");
                 //获得用户IP
                 String vistorIP = getRemoteUserIpAddr(request);
                 System.out.println(vistorIP);
@@ -162,8 +163,9 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
                     productResult = productInformationBuilder.toString();
                     responseMap.put("queryResult",result);
                     responseMap.put("productResult", productResult);
+
                     if(cacheFlag.equals("Y")) //设置了缓存标志才可以进行缓存
-                        Ehcache.setCache1(unique,responseMap);
+                        Ehcache.setCache(unique, responseMap);
                 }
 
             }catch(Exception e){
@@ -173,7 +175,7 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
                 DBUtil.closeConnect(rs, ps, conn);
             }
         }else{
-            responseMap = Ehcache.getCache1(unique);
+            responseMap = Ehcache.getCache(unique);
         }
 
         //用Gson构建最后的返回内容
