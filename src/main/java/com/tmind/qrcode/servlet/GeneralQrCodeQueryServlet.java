@@ -22,9 +22,9 @@ import java.util.Random;
 
 /**
  * @author lijunying
- * @desc 通用模板查询servlet
+ * @desc 二维码扫码查询servlet
  */
-public class CommonTemplateQueryServlet extends HttpServlet {
+public class GeneralQrCodeQueryServlet extends HttpServlet {
     /**
      *
      */
@@ -109,9 +109,9 @@ public class CommonTemplateQueryServlet extends HttpServlet {
                         //判断用户是否有中奖信息
                         if(lottery_flag.equals("N") && lottery_check_flag.equals("N")){
                             String lotteryInfo = rs.getString("lottery_info");
-                            if(lotteryInfo.length()>0)
+                            if(lotteryInfo!=null && lotteryInfo.length()>0)
                                 winLottery = luckDrawForUser(lotteryInfo);
-                            if(winLottery!=null){
+                            if(winLottery!=null && winLottery!=null){
                                 responseMap.put("winLottery", winLottery); //中奖
                                 updateQrcodeLotteryInfo(id, winLottery, "Y"); //更新中奖信息进表
                             }
@@ -309,6 +309,7 @@ public class CommonTemplateQueryServlet extends HttpServlet {
         return ip;
     }
 
+    //获得中奖信息
     private String luckDrawForUser(String lotteryInfo){
         //一等奖:0-1&二等奖:1-40&三等奖:40-50|100000
         int baseRandomNumber = Integer.valueOf(lotteryInfo.split("\\|")[1]);

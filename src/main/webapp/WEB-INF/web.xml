@@ -12,22 +12,14 @@
         <welcome-file>default.jsp</welcome-file>
     </welcome-file-list>
 
-    <servlet>
-        <servlet-name>QrCodeQueryServlet</servlet-name>
-        <servlet-class>com.tmind.qrcode.servlet.QrCodeQueryServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>QrCodeQueryServlet</servlet-name>
-        <url-pattern>/qrCodeQueryServlet</url-pattern>
-    </servlet-mapping>
 
     <servlet>
-        <servlet-name>CommonTemplateQueryServlet</servlet-name>
-        <servlet-class>com.tmind.qrcode.servlet.CommonTemplateQueryServlet</servlet-class>
+        <servlet-name>GeneralQrCodeQueryServlet</servlet-name>
+        <servlet-class>com.tmind.qrcode.servlet.GeneralQrCodeQueryServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CommonTemplateQueryServlet</servlet-name>
-        <url-pattern>/commonTemplateQueryServlet</url-pattern>
+        <servlet-name>GeneralQrCodeQueryServlet</servlet-name>
+        <url-pattern>/generalQrCodeQueryServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
