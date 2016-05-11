@@ -1,5 +1,5 @@
 /**
- * Created by vali on 2016/4/20.
+ * Created by junying li on 2016/4/20.
  */
 
 $(function () {
@@ -12,17 +12,20 @@ $(function () {
                     $("#productResult").append(obj.productResult);
                     var lotterFlag = obj.winLottery;
 
-                //TODO ÃÊªªµ„ª˜π∫¬Ú±Í«©
-                $('#purchaseLink').attr('href','http://www.taobao.com');
+                if(obj.productAddress){
+                    $('#purchaseLink').attr('href',obj.productAddress);
+                }else{
+                    $('#purchaseLink').attr('href','shop.htm?'+uniqueKey);
+                }
 
-                //÷–Ω±
+                //
                 if(lotterFlag.length>0){
                     $("#FloatDIV").click(function(){
                         window.location.href = "../../../choujiang/choujiang.html?"+lotterFlag;
                     })
                 }else{
                     $("#FloatDIV").click(function(){
-                        window.location.href = "../../../choujiang/choujiang.html?∫‹“≈∫∂£¨ƒ˙Œ¥ƒ‹÷–Ω±!";
+                        window.location.href = "../../../choujiang/choujiang.html?∫‹“≈∫∂£¨Œ¥÷–Ω±!";
                     })
                 }
                 }

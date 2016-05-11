@@ -13,6 +13,8 @@ public class UserProductModel {
     private String sellArthor;
     private String update_time;
     private String lottery_info;
+    private String sellPrice;
+    private String productAddress;
 
     public String getBatch_params() {
         return batch_params;
@@ -44,5 +46,21 @@ public class UserProductModel {
 
     public void setLottery_info(String lottery_info) {
         this.lottery_info = lottery_info;
+    }
+
+    public String getSellPrice() {
+        return sellPrice;
+    }
+
+    public void setSellPrice(String sellPrice) {
+        this.sellPrice = sellPrice;
+    }
+
+    public String getProductAddress() {
+        return productAddress;
+    }
+
+    public void setProductAddress(String productAddress) {
+        this.productAddress = productAddress;
     }
 }

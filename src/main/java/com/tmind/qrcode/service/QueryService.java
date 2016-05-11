@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 /**
  * @author Junying Li
- * @Desc: ≤È—Ø∑˛ŒÒ
+ * @Desc: ÊêúÁ¥¢‰∫ßÂìÅÂÜÖÂÆπ
  *
  */
 public class QueryService {
@@ -55,7 +55,7 @@ public class QueryService {
 
     public UserProductModel findUserProductByParams(Connection conn, String productId, String relateBatchNo) throws SQLException {
         UserProductModel userProductModel = new UserProductModel();
-        String sql = "select batch_params, sellArthor, update_time, lottery_info from m_user_product where product_id=? and relate_batch=?";
+        String sql = "select batch_params, sellArthor, update_time, lottery_info, sellPrice, productAddress from m_user_product where product_id=? and relate_batch=?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setString(1,productId);
         ps.setString(2,relateBatchNo);
@@ -66,7 +66,8 @@ public class QueryService {
                 userProductModel.setSellArthor(rs.getString("sellArthor"));
                 userProductModel.setUpdate_time(rs.getString("update_time"));
                 userProductModel.setLottery_info(rs.getString("lottery_info"));
-
+                userProductModel.setSellPrice(rs.getString("sellPrice"));
+                userProductModel.setProductAddress(rs.getString("productAddress"));
             }
         }catch (Exception e){
             System.out.println(e.getMessage());

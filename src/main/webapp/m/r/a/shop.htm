@@ -31,6 +31,37 @@
             $(window).resize(function () {
                 RWidth()
             });
+
+            $.ajaxSetup({
+                contentType: "application/x-www-form-urlencoded; charset=utf-8"
+            });
+
+            $("#purchaseLink").click(function(){
+                var uniqueKey = decodeURI(window.location.href.split("?")[1]);
+                var receivePerson = $("#receivePerson").val();
+                var telno = $("#telno").val();
+                var receiveAddr = $("#receiveAddr").val();
+                var comment = $("#comment").val();
+                var uniqueKey = window.location.href.split("?")[1];
+
+                $.post("../y/makeOrderViaEmailServlet",
+                        {
+                            numberA: '',
+                            numberB: '',
+                            receivePerson: receivePerson,
+                            telno: telno,
+                            receiveAddr: receiveAddr,
+                            comment: comment,
+                            uniqueKey: uniqueKey
+                        },
+                        function (data) {
+                            alert("下单成功!");
+                            window.history.back();
+                        })
+            });
+
+
+
         });
     </script>
     <style type="text/css">
@@ -49,24 +80,6 @@
 
 <article style="padding:0 10px">
     <aside class="result">在线下单</aside>
-    <div class="panel">
-        <h2>订购商品信息</h2>
-        <div id="productResult" class="checkboxFour">
-		<ul id="foodInfo">
-		<li>
-		<input id="proA" name="opinions" type="checkbox" style="width:14px; height:14px;"
-                                           value="" checked/>
-                                    <label for="totally">产品名称1（数量/金额）</label>
-									</li>
-									<li>
-		<input id="proA" name="opinions" type="checkbox" style="width:14px; height:14px;"
-                                           value="" checked/>
-                                    <label for="totally">产品名称2（数量/金额）</label>
-									</li>
-				
-	</ul>
-        </div>
-    </div>
 
     <div class="panel bggray">
         <h2>填写联系方式</h2>

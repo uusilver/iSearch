@@ -32,12 +32,14 @@ public class MakeOrderViaEmailServlet extends HttpServlet {
 
 
         StringBuilder sb = new StringBuilder();
-        if (Integer.valueOf(numberA) > 0) {
-            sb.append("客户:" + receivePerson);
-            sb.append("订购价格为258的柚子:" + numberA + "箱,");
-        }
-        if (Integer.valueOf(numberB) > 0) {
-            sb.append("价格为358柚子:" + numberB + "箱,");
+        if(numberA.length()>0 || numberB.length()>0) {
+            if (Integer.valueOf(numberA) > 0) {
+                sb.append("客户:" + receivePerson);
+                sb.append("订购价格为258的柚子:" + numberA + "箱,");
+            }
+            if (Integer.valueOf(numberB) > 0) {
+                sb.append("价格为358柚子:" + numberB + "箱,");
+            }
         }
         sb.append("客户地址是:" + receiveAddr + ",");
         sb.append("客户的电话是:" + telno + ",");
@@ -47,6 +49,8 @@ public class MakeOrderViaEmailServlet extends HttpServlet {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Integer userId = 0;
+        String productName = null;
+        String productId = null;
         try {
             //获得ProductId
             conn = DBUtil.getConnection();
@@ -57,8 +61,19 @@ public class MakeOrderViaEmailServlet extends HttpServlet {
             rs = ps.executeQuery();
             if (rs.next()) {
                 userId = rs.getInt("user_id");
+                productId = rs.getString("product_id");
 
             }
+            //获得商品名称
+            sql = "select product_name  from m_user_product_meta where product_id=? and user_id=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, productId);
+            ps.setInt(2, userId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                productName = rs.getString("product_name");
+            }
+
             sql = "insert into m_factory_order (product_content, receive_person, telno, receive_address, comment, send_flag, send_to_user_id) values (?,?,?,?,?,?,?)";
             ps = conn.prepareStatement(sql);
             ps.setString(1, sb.toString());
@@ -78,7 +93,7 @@ public class MakeOrderViaEmailServlet extends HttpServlet {
                 String smtp = "smtp.163.com";
                 String from = "13851483034@163.com";
                 String to = rs.getString("user_email");
-                String subject = "蜜柚订购信息";
+                String subject = "商品订购信息:"+productName;
                 String content = sb.toString();
                 String username = "13851483034@163.com";
                 String password = "19850924";
@@ -96,7 +111,9 @@ public class MakeOrderViaEmailServlet extends HttpServlet {
         } finally {
             DBUtil.closeConnect(rs, ps, conn);
         }
-
+        PrintWriter pw = response.getWriter();
+        pw.print("success");
+        pw.close();
 
     }
 }

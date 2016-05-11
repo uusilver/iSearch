@@ -101,7 +101,6 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
                                 responseMap.put("winLottery", ""); //没中奖
                             }
                         }
-
                         //具体内容
                         try {
                             String paraContainer = userProductModel.getBatch_params().replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\"","");
@@ -122,6 +121,8 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
                                         queryResultStringBuilder.append("无上次查询时间<br/>");
 
                                 }
+                                queryResultStringBuilder.append("产品价格:" +userProductModel.getSellPrice());
+
                             }
                         }catch(Exception e){
 
@@ -135,6 +136,7 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
                     productResult = productInformationBuilder.toString();
                     responseMap.put("queryResult",result);
                     responseMap.put("productResult", productResult);
+                    responseMap.put("productAddress", userProductModel.getProductAddress());
 
                     if(userQrCodeModel.getCacheFlag().equals("Y")) //设置了缓存标志才可以进行缓存
                         Ehcache.setCache(unique, responseMap);
@@ -176,13 +178,14 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
             //clean ps
             ps.clearParameters();
 
-            sql = "select user_factory_name, user_factory_address  from user where id=?";
+            sql = "select user_factory_name, user_factory_address, user_telno  from user where id=?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if(rs.next()){
                 originalStringBuilder.append("生产企业:"+rs.getString("user_factory_name")+"<br/>");
                 originalStringBuilder.append("原产（地）:"+rs.getString("user_factory_address")+"<br/>");
+                originalStringBuilder.append("企业联系方式:"+rs.getString("user_telno")+"<br/>");
             }
             originalStringBuilder.append("商品批次号:" + productId + "<br/>");
             return originalStringBuilder;
