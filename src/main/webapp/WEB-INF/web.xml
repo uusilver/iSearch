@@ -40,4 +40,13 @@
         <url-pattern>/webQueryServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>WeChatServlet</servlet-name>
+        <servlet-class>com.tmind.qrcode.servlet.WeChatServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WeChatServlet</servlet-name>
+        <url-pattern>/weChatServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>

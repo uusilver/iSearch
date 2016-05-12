@@ -121,9 +121,9 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
                                         queryResultStringBuilder.append("无上次查询时间<br/>");
 
                                 }
-                                queryResultStringBuilder.append("产品价格:" +userProductModel.getSellPrice());
-
                             }
+                            queryResultStringBuilder.append("产品价格:" +userProductModel.getSellPrice());
+
                         }catch(Exception e){
 
                         }
