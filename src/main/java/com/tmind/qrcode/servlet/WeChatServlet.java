@@ -2,10 +2,12 @@ package com.tmind.qrcode.servlet;
 
 import com.tmind.qrcode.service.WeChatCoreService;
 import com.tmind.qrcode.util.SignUtil;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class WeChatServlet extends HttpServlet {
 
+    private  static Logger log = Logger.getLogger(WeChatServlet.class);
     /**
      * 确认请求来自微信服务器
      */
@@ -50,7 +53,13 @@ public class WeChatServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         // 调用核心业务类接收消息、处理消息
-        String respMessage = WeChatCoreService.processRequest(request);
+        String respMessage = null;
+        try {
+            respMessage = WeChatCoreService.processRequest(request);
+        }
+        catch (SQLException e) {
+            log.error(e.getMessage());
+        }
 
         // 响应消息
         PrintWriter out = response.getWriter();

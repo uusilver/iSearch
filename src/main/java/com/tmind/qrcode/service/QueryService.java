@@ -52,6 +52,33 @@ public class QueryService {
         return userQrCodeModel;
     }
 
+    public UserQrCodeModel findUserQrCodeByPass(Connection conn, String passCode) throws SQLException {
+        UserQrCodeModel userQrCodeModel = new UserQrCodeModel();
+        String sql = "select id, user_id, query_times, product_id, query_date, product_batch, cache_flag, lottery_flag, lottery_desc, lottery_check_flag from M_USER_QRCODE where pass_code=?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, passCode);
+        ResultSet rs = ps.executeQuery();
+        try{
+            if(rs.next()){
+                userQrCodeModel.setId(rs.getInt("id"));
+                userQrCodeModel.setQueryTimes(rs.getInt("query_times"));
+                userQrCodeModel.setQuery_date(rs.getString("query_date"));
+                userQrCodeModel.setProductId(rs.getString("product_id"));
+                userQrCodeModel.setBatchNo(rs.getString("product_batch"));
+                userQrCodeModel.setCacheFlag(rs.getString("cache_flag"));
+                userQrCodeModel.setLottery_flag(rs.getString("lottery_flag"));
+                userQrCodeModel.setLottery_desc(rs.getString("lottery_desc"));
+                userQrCodeModel.setLottery_check_flag(rs.getString("lottery_check_flag"));
+                userQrCodeModel.setUserId(rs.getInt("user_id"));
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }finally {
+            DBUtil.closeConnect(rs, ps, null);
+        }
+        return userQrCodeModel;
+    }
+
 
     public UserProductModel findUserProductByParams(Connection conn, String productId, String relateBatchNo) throws SQLException {
         UserProductModel userProductModel = new UserProductModel();
