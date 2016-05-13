@@ -256,7 +256,7 @@ public class WeChatCoreService {
                         respContent = "点击事件";
                     }
                     else if (eventKey.equals("31")) {
-                        respContent = "无锡安可信信息技术有点公司, 江西搭手科技有限公司";
+                        respContent = "无锡安可信信息技术有限公司\n 江西搭手科技有限公司";
                     }
                     else if (eventKey.equals("32")) {
                         respContent = "即将开放！";
