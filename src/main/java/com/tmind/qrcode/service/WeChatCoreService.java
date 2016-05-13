@@ -128,7 +128,7 @@ public class WeChatCoreService {
                                     //获得查询结果信息
                                     StringBuilder queryResultStringBuilder = new StringBuilder();
                                     queryResultStringBuilder.append("防伪溯源身份证唯一编号：");
-                                    queryResultStringBuilder.append(getPassCode + "<br/>");
+                                    queryResultStringBuilder.append(getPassCode + "\n");
                                     queryResultStringBuilder.append("查询次数：");
                                     if (userQrCodeModel.getQueryTimes() == 0) {
                                         queryResultStringBuilder.append("初次查询");
@@ -138,7 +138,7 @@ public class WeChatCoreService {
                                         queryResultStringBuilder.append(queryTimesFromDatabase);
                                         responseMap.put("queryTimes", queryTimesFromDatabase);
                                     }
-                                    queryResultStringBuilder.append("<br/>");
+                                    queryResultStringBuilder.append("\n");
                                     //拼接动态参数
                                     UserProductModel userProductModel = QueryService.getInstance().findUserProductByParams(conn, userQrCodeModel
                                             .getProductId(), userQrCodeModel.getBatchNo());
@@ -150,18 +150,18 @@ public class WeChatCoreService {
                                             for (String s : paramsPool) {
                                                 //添加更多标签的时候这里需要修改
                                                 if (s.equals("ud")) {
-                                                    queryResultStringBuilder.append("产品生产时间:" + userProductModel.getUpdate_time() + "<br/>");
+                                                    queryResultStringBuilder.append("产品生产时间:" + userProductModel.getUpdate_time() + "\n");
                                                 }
                                                 if (s.equals("sl")) {
                                                     //在通用模板中，经销商信息是放在产品信息栏目中的
-                                                    productInformationBuilder.append("产品指定经销商:" + userProductModel.getSellArthor() + "<br/>");
+                                                    productInformationBuilder.append("产品指定经销商:" + userProductModel.getSellArthor() + "\n");
                                                 }
                                                 if (s.equals("lqd")) {
                                                     if (userQrCodeModel.getQuery_date() != null && !userQrCodeModel.getQuery_date().equals("null")
                                                             && userQrCodeModel.getQuery_date().length() > 0)
-                                                        queryResultStringBuilder.append("上次查询时间:" + userQrCodeModel.getQuery_date() + "<br/>");
+                                                        queryResultStringBuilder.append("上次查询时间:" + userQrCodeModel.getQuery_date() + "\n");
                                                     else
-                                                        queryResultStringBuilder.append("无上次查询时间<br/>");
+                                                        queryResultStringBuilder.append("无上次查询时间\n");
 
                                                 }
                                             }
@@ -199,10 +199,35 @@ public class WeChatCoreService {
                         //
                         String finalResult = (String) responseMap.get("productResult") + responseMap.get("queryResult");
                         log.info(finalResult);
+                        //TODO 返回用模板构造的数据
+//                        String finalResponseText = "<xml><ToUserName><![CDATA["+toUserName+"]]></ToUserName>\n" +
+//                                                    "<FromUserName><![CDATA["+fromUserName+"]]></FromUserName>\n" +
+//                                                    "<CreateTime>"+new Date().getTime()+"</CreateTime>\n" +
+//                                                    "<MsgType><![CDATA[event]]></MsgType>\n" +
+//                                                    "<Event><![CDATA[scancode_waitmsg]]></Event>\n" +
+//                                                    "<EventKey><![CDATA[6]]></EventKey>\n" +
+//                                                    "<ScanCodeInfo><ScanType><![CDATA[qrcode]]></ScanType>\n" +
+//                                                    "<ScanResult><![CDATA["+finalResult+"]]></ScanResult>\n" +
+//                                                    "</ScanCodeInfo>\n" +
+//                                                    "</xml>";
+//                        return finalResponseText;
                         respContent = finalResult;
                     }
                     catch (Exception e) {
-                        respContent = "非法数据，请检查!";
+//                        String finalResponseText = "<xml><ToUserName><![CDATA["+toUserName+"]]></ToUserName>\n" +
+//                                "<FromUserName><![CDATA["+fromUserName+"]]></FromUserName>\n" +
+//                                "<CreateTime>"+new Date().getTime()+"</CreateTime>\n" +
+//                                "<MsgType><![CDATA[event]]></MsgType>\n" +
+//                                "<Event><![CDATA[scancode_waitmsg]]></Event>\n" +
+//                                "<EventKey><![CDATA[6]]></EventKey>\n" +
+//                                "<ScanCodeInfo><ScanType><![CDATA[qrcode]]></ScanType>\n" +
+//                                "<ScanResult><![CDATA[非法数据，请检查]]></ScanResult>\n" +
+//                                "</ScanCodeInfo>\n" +
+//                                "</xml>";
+//
+//                        return finalResponseText;
+                        respContent = "非法数据，请检查";
+
                     }
 
                 }
@@ -222,7 +247,6 @@ public class WeChatCoreService {
                     }
                 }
             }
-
             textMessage.setContent(respContent);
             respMessage = MessageUtil.textMessageToXml(textMessage);
         }
@@ -246,7 +270,7 @@ public class WeChatCoreService {
             ps.setString(2, productId);
             rs = ps.executeQuery();
             if (rs.next()) {
-                originalStringBuilder.append("商品名称:" + rs.getString("product_name") + "<br/>");
+                originalStringBuilder.append("商品名称:" + rs.getString("product_name") + "\n");
             }
             //clean ps
             ps.clearParameters();
@@ -256,11 +280,11 @@ public class WeChatCoreService {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                originalStringBuilder.append("生产企业:" + rs.getString("user_factory_name") + "<br/>");
-                originalStringBuilder.append("原产（地）:" + rs.getString("user_factory_address") + "<br/>");
-                originalStringBuilder.append("企业联系方式:" + rs.getString("user_telno") + "<br/>");
+                originalStringBuilder.append("生产企业:" + rs.getString("user_factory_name") + "\n");
+                originalStringBuilder.append("原产（地）:" + rs.getString("user_factory_address") + "\n");
+                originalStringBuilder.append("企业联系方式:" + rs.getString("user_telno") + "\n");
             }
-            originalStringBuilder.append("商品批次号:" + productId + "<br/>");
+            originalStringBuilder.append("商品批次号:" + productId + "\n");
             return originalStringBuilder;
         }
         catch (Exception e) {
