@@ -29,7 +29,10 @@ public class WeChatCoreService {
             String respContent = "请求处理异常，请稍候尝试！";
 
             // xml请求解析
-            Map<String, String> requestMap = MessageUtil.parseXmlByXPath(request);
+
+//            Map<String, String> requestMap = MessageUtil.parseXmlByXPath(request);
+
+            Map<String, String> requestMap = MessageUtil.parseXml(request);
 
             // 发送方帐号（open_id）
             String fromUserName = requestMap.get("FromUserName");
@@ -78,17 +81,22 @@ public class WeChatCoreService {
                 else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
                     // TODO 取消订阅后用户再收不到公众号发送的消息，因此不需要回复消息
                 }
+                else if(eventType.equals(MessageUtil.SCANCODE_PUSH)){
+
+                    respContent = requestMap.get("ScanResult");
+
+                }else if(eventType.equals(MessageUtil.SCANCODE_WAITMSG)){
+                    //事件推送
+                    respContent = requestMap.get("ScanResult");
+
+                }
                 // 自定义菜单点击事件
                 else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
                     // 事件KEY值，与创建自定义菜单时指定的KEY值对应
                     String eventKey = requestMap.get("EventKey");
 
                     if (eventKey.equals("11")) {
-                        try {
-                            respContent = requestMap.get("ScanResult");
-                        }catch (Exception e){
-                            log.info(e.getMessage());
-                        }
+                        respContent = "点击事件";
                     }else if (eventKey.equals("31")) {
                         respContent = "渠道商被点击！";
                     } else if (eventKey.equals("32")) {

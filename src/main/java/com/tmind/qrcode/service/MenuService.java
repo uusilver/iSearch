@@ -47,7 +47,7 @@ public class MenuService {
      */
     private static Menu getMenu() {
         CommonButton btn11 = new CommonButton();
-        btn11.setName("扫码查询");
+        btn11.setName("解码查询");
         btn11.setType("scancode_push");
 //        btn11.setType("scancode_waitmsg");
         btn11.setKey("11");

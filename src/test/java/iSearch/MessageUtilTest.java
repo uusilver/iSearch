@@ -58,6 +58,7 @@ public class MessageUtilTest {
         String MsgType  = "/xml/MsgType";
         String Event  = "/xml/Event";
         String EventKey  = "/xml/EventKey";
+        String ScanCodeInfo = "/xml/ScanCodeInfo";
         String ScanType  = "/xml/ScanCodeInfo/ScanType";
         String ScanResult  = "/xml/ScanCodeInfo/ScanResult";
 
@@ -93,15 +94,19 @@ public class MessageUtilTest {
         text = document.selectSingleNode(EventKey).getText();
         hashMap.put(name, text);
 
-        //ScanType
-        name = document.selectSingleNode(ScanType).getName();
-        text = document.selectSingleNode(ScanType).getText();
-        hashMap.put(name, text);
+        name = document.selectSingleNode(ScanCodeInfo).getName();
+        if(name!=null){
+            //ScanType
+            name = document.selectSingleNode(ScanType).getName();
+            text = document.selectSingleNode(ScanType).getText();
+            hashMap.put(name, text);
 
-        //ScanResult
-        name = document.selectSingleNode(ScanResult).getName();
-        text = document.selectSingleNode(ScanResult).getText();
-        hashMap.put(name, text);
+            //ScanResult
+            name = document.selectSingleNode(ScanResult).getName();
+            text = document.selectSingleNode(ScanResult).getText();
+            hashMap.put(name, text);
+        }
+
 
         for (Iterator<Map.Entry<String, String>> it = hashMap.entrySet().iterator(); it.hasNext();) {
             Map.Entry<String, String> entry = (Map.Entry<String, String>) it.next();
