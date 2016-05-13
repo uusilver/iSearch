@@ -214,8 +214,7 @@ public class WeChatCoreService {
 
                         //
                         String finalResult = (String) responseMap.get("productResult") + responseMap.get("queryResult");
-                        log.info(finalResult);
-                        //TODO 返回用模板构造的数据
+//                        log.info(finalResult);
 //                        String finalResponseText = "<xml><ToUserName><![CDATA["+toUserName+"]]></ToUserName>\n" +
 //                                                    "<FromUserName><![CDATA["+fromUserName+"]]></FromUserName>\n" +
 //                                                    "<CreateTime>"+new Date().getTime()+"</CreateTime>\n" +
