@@ -1,7 +1,6 @@
 package com.tmind.qrcode.util;
 
-import java.io.InputStream;
-import java.io.Writer;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,9 @@ import com.tmind.qrcode.resp.Article;
 import com.tmind.qrcode.resp.MusicMessage;
 import com.tmind.qrcode.resp.NewsMessage;
 import com.tmind.qrcode.resp.TextMessage;
+import org.apache.log4j.Logger;
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
@@ -29,6 +30,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
  */
 public class MessageUtil {
 
+    private static Logger log = Logger.getLogger(MessageUtil.class);
     /**
      * 返回消息类型：文本
      */
@@ -103,6 +105,9 @@ public class MessageUtil {
 
         // 从request中取得输入流
         InputStream inputStream = request.getInputStream();
+
+        log.info(convertStreamToString(inputStream));
+
         // 读取输入流
         SAXReader reader = new SAXReader();
         Document document = reader.read(inputStream);
@@ -112,8 +117,20 @@ public class MessageUtil {
         List<Element> elementList = root.elements();
 
         // 遍历所有子节点
-        for (Element e : elementList)
-            map.put(e.getName(), e.getText());
+        for (Element e : elementList) {
+            if ("ScanCodeInfo".equals(e.getName())) {
+                Element root1 = e;
+                List<Element> elementList1 = root1.elements();
+                for (Element element : elementList1) {
+                    map.put(element.getName(), element.getText());
+//                    System.out.println(element.getName()+"===>"+element.getText());
+                }
+            }
+            else {
+                map.put(e.getName(), e.getText());
+//                System.out.println(e.getName()+"===>"+ e.getText());
+            }
+        }
 
         // 释放资源
         inputStream.close();
@@ -177,11 +194,100 @@ public class MessageUtil {
                         writer.write("<![CDATA[");
                         writer.write(text);
                         writer.write("]]>");
-                    } else {
+                    }
+                    else {
                         writer.write(text);
                     }
                 }
             };
         }
     });
+
+    private static String convertStreamToString(InputStream is) {
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+
+        String line = null;
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "/n");
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                is.close();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return sb.toString();
+
+    }
+
+    public static HashMap<String, String> parseXmlByXPath(HttpServletRequest request) throws DocumentException, IOException {
+
+        InputStream inputStream = request.getInputStream();
+
+        String xml = convertStreamToString(inputStream);
+
+        String ToUserName  = "/xml/ToUserName";
+        String FromUserName  = "/xml/FromUserName";
+        String MsgType  = "/xml/MsgType";
+        String Event  = "/xml/Event";
+        String EventKey  = "/xml/EventKey";
+        String ScanType  = "/xml/ScanCodeInfo/ScanType";
+        String ScanResult  = "/xml/ScanCodeInfo/ScanResult";
+
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+
+        SAXReader saxReader = new SAXReader();
+        Document document = saxReader.read(new ByteArrayInputStream(xml.getBytes("UTF-8")));
+
+        //ToUserName
+        String name = document.selectSingleNode(ToUserName).getName();
+        String text = document.selectSingleNode(ToUserName).getText();
+        hashMap.put(name, text);
+
+        //FromUserName
+        name = document.selectSingleNode(FromUserName).getName();
+        text = document.selectSingleNode(FromUserName).getText();
+        hashMap.put(name, text);
+
+        //MsgType
+        name = document.selectSingleNode(MsgType).getName();
+        text = document.selectSingleNode(MsgType).getText();
+        hashMap.put(name, text);
+
+        //Event
+        name = document.selectSingleNode(Event).getName();
+        text = document.selectSingleNode(Event).getText();
+        hashMap.put(name, text);
+
+        //EventKey
+        name = document.selectSingleNode(EventKey).getName();
+        text = document.selectSingleNode(EventKey).getText();
+        hashMap.put(name, text);
+
+        //ScanType
+        name = document.selectSingleNode(ScanType).getName();
+        text = document.selectSingleNode(ScanType).getText();
+        hashMap.put(name, text);
+
+        //ScanResult
+        name = document.selectSingleNode(ScanResult).getName();
+        text = document.selectSingleNode(ScanResult).getText();
+        hashMap.put(name, text);
+
+//        for (Iterator<Map.Entry<String, String>> it = hashMap.entrySet().iterator(); it.hasNext();) {
+//            Map.Entry<String, String> entry = (Map.Entry<String, String>) it.next();
+//            System.out.println(entry.getKey() + "--->" + entry.getValue());
+//        }
+
+        return hashMap;
+    }
 }

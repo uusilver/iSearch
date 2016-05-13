@@ -2,6 +2,7 @@ package com.tmind.qrcode.service;
 
 import com.tmind.qrcode.resp.TextMessage;
 import com.tmind.qrcode.util.MessageUtil;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -12,6 +13,9 @@ import java.util.Map;
  * @Desc: 所有微信请求过来的处理内容
  */
 public class WeChatCoreService {
+
+    private  static Logger log = Logger.getLogger(WeChatCoreService.class);
+
     /**
      * 处理微信发来的请求
      *
@@ -25,7 +29,7 @@ public class WeChatCoreService {
             String respContent = "请求处理异常，请稍候尝试！";
 
             // xml请求解析
-            Map<String, String> requestMap = MessageUtil.parseXml(request);
+            Map<String, String> requestMap = MessageUtil.parseXmlByXPath(request);
 
             // 发送方帐号（open_id）
             String fromUserName = requestMap.get("FromUserName");
@@ -80,7 +84,11 @@ public class WeChatCoreService {
                     String eventKey = requestMap.get("EventKey");
 
                     if (eventKey.equals("11")) {
-                        respContent = requestMap.get("ScanResult");
+                        try {
+                            respContent = requestMap.get("ScanResult");
+                        }catch (Exception e){
+                            log.info(e.getMessage());
+                        }
                     }else if (eventKey.equals("31")) {
                         respContent = "渠道商被点击！";
                     } else if (eventKey.equals("32")) {
