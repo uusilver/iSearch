@@ -102,7 +102,15 @@ public class WeChatCoreService {
                     //事件推送
                     log.info(requestMap.get("ScanResult"));
                     try {
-                        String getPassCode = requestMap.get("ScanResult").split("\\?")[1];
+                        String url = requestMap.get("ScanResult");
+                        boolean encodeFlag = (url.indexOf("pass")>0);
+                        String getPassCode = null;
+                        String uniqueCode = null;
+                        if(encodeFlag) {
+                             getPassCode = url.split("\\?")[1];
+                        }else{
+                             uniqueCode = url.split("\\?")[1];
+                        }
                         //实际查询
                         //init
                         Map responseMap = new HashMap();
@@ -115,7 +123,12 @@ public class WeChatCoreService {
                             Connection conn = null;
                             try {
                                 conn = DBUtil.getConnection();
-                                UserQrCodeModel userQrCodeModel = QueryService.getInstance().findUserQrCodeByPass(conn, getPassCode);
+                                UserQrCodeModel userQrCodeModel = null;
+                                if(encodeFlag) {
+                                    userQrCodeModel = QueryService.getInstance().findUserQrCodeByPass(conn, getPassCode);
+                                }else{
+                                    userQrCodeModel = QueryService.getInstance().findUserQrCodeByUniqueId(conn, uniqueCode);
+                                }
                                 //获得用户IP
                                 String vistorIP = CommonService.getInstance().getRemoteUserIpAddr(request);
                                 //TODO add logger
@@ -128,7 +141,10 @@ public class WeChatCoreService {
                                     //获得查询结果信息
                                     StringBuilder queryResultStringBuilder = new StringBuilder();
                                     queryResultStringBuilder.append("防伪溯源身份证唯一编号：");
-                                    queryResultStringBuilder.append(getPassCode + "\n");
+                                    if(encodeFlag)
+                                        queryResultStringBuilder.append(getPassCode + "\n");
+                                    else
+                                        queryResultStringBuilder.append(uniqueCode + "\n");
                                     queryResultStringBuilder.append("查询次数：");
                                     if (userQrCodeModel.getQueryTimes() == 0) {
                                         queryResultStringBuilder.append("初次查询");
