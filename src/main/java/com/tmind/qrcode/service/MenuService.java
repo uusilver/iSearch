@@ -57,7 +57,7 @@ public class MenuService {
         btn12.setUrl("http://www.315kc.com/mobile/index.html");
 //
         CommonButton btn21 = new CommonButton();
-        btn21.setName("访问官网");
+        btn21.setName("访问官网查询");
         btn21.setType("view");
         btn21.setUrl("http://www.315kc.com/mobile/index1.html");
 //
