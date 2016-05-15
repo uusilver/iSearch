@@ -100,16 +100,16 @@ public class WeChatCoreService {
                 }
                 else if (eventType.equals(MessageUtil.SCANCODE_WAITMSG)) {
                     //事件推送
-                    log.info(requestMap.get("ScanResult"));
+//                    log.info(requestMap.get("ScanResult"));
                     try {
                         String url = requestMap.get("ScanResult");
                         boolean encodeFlag = (url.indexOf("pass")>0);
                         String getPassCode = null;
                         String uniqueCode = null;
                         if(encodeFlag) {
-                             getPassCode = url.split("\\?")[1];
+                            getPassCode = url.split("\\?")[1];
                         }else{
-                             uniqueCode = url.split("\\?")[1];
+                            uniqueCode = url.split("\\?")[1];
                         }
                         //实际查询
                         //init

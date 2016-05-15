@@ -47,20 +47,22 @@ public class MenuService {
      */
     private static Menu getMenu() {
         CommonButton btn11 = new CommonButton();
-        btn11.setName("扫码查询");
+        btn11.setName("\ue212扫一扫");
 //        btn11.setType("scancode_push");
         btn11.setType("scancode_waitmsg");
         btn11.setKey("11");
 
-        ViewButton btn12 = new ViewButton();
-        btn12.setName("品牌码查询");
-        btn12.setType("view");
-        btn12.setUrl("http://www.315kc.com/mobile/index.html");
+
 //
         CommonButton btn21 = new CommonButton();
-        btn21.setName("访问官网查询");
+        btn21.setName("访问官网");
         btn21.setType("view");
         btn21.setUrl("http://www.315kc.com/mobile/index1.html");
+
+        ViewButton btn22 = new ViewButton();
+        btn22.setName("品牌码查询");
+        btn22.setType("view");
+        btn22.setUrl("http://www.315kc.com/mobile/index.html");
 //
 //
         CommonButton btn31 = new CommonButton();
@@ -74,16 +76,13 @@ public class MenuService {
         btn32.setKey("32");
 
 
-        ComplexButton mainBtn1 = new ComplexButton();
-        mainBtn1.setName("在线查询");
-        mainBtn1.setSub_button(new Button[] { btn11, btn12 });
 
         ComplexButton mainBtn2 = new ComplexButton();
-        mainBtn2.setName("官方网站");
-        mainBtn2.setSub_button(new CommonButton[] { btn21});
+        mainBtn2.setName("在线查询");
+        mainBtn2.setSub_button(new Button[] { btn21, btn22});
 //
         ComplexButton mainBtn3 = new ComplexButton();
-        mainBtn3.setName("信息验证");
+        mainBtn3.setName("帮助");
         mainBtn3.setSub_button(new CommonButton[] { btn31, btn32 });
 
         /**
@@ -94,7 +93,7 @@ public class MenuService {
          * menu.setButton(new Button[] { mainBtn1, mainBtn2, btn33 });
          */
         Menu menu = new Menu();
-        menu.setButton(new Button[] { mainBtn1, mainBtn2, mainBtn3 });
+        menu.setButton(new Button[] { btn11, mainBtn2, mainBtn3 });
         return menu;
     }
 }
