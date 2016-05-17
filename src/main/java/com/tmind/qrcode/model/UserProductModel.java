@@ -15,6 +15,7 @@ public class UserProductModel {
     private String lottery_info;
     private String sellPrice;
     private String productAddress;
+    private String level_desc;
 
     public String getBatch_params() {
         return batch_params;
@@ -62,5 +63,13 @@ public class UserProductModel {
 
     public void setProductAddress(String productAddress) {
         this.productAddress = productAddress;
+    }
+
+    public String getLevel_desc() {
+        return level_desc;
+    }
+
+    public void setLevel_desc(String level_desc) {
+        this.level_desc = level_desc;
     }
 }

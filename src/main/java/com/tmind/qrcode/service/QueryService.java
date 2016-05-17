@@ -82,7 +82,7 @@ public class QueryService {
 
     public UserProductModel findUserProductByParams(Connection conn, String productId, String relateBatchNo) throws SQLException {
         UserProductModel userProductModel = new UserProductModel();
-        String sql = "select batch_params, sellArthor, update_time, lottery_info, sellPrice, productAddress from m_user_product where product_id=? and relate_batch=?";
+        String sql = "select batch_params, sellArthor, update_time, lottery_info, sellPrice, productAddress, level_desc from m_user_product where product_id=? and relate_batch=?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setString(1,productId);
         ps.setString(2,relateBatchNo);
@@ -95,6 +95,7 @@ public class QueryService {
                 userProductModel.setLottery_info(rs.getString("lottery_info"));
                 userProductModel.setSellPrice(rs.getString("sellPrice"));
                 userProductModel.setProductAddress(rs.getString("productAddress"));
+                userProductModel.setLevel_desc(rs.getString("level_desc"));
             }
         }catch (Exception e){
             System.out.println(e.getMessage());

@@ -180,7 +180,10 @@ public class WeChatCoreService {
                                                         queryResultStringBuilder.append("无上次查询时间\n");
 
                                                 }
-                                            }
+                                                if(s.equals("lv")){
+                                                    productInformationBuilder.append("产品等级:" + userProductModel.getLevel_desc() + "\n");
+                                                }
+                                            }//end of for
                                             queryResultStringBuilder.append("产品价格:" + userProductModel.getSellPrice());
 
                                         }
@@ -272,48 +275,36 @@ public class WeChatCoreService {
         return respMessage;
     }
 
-    private static StringBuilder getProductInfo(StringBuilder originalStringBuilder, Integer id, String productId) {
+    private static StringBuilder getProductInfo(StringBuilder originalStringBuilder, Integer id, String productId){
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        try {
+        try{
             conn = DBUtil.getConnection();
             conn.setAutoCommit(false);
-            String sql = "select product_name from m_user_product_meta where user_id=? and product_id=?";
+            String sql = "select product_name, product_address, tel_no, product_factory from m_user_product_meta where user_id=? and product_id=?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ps.setString(2, productId);
             rs = ps.executeQuery();
-            if (rs.next()) {
-                originalStringBuilder.append("商品名称:" + rs.getString("product_name") + "\n");
-            }
-            //clean ps
-            ps.clearParameters();
-
-            sql = "select user_factory_name, user_factory_address, user_telno  from user where id=?";
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                originalStringBuilder.append("生产企业:" + rs.getString("user_factory_name") + "\n");
-                originalStringBuilder.append("原产（地）:" + rs.getString("user_factory_address") + "\n");
-                originalStringBuilder.append("企业联系方式:" + rs.getString("user_telno") + "\n");
+            if(rs.next()){
+                originalStringBuilder.append("商品名称:"+rs.getString("product_name")+"\n");
+                originalStringBuilder.append("生产企业:"+rs.getString("product_factory")+"\n");
+                originalStringBuilder.append("原产（地）:"+rs.getString("product_address")+"\n");
+                originalStringBuilder.append("企业联系方式:"+rs.getString("tel_no")+"\n");
             }
             originalStringBuilder.append("商品批次号:" + productId + "\n");
             return originalStringBuilder;
-        }
-        catch (Exception e) {
+        }catch(Exception e){
             System.out.println(e.getMessage());
             try {
                 conn.rollback();
-            }
-            catch (SQLException e1) {
+            } catch (SQLException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             return null;
-        }
-        finally {
+        }finally{
             DBUtil.closeConnect(rs, ps, conn);
         }
     }
