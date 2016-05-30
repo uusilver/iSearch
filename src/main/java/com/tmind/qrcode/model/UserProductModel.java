@@ -9,6 +9,7 @@ package com.tmind.qrcode.model;/**
  */
 public class UserProductModel {
 
+    private String relatedBatch;
     private String batch_params;
     private String sellArthor;
     private String update_time;
@@ -16,6 +17,14 @@ public class UserProductModel {
     private String sellPrice;
     private String productAddress;
     private String level_desc;
+
+    public String getRelatedBatch() {
+        return relatedBatch;
+    }
+
+    public void setRelatedBatch(String relatedBatch) {
+        this.relatedBatch = relatedBatch;
+    }
 
     public String getBatch_params() {
         return batch_params;

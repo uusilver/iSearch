@@ -62,7 +62,6 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
                 if(UpdateService.getInstance().updateQueryTimes(userQrCodeModel.getQueryTimes(), userQrCodeModel.getId(), vistorIP)){
                     //获得产品信息
                     StringBuilder productInformationBuilder = new StringBuilder();
-                    productInformationBuilder = getProductInfo(productInformationBuilder, userQrCodeModel.getUserId(), userQrCodeModel.getProductId());
                     //获得查询结果信息
                     StringBuilder queryResultStringBuilder = new StringBuilder();
                     queryResultStringBuilder.append("<font size='1'>防伪溯源身份证唯一编号：");
@@ -78,6 +77,7 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
                     queryResultStringBuilder.append("<br/>");
                     //拼接动态参数
                     UserProductModel userProductModel = QueryService.getInstance().findUserProductByParams(conn, userQrCodeModel.getProductId(), userQrCodeModel.getBatchNo());
+                    productInformationBuilder = getProductInfo(productInformationBuilder, userQrCodeModel.getUserId(), userQrCodeModel.getProductId(), userProductModel);
                     if(userProductModel!=null){
                         String winLottery = null;
                         //判断用户是否有中奖信息
@@ -163,25 +163,34 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
 
 
 
-    private StringBuilder getProductInfo(StringBuilder originalStringBuilder, Integer id, String productId){
+    private StringBuilder getProductInfo(StringBuilder originalStringBuilder, Integer id, String productId, UserProductModel productModel){
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try{
             conn = DBUtil.getConnection();
             conn.setAutoCommit(false);
-            String sql = "select product_name, product_address, tel_no, product_factory from m_user_product_meta where user_id=? and product_id=?";
+            String sql = "select product_name, product_address, tel_no, product_factory, show_desc, product_desc from m_user_product_meta where user_id=? and product_id=?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ps.setString(2, productId);
             rs = ps.executeQuery();
+            String showFlag = null;
+            String productDesc = null;
             if(rs.next()){
                 originalStringBuilder.append("商品名称:"+rs.getString("product_name")+"<br/>");
                 originalStringBuilder.append("生产企业:"+rs.getString("product_factory")+"<br/>");
                 originalStringBuilder.append("原产（地）:"+rs.getString("product_address")+"<br/>");
                 originalStringBuilder.append("企业联系方式:"+rs.getString("tel_no")+"<br/>");
+                showFlag = rs.getString("show_desc");
+                productDesc = rs.getString("product_desc");
+
             }
-            originalStringBuilder.append("商品批次号:" + productId + "<br/>");
+            originalStringBuilder.append("商品批次号:" + productModel.getRelatedBatch() + "<br/>");
+            if(showFlag.equals("Y")){
+                originalStringBuilder.append("商品信息:" + productDesc + "<br/>");
+
+            }
             return originalStringBuilder;
         }catch(Exception e){
             System.out.println(e.getMessage());

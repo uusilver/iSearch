@@ -87,6 +87,7 @@ public class WeChatCoreService {
                 String eventType = requestMap.get("Event");
                 // 订阅
                 if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
+                    log.info("关注账号:"+fromUserName);
                     respContent = "谢谢您的关注！";
                 }
                 // 取消订阅
@@ -100,17 +101,24 @@ public class WeChatCoreService {
                 }
                 else if (eventType.equals(MessageUtil.SCANCODE_WAITMSG)) {
                     //事件推送
-//                    log.info(requestMap.get("ScanResult"));
+                    log.info("扫码账号:"+fromUserName);
                     try {
                         String url = requestMap.get("ScanResult");
-                        boolean encodeFlag = (url.indexOf("pass")>0);
+                        boolean encodeFlag = (url.indexOf("weixin")>0);
+                        boolean passPage = (url.indexOf("pass")>0);
                         String getPassCode = null;
                         String uniqueCode = null;
-                        if(encodeFlag) {
+                        //遗留问题，兼容之前的pass页面，之后的全部使用weixin链接替换
+                        if(passPage){
                             getPassCode = url.split("\\?")[1];
                         }else{
-                            uniqueCode = url.split("\\?")[1];
+                            if(encodeFlag) {
+                                getPassCode = url.split("\\/")[5];
+                            }else{
+                                uniqueCode = url.split("\\?")[1];
+                            }
                         }
+
                         //实际查询
                         //init
                         Map responseMap = new HashMap();
@@ -136,8 +144,6 @@ public class WeChatCoreService {
                                         vistorIP)) {
                                     //获得产品信息
                                     StringBuilder productInformationBuilder = new StringBuilder();
-                                    productInformationBuilder = getProductInfo(productInformationBuilder, userQrCodeModel.getUserId(),
-                                            userQrCodeModel.getProductId());
                                     //获得查询结果信息
                                     StringBuilder queryResultStringBuilder = new StringBuilder();
                                     queryResultStringBuilder.append("防伪溯源身份证唯一编号：");
@@ -158,6 +164,10 @@ public class WeChatCoreService {
                                     //拼接动态参数
                                     UserProductModel userProductModel = QueryService.getInstance().findUserProductByParams(conn, userQrCodeModel
                                             .getProductId(), userQrCodeModel.getBatchNo());
+
+                                    productInformationBuilder = getProductInfo(productInformationBuilder, userQrCodeModel.getUserId(),
+                                            userQrCodeModel.getProductId(), userProductModel);
+
                                     if (userProductModel != null) {
                                         try {
                                             String paraContainer = userProductModel.getBatch_params().replaceAll("\\[", "").replaceAll("\\]", "")
@@ -217,33 +227,9 @@ public class WeChatCoreService {
 
                         //
                         String finalResult = (String) responseMap.get("productResult") + responseMap.get("queryResult");
-//                        log.info(finalResult);
-//                        String finalResponseText = "<xml><ToUserName><![CDATA["+toUserName+"]]></ToUserName>\n" +
-//                                                    "<FromUserName><![CDATA["+fromUserName+"]]></FromUserName>\n" +
-//                                                    "<CreateTime>"+new Date().getTime()+"</CreateTime>\n" +
-//                                                    "<MsgType><![CDATA[event]]></MsgType>\n" +
-//                                                    "<Event><![CDATA[scancode_waitmsg]]></Event>\n" +
-//                                                    "<EventKey><![CDATA[6]]></EventKey>\n" +
-//                                                    "<ScanCodeInfo><ScanType><![CDATA[qrcode]]></ScanType>\n" +
-//                                                    "<ScanResult><![CDATA["+finalResult+"]]></ScanResult>\n" +
-//                                                    "</ScanCodeInfo>\n" +
-//                                                    "</xml>";
-//                        return finalResponseText;
                         respContent = finalResult;
                     }
                     catch (Exception e) {
-//                        String finalResponseText = "<xml><ToUserName><![CDATA["+toUserName+"]]></ToUserName>\n" +
-//                                "<FromUserName><![CDATA["+fromUserName+"]]></FromUserName>\n" +
-//                                "<CreateTime>"+new Date().getTime()+"</CreateTime>\n" +
-//                                "<MsgType><![CDATA[event]]></MsgType>\n" +
-//                                "<Event><![CDATA[scancode_waitmsg]]></Event>\n" +
-//                                "<EventKey><![CDATA[6]]></EventKey>\n" +
-//                                "<ScanCodeInfo><ScanType><![CDATA[qrcode]]></ScanType>\n" +
-//                                "<ScanResult><![CDATA[非法数据，请检查]]></ScanResult>\n" +
-//                                "</ScanCodeInfo>\n" +
-//                                "</xml>";
-//
-//                        return finalResponseText;
                         respContent = "非法数据，请检查";
 
                     }
@@ -275,7 +261,7 @@ public class WeChatCoreService {
         return respMessage;
     }
 
-    private static StringBuilder getProductInfo(StringBuilder originalStringBuilder, Integer id, String productId){
+    private static StringBuilder getProductInfo(StringBuilder originalStringBuilder, Integer id, String productId, UserProductModel productModel){
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -293,7 +279,7 @@ public class WeChatCoreService {
                 originalStringBuilder.append("原产（地）:"+rs.getString("product_address")+"\n");
                 originalStringBuilder.append("企业联系方式:"+rs.getString("tel_no")+"\n");
             }
-            originalStringBuilder.append("商品批次号:" + productId + "\n");
+            originalStringBuilder.append("商品批次号:" + productModel.getRelatedBatch() + "\n");
             return originalStringBuilder;
         }catch(Exception e){
             System.out.println(e.getMessage());
