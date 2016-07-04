@@ -7,7 +7,7 @@ package com.tmind.qrcode.pojo;/**
 /**
  * @author Vani Li
  *
- * °´Å¥µÄ»ùÀà
+ * æŒ‰é’®çš„åŸºç±»
  */
 public class Button {
 

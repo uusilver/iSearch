@@ -132,10 +132,14 @@ public class WeChatCoreService {
                             try {
                                 conn = DBUtil.getConnection();
                                 UserQrCodeModel userQrCodeModel = null;
-                                if(encodeFlag) {
+                                if(passPage){
                                     userQrCodeModel = QueryService.getInstance().findUserQrCodeByPass(conn, getPassCode);
                                 }else{
-                                    userQrCodeModel = QueryService.getInstance().findUserQrCodeByUniqueId(conn, uniqueCode);
+                                    if(encodeFlag) {
+                                        userQrCodeModel = QueryService.getInstance().findUserQrCodeByPass(conn, getPassCode);
+                                    }else{
+                                        userQrCodeModel = QueryService.getInstance().findUserQrCodeByUniqueId(conn, uniqueCode);
+                                    }
                                 }
                                 //获得用户IP
                                 String vistorIP = CommonService.getInstance().getRemoteUserIpAddr(request);
@@ -244,7 +248,11 @@ public class WeChatCoreService {
                         respContent = "点击事件";
                     }
                     else if (eventKey.equals("31")) {
-                        respContent = "无锡安可信信息技术有限公司\n 江西搭手科技有限公司";
+                        respContent = "江西省\n江西省搭手网络科技有限公司\n" +
+                                        "\n" +
+                                        "河北省\n保定东信电子科技有限公司(服务地区:河北)\n" +
+                                        "\n" +
+                                        "江苏省\n苏州爱威尔信息科技有限公司(服务地区:苏州)\n无锡安可信信息技术有限公司(服务地区:无锡)";
                     }
                     else if (eventKey.equals("32")) {
                         respContent = "即将开放！";

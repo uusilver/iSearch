@@ -3,7 +3,7 @@ package com.tmind.qrcode.model;
 /**
  * @author JunyingLi
  *
- * @Desc: 用来保存用户二维码表的查询数据的model
+ * @Desc: 鐢ㄦ潵淇濆瓨鐢ㄦ埛浜岀淮鐮佽〃鐨勬煡璇㈡暟鎹殑model
  */
 public class UserQrCodeModel {
 

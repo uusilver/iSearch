@@ -20,10 +20,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * @author lijunying
@@ -77,7 +74,14 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
                     queryResultStringBuilder.append("<br/>");
                     //拼接动态参数
                     UserProductModel userProductModel = QueryService.getInstance().findUserProductByParams(conn, userQrCodeModel.getProductId(), userQrCodeModel.getBatchNo());
-                    productInformationBuilder = getProductInfo(productInformationBuilder, userQrCodeModel.getUserId(), userQrCodeModel.getProductId(), userProductModel);
+                    List<StringBuilder> resultList = getProductInfo(productInformationBuilder, userQrCodeModel.getUserId(), userQrCodeModel.getProductId(), userProductModel);
+                    if(resultList.size()>1){
+                        productInformationBuilder = resultList.get(1);
+                        responseMap.put("productDesc", resultList.get(0).toString());
+                    }else{
+                        productInformationBuilder = resultList.get(0);
+                    }
+
                     if(userProductModel!=null){
                         String winLottery = null;
                         //判断用户是否有中奖信息
@@ -100,6 +104,11 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
                             }else{
                                 responseMap.put("winLottery", ""); //没中奖
                             }
+                        }
+                        if(userQrCodeModel.getLottery_flag().equalsIgnoreCase("Y")){
+                            responseMap.put("lotteryFlag", "Yes");
+                        }else{
+                            responseMap.put("lotteryFlag", "");
                         }
                         //具体内容
                         try {
@@ -163,7 +172,8 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
 
 
 
-    private StringBuilder getProductInfo(StringBuilder originalStringBuilder, Integer id, String productId, UserProductModel productModel){
+    private List<StringBuilder> getProductInfo(StringBuilder originalStringBuilder, Integer id, String productId, UserProductModel productModel){
+        List<StringBuilder> list = new ArrayList<StringBuilder>();
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -188,10 +198,10 @@ public class GeneralQrCodeQueryServlet extends HttpServlet {
             }
             originalStringBuilder.append("商品批次号:" + productModel.getRelatedBatch() + "<br/>");
             if(showFlag.equals("Y")){
-                originalStringBuilder.append("商品信息:" + productDesc + "<br/>");
-
+                list.add(new StringBuilder().append(productDesc));
             }
-            return originalStringBuilder;
+            list.add(originalStringBuilder);
+            return list;
         }catch(Exception e){
             System.out.println(e.getMessage());
             try {
