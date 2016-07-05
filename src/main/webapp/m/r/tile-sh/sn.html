@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>超晶石系列</title>
+<style type="text/css">
+<!--
+body {
+	background-color: #333333;
+}
+img {width: 100%;
+}
+a {
+	display: block;
+	float: left;
+	width: 100%;
+}
+-->
+</style>
+</head>
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<script>
+	$(function(){
+		$.get("../../../loadImagieServlet"+"?key=sn",function(result){
+			if(result) {
+				$("#content").html(result);
+			}
+		})
+	});
+
+</script>
+<body>
+<div id="content" style="width:auto; height:auto; margin:0px auto;">
+
+
+
+</div>
+</body>
+</html>

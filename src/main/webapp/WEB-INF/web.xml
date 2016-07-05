@@ -49,4 +49,13 @@
         <url-pattern>/weChatServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>LoadImagieServlet</servlet-name>
+        <servlet-class>com.tmind.qrcode.servlet.LoadImagieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoadImagieServlet</servlet-name>
+        <url-pattern>/loadImagieServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>
