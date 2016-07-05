@@ -1,0 +1,64 @@
+@charset "utf-8";
+/* CSS Document */
+html { background:#FFF;}
+.fullW { display:block; width:100%;}
+.pdt10 { padding:10px;}
+.pdt20 { padding-top:20px;}
+.pdt5 { padding:5px;}
+.pdp3 { padding:0 3%;}
+.pdpr3 { padding-right:3%;}
+.pdpl3 { padding-left:3%;}
+.ts3 { -webkit-transition:all ease 0.3s; -moz-transition:all ease 0.3s; -o-transition:all ease 0.3s; -ms-transition:all ease 0.3s; transition:all ease 0.3s;}
+.brR3 { -webkit-border-radius:3px; -moz-border-radius:3px; -ms-border-radius:3px; -o-border-radius:3px; border-radius:3px;}
+.brR10 { -webkit-border-radius:10px; -moz-border-radius:10px; -ms-border-radius:10px; -o-border-radius:10px; border-radius:10px;}
+.brR { -webkit-border-radius:50%; -moz-border-radius:50%; -ms-border-radius:50%; -o-border-radius:50%; border-radius:50%;}
+.pr { position:relative;}
+.txt_c { text-align:center;}
+body { margin:0;}
+
+
+/*warp*/
+#warp { position:relative; z-index:2; width:100%; max-width:640px; margin:0 auto; overflow:hidden; font-size:12px; background:#F8EFFF; font-family:'宋体';}
+#warp #main { padding-bottom:10px;}
+#warp .logo { position:absolute; left:17.5%; top:5.7%; z-index:2; display:block; width:24.2%; height:66%;}
+#main dl { width:100%; margin-top:10px;}
+#main dl.active dt { background:#3D8D02;}
+#main dl dt .slid_ico .pic1 { display:block;}
+#main dl dt .slid_ico .pic2 { display:none;}
+#main dl.active dt .slid_ico .pic1 { display:none;}
+#main dl.active dt .slid_ico .pic2 { display:block;}
+#main dl.active dd { display:block;}
+#main dl dt { width:94%; padding:10px 3%; background:#e52c34;}
+#main dl dt span { float:left; width:36%;}
+#main dl dt span img { display:block; width:100%;}
+#main dl dt .slid_ico { float:right; display:block; width:6%; margin-top:3%;}
+#main dl dt .slid_ico img { display:block; width:100%;}
+
+#main dl dd { width:100%; padding-bottom:10px; display:none;}
+#main dl dd .txtPic { width:100%; padding-top:10px; font-size:12px; color:#3D8D02;}
+#main dl dd .txtPic span,#main dl dd .txtPic p { padding-top:2%;}
+#main dl dd .txtPic .txt_c { padding-top:10px;}
+#main dl dd i img { display:block; padding:0 2%; width:96%;}
+.W35 { width:35%; display:block;}
+.W65 { width:64.5%; display:block;}
+.W50 { width:50%; display:block;}
+
+#main dl dd .txtPic2 { width:100%; padding-top:10px; font-size:12px; color:#3D8D02;}
+#main dl dd .txtPic2 p { padding-top:10px; font-size:12px; color:#3D8D02;}
+#main dl dd .txtPic2 h6 { margin:10px 0 0; padding:0; font-size:12px;}
+#main dl dd .txtPic2 h6 span { display:inline-block; padding:3px 20px; background:#e52c34; color:#FFF;}
+#main dl dd .txtPic2 .num { display:inline-block; width:20px; height:20px; background:#3D8D02; vertical-align:middle; color:#FFF; font-size:12px; line-height:20px; text-align:center; font-family:"Times New Roman", Times, serif;}
+#main dl dd table td { padding:2px; line-height:1.5em; vertical-align:baseline;}
+#main .btm_btn { display:block; width:100%; margin-top:10px; overflow:hidden; background:#FFF;}
+#main .btm_btn img { display:block; width:44%; margin:0 auto;}
+#main .btm_btns { width:100%; padding:10px 0;}
+#main .btm_btns a { float:left; display:inline-block; width:23%; margin:0 1%; background:#e52c34; text-align:center;}
+#main .btm_btns a:active,#main .btm_btns a.active { background:#3D8D02;}
+#main .btm_btns a img { display:inline-block; width:48.5%; vertical-align:bottom;}
+#main .other_channel { width:94%; padding:10px 3% 0; border-top:1px #f1f4b3 solid;}
+#main .other_channel a { float:left; display:inline-block; width:23%; margin:0 1%; overflow:hidden;}
+#main .other_channel a img { display:block; width:100%;}
+
+#main2 { padding-bottom:10px;}
+#main2 h6 { width:80%; margin:0 auto; font-size:20px; line-height:1.5em; color:#4e7fc1;}
+#main2 h6 span { display:block; padding:30px;}
