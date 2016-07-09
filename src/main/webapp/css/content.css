@@ -887,25 +887,25 @@ ul.sibling_l > li.pl_now1 > a, ul.sibling_l > li.pl_now1 > a > span {
 }
 
 .hrdengd {
-    background: #0E69BB;
-    height: 44px;
+    background: #EEEEEE;
+    height: 28px;
     min-width: 1024px;
     width: 100%;
 }
 
 .kuand h2 {
-    color: #fff;
-    line-height: 44px;
+    color: #353535;
+    line-height: 24px;
     width: 300px;
 }
 
 .kuand a {
-    color: #fff;
+    color: #353535;
     line-height: 44px;
 }
 
 .background_warry {
-    background: url(../images/bj.png) no-repeat center;
+/*    background: url(../images/bj.png) no-repeat center;*/
     height: 430px;
     min-width: 1024px;
     padding-top: 90px;
@@ -924,19 +924,19 @@ ul.sibling_l > li.pl_now1 > a, ul.sibling_l > li.pl_now1 > a > span {
     background-position: 0 0;
     height: 101px;
     margin: 0 auto;
-    width: 579px;
+    width: 250px;
 }
 
 .input {
     background-position: -14px -117px;
     height: 51px;
-    width: 476px;
+    width: 456px;
 }
 
 .suoshou {
-    background-position: -498px -120px;
-    height: 50px;
-    width: 70px;
+    background-position: -488px -117px;
+    height: 52px;
+    width: 88px;
 }
 
 .input input {
@@ -954,6 +954,7 @@ ul.sibling_l > li.pl_now1 > a, ul.sibling_l > li.pl_now1 > a > span {
 .liucheng2 {
     margin: 20px auto 0;
     width: 560px;
+	height:auto;
 	border:1px; border-style:solid; border-color:#CCCCCC; background-color:#FFFFFF; text-align:center;
 }
 .shuziliuc h2 {
@@ -965,8 +966,8 @@ ul.sibling_l > li.pl_now1 > a, ul.sibling_l > li.pl_now1 > a > span {
     font-family: '宋体';
 }
 
-.backgroound_quanju {
-    background: #ececec;
+.backgroound_315kc {
+    background: #FFF;
 }
 
 .index_op {
