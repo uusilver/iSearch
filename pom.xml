@@ -83,6 +83,14 @@
 		</dependency>
 
 
+		<!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+
+
 
 	</dependencies>
 

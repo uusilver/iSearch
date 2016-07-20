@@ -88,26 +88,33 @@ public class WeChatCoreService {
                 // 订阅
                 if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
                     log.info("关注账号:"+fromUserName);
-                    respContent = "谢谢您的关注！";
+                    respContent = "感谢您关注315快查公共号\n点击下方扫一扫按钮\n重新扫码即可查询产品信息";
                 }
                 // 取消订阅
                 else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
-                    // TODO 取消订阅后用户再收不到公众号发送的消息，因此不需要回复消息
+                    //如果取消订阅 则移除缓存
                 }
                 else if (eventType.equals(MessageUtil.SCANCODE_PUSH)) {
+                    log.info("获得scan_push信息");
 
                     respContent = requestMap.get("ScanResult");
+                    textMessage.setContent(respContent);
+                    respMessage = MessageUtil.textMessageToXml(textMessage);
 
                 }
                 else if (eventType.equals(MessageUtil.SCANCODE_WAITMSG)) {
                     //事件推送
                     log.info("扫码账号:"+fromUserName);
+                    //将扫码账号保存在缓存里
+
                     try {
                         String url = requestMap.get("ScanResult");
                         boolean encodeFlag = (url.indexOf("weixin")>0);
                         boolean passPage = (url.indexOf("pass")>0);
                         String getPassCode = null;
                         String uniqueCode = null;
+
+                        //http://weixin.qq.com/r/Vj-i_pDE0M2vrdSZ92pE/99 {99代表唯一码}{前面是微信公共号的关注链接}
                         //遗留问题，兼容之前的pass页面，之后的全部使用weixin链接替换
                         if(passPage){
                             getPassCode = url.split("\\?")[1];
@@ -151,10 +158,14 @@ public class WeChatCoreService {
                                     //获得查询结果信息
                                     StringBuilder queryResultStringBuilder = new StringBuilder();
                                     queryResultStringBuilder.append("防伪溯源身份证唯一编号：");
-                                    if(encodeFlag)
+                                    if(passPage){
                                         queryResultStringBuilder.append(getPassCode + "\n");
-                                    else
-                                        queryResultStringBuilder.append(uniqueCode + "\n");
+                                    }else {
+                                        if (encodeFlag)
+                                            queryResultStringBuilder.append(getPassCode + "\n");
+                                        else
+                                            queryResultStringBuilder.append(uniqueCode + "\n");
+                                    }
                                     queryResultStringBuilder.append("查询次数：");
                                     if (userQrCodeModel.getQueryTimes() == 0) {
                                         queryResultStringBuilder.append("初次查询");

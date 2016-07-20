@@ -75,6 +75,11 @@ public class MenuService {
         btn32.setType("click");
         btn32.setKey("32");
 
+        CommonButton btn33 = new CommonButton();
+        btn33.setName("微商城");
+        btn33.setType("view");
+        btn33.setUrl("http://mp.weixin.qq.com/bizmall/mallshelf?id=&t=mall/list&biz=MzI5MzIwMDAwMA==&shelf_id=1&showwxpaytitle=1#wechat_redirect");
+
 
 
         ComplexButton mainBtn2 = new ComplexButton();
@@ -83,7 +88,7 @@ public class MenuService {
 //
         ComplexButton mainBtn3 = new ComplexButton();
         mainBtn3.setName("帮助");
-        mainBtn3.setSub_button(new CommonButton[] { btn31, btn32 });
+        mainBtn3.setSub_button(new Button[] { btn31, btn32, btn33 });
 
         /**
          * 这是公众号xiaoqrobot目前的菜单结构，每个一级菜单都有二级菜单项<br>

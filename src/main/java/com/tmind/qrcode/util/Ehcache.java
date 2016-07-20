@@ -3,6 +3,7 @@ package com.tmind.qrcode.util;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.util.Map;
 
@@ -44,5 +45,7 @@ public class Ehcache<T> {
 
     }
 
-
+    public static void removeCache(String key){
+        cache1.remove(key);
+    }
 }

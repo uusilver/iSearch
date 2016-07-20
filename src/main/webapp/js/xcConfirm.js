@@ -1,14 +1,14 @@
 /*
- * ä½¿ç”¨è¯´æ˜:
+ * Ê¹ÓÃËµÃ÷:
  * window.wxc.Pop(popHtml, [type], [options])
- * popHtml:htmlå­—ç¬¦ä¸²
- * type:window.wxc.xcConfirm.typeEnumé›†åˆä¸­çš„å…ƒç´ 
- * options:æ‰©å±•å¯¹è±¡
- * ç”¨æ³•:
- * 1. window.wxc.xcConfirm("æˆ‘æ˜¯å¼¹çª—<span>lalala</span>");
- * 2. window.wxc.xcConfirm("æˆåŠŸ","success");
- * 3. window.wxc.xcConfirm("è¯·è¾“å…¥","input",{onOk:function(){}})
- * 4. window.wxc.xcConfirm("è‡ªå®šä¹‰",{title:"è‡ªå®šä¹‰"})
+ * popHtml:html×Ö·û´®
+ * type:window.wxc.xcConfirm.typeEnum¼¯ºÏÖĞµÄÔªËØ
+ * options:À©Õ¹¶ÔÏó
+ * ÓÃ·¨:
+ * 1. window.wxc.xcConfirm("ÎÒÊÇµ¯´°<span>lalala</span>");
+ * 2. window.wxc.xcConfirm("³É¹¦","success");
+ * 3. window.wxc.xcConfirm("ÇëÊäÈë","input",{onOk:function(){}})
+ * 4. window.wxc.xcConfirm("×Ô¶¨Òå",{title:"×Ô¶¨Òå"})
  */
 (function($){
 	window.wxc = window.wxc || {};
@@ -17,32 +17,32 @@
 		var eventType = window.wxc.xcConfirm.eventEnum;
 		var popType = {
 			info: {
-				title: "ä¿¡æ¯",
-				icon: "0 0",//è“è‰²i
+				title: "ĞÅÏ¢",
+				icon: "0 0",//À¶É«i
 				btn: btnType.ok
 			},
 			success: {
-				title: "æˆåŠŸ",
-				icon: "0 -48px",//ç»¿è‰²å¯¹å‹¾
+				title: "³É¹¦",
+				icon: "0 -48px",//ÂÌÉ«¶Ô¹´
 				btn: btnType.ok
 			},
 			error: {
-				title: "é”™è¯¯",
-				icon: "-48px -48px",//çº¢è‰²å‰
+				title: "´íÎó",
+				icon: "-48px -48px",//ºìÉ«²æ
 				btn: btnType.ok
 			},
 			confirm: {
-				title: "æç¤º",
-				icon: "-48px 0",//é»„è‰²é—®å·
+				title: "ÌáÊ¾",
+				icon: "-48px 0",//»ÆÉ«ÎÊºÅ
 				btn: btnType.okcancel
 			},
 			warning: {
-				title: "è­¦å‘Š",
-				icon: "0 -96px",//é»„è‰²å¹å·
+				title: "¾¯¸æ",
+				icon: "0 -96px",//»ÆÉ«Ì¾ºÅ
 				btn: btnType.okcancel
 			},
 			input: {
-				title: "è¾“å…¥",
+				title: "ÊäÈë",
 				icon: "",
 				btn: btnType.ok
 			},
@@ -52,39 +52,39 @@
 				btn: btnType.ok
 			}
 		};
-		var itype = type ? type instanceof Object ? type : popType[type] || {} : {};//æ ¼å¼åŒ–è¾“å…¥çš„å‚æ•°:å¼¹çª—ç±»å‹
+		var itype = type ? type instanceof Object ? type : popType[type] || {} : {};//¸ñÊ½»¯ÊäÈëµÄ²ÎÊı:µ¯´°ÀàĞÍ
 		var config = $.extend(true, {
-			//å±æ€§
-			title: "", //è‡ªå®šä¹‰çš„æ ‡é¢˜
-			icon: "", //å›¾æ ‡
-			btn: btnType.ok, //æŒ‰é’®,é»˜è®¤å•æŒ‰é’®
-			//äº‹ä»¶
-			onOk: $.noop,//ç‚¹å‡»ç¡®å®šçš„æŒ‰é’®å›è°ƒ
-			onCancel: $.noop,//ç‚¹å‡»å–æ¶ˆçš„æŒ‰é’®å›è°ƒ
-			onClose: $.noop//å¼¹çª—å…³é—­çš„å›è°ƒ,è¿”å›è§¦å‘äº‹ä»¶
+			//ÊôĞÔ
+			title: "", //×Ô¶¨ÒåµÄ±êÌâ
+			icon: "", //Í¼±ê
+			btn: btnType.ok, //°´Å¥,Ä¬ÈÏµ¥°´Å¥
+			//ÊÂ¼ş
+			onOk: $.noop,//µã»÷È·¶¨µÄ°´Å¥»Øµ÷
+			onCancel: $.noop,//µã»÷È¡ÏûµÄ°´Å¥»Øµ÷
+			onClose: $.noop//µ¯´°¹Ø±ÕµÄ»Øµ÷,·µ»Ø´¥·¢ÊÂ¼ş
 		}, itype, options);
 		
-		var $txt = $("<p>").html(popHtml);//å¼¹çª—æ–‡æœ¬dom
-		var $tt = $("<span>").addClass("tt").text(config.title);//æ ‡é¢˜
+		var $txt = $("<p>").html(popHtml);//µ¯´°ÎÄ±¾dom
+		var $tt = $("<span>").addClass("tt").text(config.title);//±êÌâ
 		var icon = config.icon;
 		var $icon = icon ? $("<div>").addClass("bigIcon").css("backgroundPosition",icon) : "";
-		var btn = config.btn;//æŒ‰é’®ç»„ç”Ÿæˆå‚æ•°
+		var btn = config.btn;//°´Å¥×éÉú³É²ÎÊı
 		
-		var popId = creatPopId();//å¼¹çª—ç´¢å¼•
+		var popId = creatPopId();//µ¯´°Ë÷Òı
 		
-		var $box = $("<div>").addClass("xcConfirm");//å¼¹çª—æ’ä»¶å®¹å™¨
-		var $layer = $("<div>").addClass("xc_layer");//é®ç½©å±‚
-		var $popBox = $("<div>").addClass("popBox");//å¼¹çª—ç›’å­
-		var $ttBox = $("<div>").addClass("ttBox");//å¼¹çª—é¡¶éƒ¨åŒºåŸŸ
-		var $txtBox = $("<div>").addClass("txtBox");//å¼¹çª—å†…å®¹ä¸»ä½“åŒº
-		var $btnArea = $("<div>").addClass("btnArea");//æŒ‰é’®åŒºåŸŸ
+		var $box = $("<div>").addClass("xcConfirm");//µ¯´°²å¼şÈİÆ÷
+		var $layer = $("<div>").addClass("xc_layer");//ÕÚÕÖ²ã
+		var $popBox = $("<div>").addClass("popBox");//µ¯´°ºĞ×Ó
+		var $ttBox = $("<div>").addClass("ttBox");//µ¯´°¶¥²¿ÇøÓò
+		var $txtBox = $("<div>").addClass("txtBox");//µ¯´°ÄÚÈİÖ÷ÌåÇø
+		var $btnArea = $("<div>").addClass("btnArea");//°´Å¥ÇøÓò
 		
-		var $ok = $("<a>").addClass("sgBtn").addClass("ok").text("ç¡®å®š");//ç¡®å®šæŒ‰é’®
-		var $cancel = $("<a>").addClass("sgBtn").addClass("cancel").text("å–æ¶ˆ");//å–æ¶ˆæŒ‰é’®
-		var $input = $("<input>").addClass("inputBox");//è¾“å…¥æ¡†
-		var $clsBtn = $("<a>").addClass("clsBtn");//å…³é—­æŒ‰é’®
+		var $ok = $("<a>").addClass("sgBtn").addClass("ok").text("È·¶¨");//È·¶¨°´Å¥
+		var $cancel = $("<a>").addClass("sgBtn").addClass("cancel").text("È¡Ïû");//È¡Ïû°´Å¥
+		var $input = $("<input>").addClass("inputBox");//ÊäÈë¿ò
+		var $clsBtn = $("<a>").addClass("clsBtn");//¹Ø±Õ°´Å¥
 		
-		//å»ºç«‹æŒ‰é’®æ˜ å°„å…³ç³»
+		//½¨Á¢°´Å¥Ó³Éä¹ØÏµ
 		var btns = {
 			ok: $ok,
 			cancel: $cancel
@@ -93,7 +93,7 @@
 		init();
 		
 		function init(){
-			//å¤„ç†ç‰¹æ®Šç±»å‹input
+			//´¦ÀíÌØÊâÀàĞÍinput
 			if(popType["input"] === itype){
 				$txt.append($input);
 			}
@@ -119,10 +119,10 @@
 		}
 		
 		function bind(){
-			//ç‚¹å‡»ç¡®è®¤æŒ‰é’®
+			//µã»÷È·ÈÏ°´Å¥
 			$ok.click(doOk);
 			
-			//å›è½¦é”®è§¦å‘ç¡®è®¤æŒ‰é’®äº‹ä»¶
+			//»Ø³µ¼ü´¥·¢È·ÈÏ°´Å¥ÊÂ¼ş
 			$(window).bind("keydown", function(e){
 				if(e.keyCode == 13) {
 					if($("#" + popId).length == 1){
@@ -131,14 +131,14 @@
 				}
 			});
 			
-			//ç‚¹å‡»å–æ¶ˆæŒ‰é’®
+			//µã»÷È¡Ïû°´Å¥
 			$cancel.click(doCancel);
 			
-			//ç‚¹å‡»å…³é—­æŒ‰é’®
+			//µã»÷¹Ø±Õ°´Å¥
 			$clsBtn.click(doClose);
 		}
 
-		//ç¡®è®¤æŒ‰é’®äº‹ä»¶
+		//È·ÈÏ°´Å¥ÊÂ¼ş
 		function doOk(){
 			var $o = $(this);
 			var v = $.trim($input.val());
@@ -150,7 +150,7 @@
 			config.onClose(eventType.ok);
 		}
 		
-		//å–æ¶ˆæŒ‰é’®äº‹ä»¶
+		//È¡Ïû°´Å¥ÊÂ¼ş
 		function doCancel(){
 			var $o = $(this);
 			config.onCancel();
@@ -158,14 +158,14 @@
 			config.onClose(eventType.cancel);
 		}
 		
-		//å…³é—­æŒ‰é’®äº‹ä»¶
+		//¹Ø±Õ°´Å¥ÊÂ¼ş
 		function doClose(){
 			$("#" + popId).remove();
 			config.onClose(eventType.close);
 			$(window).unbind("keydown");
 		}
 		
-		//ç”ŸæˆæŒ‰é’®ç»„
+		//Éú³É°´Å¥×é
 		function creatBtnGroup(tp){
 			var $bgp = $("<div>").addClass("btnGroup");
 			$.each(btns, function(i, n){
@@ -176,9 +176,9 @@
 			return $bgp;
 		}
 
-		//é‡ç”ŸpopId,é˜²æ­¢idé‡å¤
+		//ÖØÉúpopId,·ÀÖ¹idÖØ¸´
 		function creatPopId(){
-			var i = "pop_" + (new Date()).getTime()+parseInt(Math.random()*100000);//å¼¹çª—ç´¢å¼•
+			var i = "pop_" + (new Date()).getTime()+parseInt(Math.random()*100000);//µ¯´°Ë÷Òı
 			if($("#" + i).length > 0){
 				return creatPopId();
 			}else{
@@ -187,21 +187,21 @@
 		}
 	};
 	
-	//æŒ‰é’®ç±»å‹
+	//°´Å¥ÀàĞÍ
 	window.wxc.xcConfirm.btnEnum = {
-		ok: parseInt("0001",2), //ç¡®å®šæŒ‰é’®
-		cancel: parseInt("0010",2), //å–æ¶ˆæŒ‰é’®
-		okcancel: parseInt("0011",2) //ç¡®å®š&&å–æ¶ˆ
+		ok: parseInt("0001",2), //È·¶¨°´Å¥
+		cancel: parseInt("0010",2), //È¡Ïû°´Å¥
+		okcancel: parseInt("0011",2) //È·¶¨&&È¡Ïû
 	};
 	
-	//è§¦å‘äº‹ä»¶ç±»å‹
+	//´¥·¢ÊÂ¼şÀàĞÍ
 	window.wxc.xcConfirm.eventEnum = {
 		ok: 1,
 		cancel: 2,
 		close: 3
 	};
 	
-	//å¼¹çª—ç±»å‹
+	//µ¯´°ÀàĞÍ
 	window.wxc.xcConfirm.typeEnum = {
 		info: "info",
 		success: "success",

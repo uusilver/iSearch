@@ -58,4 +58,14 @@
         <url-pattern>/loadImagieServlet</url-pattern>
     </servlet-mapping>
 
+    <!-- upload image-->
+    <servlet>
+        <servlet-name>UploadImage</servlet-name>
+        <servlet-class>com.tmind.qrcode.servlet.UploadImageAjax</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadImage</servlet-name>
+        <url-pattern>/ajax/uploadimage</url-pattern>
+    </servlet-mapping>
+
 </web-app>
