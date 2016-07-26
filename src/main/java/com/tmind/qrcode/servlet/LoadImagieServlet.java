@@ -24,6 +24,7 @@ import java.util.Map;
 
 /**
  * Created by lijunying on 16/7/5.
+ * 无缓存
  */
 //读取上海瓷砖页的HTML
 @SuppressWarnings("ALL")
@@ -40,7 +41,6 @@ public class LoadImagieServlet  extends HttpServlet {
         //最终返回结果
         String result = "<a class='STYLE1'>错误</a>，数据不存在!";
 
-        if(Ehcache.getCache(key)==null){
             Connection conn = null;
             try{
                 conn = DBUtil.getConnection();
@@ -59,9 +59,7 @@ public class LoadImagieServlet  extends HttpServlet {
             }finally{
                 DBUtil.closeConnect(null, null, conn);
             }
-        }else{
-            result = Ehcache.getCache(key);
-        }
+       
 
         //用Gson构建最后的返回内容
         pw.print(result);
