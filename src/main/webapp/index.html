@@ -81,6 +81,11 @@
                 var unquie_code = $("#unquie_code").val();
                 window.location.href = "ok.html?" + unquie_code;
             })
+
+            //get system main info
+            $.get("queryMainInfo",function(data){
+                $("#queryMainInfo").html(data);
+            })
         });
     </script>
 </head>
@@ -190,7 +195,7 @@
                 </div>
                 <!--这是弹出层结束-->
                 <div style="width:auto; height:23px; clear:both;"></div>
-                <div class="mb-company tongji">共120万7890个物品正在使用315快查 <br/>今天监控问题产品12万1321次 累计安全监控3124万9420次</div>
+                <div class="mb-company tongji" id="queryMainInfo"></div>
             </div>
 
             <div class="mb-company"><h2 class="am-titlebar-title "><a href="#">快捷通道</a></h2>

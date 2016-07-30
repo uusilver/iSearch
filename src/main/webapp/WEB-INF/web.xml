@@ -68,4 +68,13 @@
         <url-pattern>/ajax/uploadimage</url-pattern>
     </servlet-mapping>
 
+    <!--Load system info -->
+    <servlet>
+        <servlet-name>QueryMainInfo</servlet-name>
+        <servlet-class>com.tmind.qrcode.servlet.QueryMainInfoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QueryMainInfo</servlet-name>
+        <url-pattern>/queryMainInfo</url-pattern>
+    </servlet-mapping>
 </web-app>
