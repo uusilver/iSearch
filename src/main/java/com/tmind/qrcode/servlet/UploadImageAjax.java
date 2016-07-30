@@ -61,7 +61,8 @@ public class UploadImageAjax extends HttpServlet {
             e.printStackTrace();
         }
         System.out.println(result.getText());
-        if(result.getText().indexOf("315kc")>0) {
+        //一律不返回任何警告
+        if(true) {
             resp.getWriter().print(new Gson().toJson(wrapJSON("success",result.getText())));
         }
         else{

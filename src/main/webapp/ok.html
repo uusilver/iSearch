@@ -24,7 +24,53 @@
 
     <script language="JavaScript" type="text/javascript" src="js/globaltext_cn.js"></script>
     <script language="JavaScript" type="text/javascript" src="js/jquery.js"></script>
+    <script src="js2/dist/lrz.bundle.js"></script>
     <script language="javascript">
+
+        function selectImage(that) {
+            var filepath = $(that).val();
+            if (filepath == "") {
+                return;
+            }
+            var extStart = filepath.lastIndexOf(".");
+            var ext = filepath.substring(extStart, filepath.length).toUpperCase();
+            if (".jpg|.jpeg".toUpperCase().indexOf(ext.toUpperCase()) == -1) {
+                alert("只允许上传jpg、jpeg格式的图片");
+                return false;
+            }
+            //以图片宽度为800进行压缩
+            lrz(that.files[0], {
+                width: 800
+            })
+                    .then(function (rst) {
+                        //压缩后异步上传
+                        $.ajax({
+                            url: "ajax/uploadimage",
+                            type: "POST",
+                            data: {
+                                image: rst.base64//压缩后的base值
+                            },
+                            dataType: "json",
+                            cache: false,
+                            async: false,
+                            success: function (data) {
+                                if (data.status == "success") {
+                                    $("#ajaxLoadResult").show();
+                                    $('#a1').attr('href', data.url);
+
+                                } else {
+                                    $("#ajaxLoadFail").show();
+                                    //添加警告链接
+                                }
+
+                            },
+                            error: function () {
+                                alert("上传失败");
+                            }
+                        });
+                    });
+        }
+
         $(document).ready(function () {
             function RWidth() {
                 var W = $(window).width();
@@ -52,7 +98,13 @@
                 var unquie_code = $("#unquie_code").val();
                 window.location.href = "ok.html?" + unquie_code;
             })
+
+            //
+            $("#ajaxLoadResult").hide();
+            $("#ajaxLoadFail").hide();
         });
+
+
     </script>
 
 </head>
@@ -126,9 +178,40 @@
 
                 <form class="form-wrapper cf">
                     <input type="text" id="unquie_code" placeholder="输入识别码..." required>
-
+                    <div class="saoyisao">
+                        <a href="#" data-am-modal="{target: '#my-actions'}"></a>
+                    <!--二维码扫码结果页/qr.html--></div>
                     <button type="button" id="search">搜索</button>
                 </form>
+                <!--这是弹出层-->
+                <div class="am-modal-actions" id="my-actions">
+                    <div class="am-modal-actions-group">
+                        <ul class="am-list">
+                            <li>
+                                <div class="am-form-file am-btn-primary">
+                                    <button type="button" class="am-btn am-btn-primary" style="width:100%;">
+                                        <i class="am-icon-cloud-upload"></i> 请选择要上传识别的二维码图片文件
+                                    </button>
+                                    <input type="file" name="myFile" onchange="selectImage(this);"/>
+                                </div>
+
+                            </li>
+
+                            <li class="am-modal-actions-danger">
+                                <img src="images/315kcma.gif">
+                            </li>
+                            <li id="ajaxLoadResult"><a class="am-btn am-btn-success" id="a1">恭喜：识别成功-查看结果</a></li>
+                            <li id="ajaxLoadFail"><a class="am-btn am-btn-danger">请注意，非法数据</a></li>
+
+                            <!--	  <li> <a class="am-btn am-btn-warning am-btn" href="#">很遗憾：识别失败-请上传正确的二维码！</a></li>-->
+                        </ul>
+                    </div>
+                    <div class="am-modal-actions-group">
+                        <button class="am-btn am-btn-secondary am-btn-block" data-am-modal-close>取消</button>
+                    </div>
+                </div>
+                <!--这是弹出层结束-->
+
                 <div style="width:auto; height:23px; clear:both;"></div>
                 <div class="mb-company tongji">共120万7890个物品正在使用315快查 <br/>今天监控问题产品12万1321次 累计安全监控3124万9420次</div>
             </div>
