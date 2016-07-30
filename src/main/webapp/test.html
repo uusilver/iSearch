@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="testApp">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script src="general-js/angular.js"></script>
+<body ng-controller="testController">
+<input type="text" val="1" ng-model="val"/><br/>
+<button ng-click="valPlus()">加1</button>
+</body>
+<script>
+    angular.module("testApp",[])
+            .controller("testController",function($scope){
+                $scope.val=1;
+                $scope.valPlus = function(){
+                    $scope.val += parseInt(1);
+                }
+            });
+
+</script>
+</html>

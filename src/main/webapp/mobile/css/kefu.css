@@ -1,0 +1,16 @@
+	#kefu {
+		background: rgba(0, 0, 0, 0) url("/images/200.png") no-repeat scroll 0 0;
+		height: 375px;
+		margin-top: -207px;
+		position: fixed;
+		right: -120px;
+		top: 60%;
+		width: 164px;
+	}
+	#kefu:hover{
+		right: 0px;
+	}
+	.kefu_ul{
+	margin-top: 65px;
+	margin-left: 45px;
+	}

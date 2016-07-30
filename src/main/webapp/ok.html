@@ -1,272 +1,90 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-
-    <meta content="telephone=no,email=no" name="format-detection">
-
-    <meta name="keywords" content="快查-315快查-中国315快查联盟移动搜索引擎">
-
-    <meta name="description" content="快查-315快查-中国315快查联盟移动搜索引擎">
-
-    <title>识别码查询结果-快查-315快查-中国315快查联盟移动搜索引擎</title>
-
-    <link href="css/amazeui.min.css" rel="stylesheet" type="text/css">
-
-    <link rel="stylesheet" href="css/315kc.css">
-
-    <script language="JavaScript" type="text/javascript" src="js/globaltext_cn.js"></script>
-    <script language="JavaScript" type="text/javascript" src="js/jquery.js"></script>
-    <script src="js2/dist/lrz.bundle.js"></script>
-    <script language="javascript">
-
-        function selectImage(that) {
-            var filepath = $(that).val();
-            if (filepath == "") {
-                return;
-            }
-            var extStart = filepath.lastIndexOf(".");
-            var ext = filepath.substring(extStart, filepath.length).toUpperCase();
-            if (".jpg|.jpeg".toUpperCase().indexOf(ext.toUpperCase()) == -1) {
-                alert("只允许上传jpg、jpeg格式的图片");
-                return false;
-            }
-            //以图片宽度为800进行压缩
-            lrz(that.files[0], {
-                width: 800
-            })
-                    .then(function (rst) {
-                        //压缩后异步上传
-                        $.ajax({
-                            url: "ajax/uploadimage",
-                            type: "POST",
-                            data: {
-                                image: rst.base64//压缩后的base值
-                            },
-                            dataType: "json",
-                            cache: false,
-                            async: false,
-                            success: function (data) {
-                                if (data.status == "success") {
-                                    $("#ajaxLoadResult").show();
-                                    $('#a1').attr('href', data.url);
-
-                                } else {
-                                    $("#ajaxLoadFail").show();
-                                    //添加警告链接
-                                }
-
-                            },
-                            error: function () {
-                                alert("上传失败");
-                            }
-                        });
-                    });
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="description" content="中国3•15快查联盟是集防伪技术研发、防伪标签印刷、防伪码查询为一体权威防伪机构(业务电话：4000-870-163)。315快查防伪中心已推出二维码防伪积分系统、防伪防窜货系统、渠道管理系统、二维码防伪溯源系统、微信扫码通等高端行业防伪解决方案，欢迎来电咨询。">
+	<meta name="keywords" content="防伪标签,二维码防伪,二维码防伪标签,防伪码查询">
+   <title>搜索结果页-【快查-中国315快查联盟】-二维码防伪标签-二维码溯源标签-315快查物联网大数据搜索引擎！</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<link rel="icon" href="favicon.ico">
+<link href="css/content.css" rel="stylesheet">
+    <style type="text/css">
+	body {
+            margin-top: 0;
+            background-color: #FFF;
         }
-
-        $(document).ready(function () {
-            function RWidth() {
-                var W = $(window).width();
-                $(".list_in").find("li.right").css("width", parseInt(W) - 20 - 90);
-                $(".content").css("width", parseInt(W) - 20);
-                $("h1.header").css("width", parseInt(W) - 90);
-            }
-
-            RWidth()
-            $(window).resize(function () {
-                RWidth()
-            });
-
-            //动态替换placeholder值
-            var u = window.location.href.split("?")[1];
-            $("#unquie_code").attr("placeholder", u);
-            $.get("../webQueryServlet" + "?uniqueKey=" + u, function (data) {
-                if (data) {
-                    $("#result").html(data.replace("?", ""));
-                } else {
-                    $("#result").html("<a class='STYLE1'>错误</a>，数据不存在!");
-                }
-            });
-            $("#search").click(function () {
-                var unquie_code = $("#unquie_code").val();
-                window.location.href = "ok.html?" + unquie_code;
-            })
-
-            //
-            $("#ajaxLoadResult").hide();
-            $("#ajaxLoadFail").hide();
-
-            //get system main info
-            $.get("queryMainInfo",function(data){
-                $("#queryMainInfo").html(data);
-            })
-        });
-
-
-    </script>
-
+    .STYLE1 {color: #FF0000; font-size:14px;}
+    .STYLE2 {color: #0055b6;font-size:14px;}
+    </style>
 </head>
-
-
-<body>
-
-<div class="toptitle">
-    <div class="zdtitle"><a href="index.html" title="首页">315快查-中立-公正的物联网大数据第三方平台</a><img src="images/logo315.png"
-                                                                                         class="am-fl logo-white"
-                                                                                         width="20px" height="20px"/>
-    </div>
-    <nav data-am-widget="menu" class="am-menu am-menu-offcanvas1" data-am-menu-offcanvas><a href="javascript: void(0)"
-                                                                                            class="am-menu-toggle"><i
-            class="am-menu-toggle-icon am-icon-bars am-icon-sm"></i></a>
-
-        <div class="am-offcanvas">
-            <div class="am-offcanvas-bar" style="background:#005990;background-color:rgba(0,0,0,0.8);">
-                <ul class="am-menu-nav sm-block-grid-1">
-                    <li class="nav-title">
-                        <div class="userpic">
-                            <div class="img-contain">
-
-                                <img src="images/user1728.gif" class="am-round">
-
-                            </div>
-                        </div>
-                        <span>您好， 来宾 </span>
-                    </li>
-                    <li style="background-color:#005993"><a href="index.html" style="color: #fff"><span
-                            class="am-icon-home"></span>官方首页 </a></li>
-                    <li><a href="baoguang.html"><span class="am-icon-spinner"></span>投诉曝光</a></li>
-                    <li><a href="liebiao.html"><span class="am-icon-yelp"></span> 专题资讯</a></li>
-                    <li><a href="shuju.html"><span class="am-icon-forumbee"></span> 数据接入</a></li>
-                    <li><a href="hezuo.html"><span class="am-icon-puzzle-piece"></span> 联盟合作</a></li>
-                    <li><a href="about.html"><span class="am-icon-plus"></span> 关于我们</a></li>
-                </ul>
-
-            </div>
-        </div>
-    </nav>
-</div>
-<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default" id="footernav">
-    <ul class="am-navbar-nav am-cf am-avg-sm-4">
-        <li class="active"><a href="index.html"><img src="images/home.png"
-
-                                                     bl-src="images/home-orange.png"
-
-                                                     width="35"/><span class="am-navbar-label">首页</span></a></li>
-        <li><a href="liebiao.html"><img src="images/tags.png"
-
-                                        bl-src="images/tags-orange.png"
-
-                                        width="35"/><span class="am-navbar-label">发现</span></a></li>
-        <li><a href="shuju.html"><img src="images/find.png"
-
-                                      bl-src="images/find-orange.png" width="35"/><span
-                class="am-navbar-label">数据接入</span></a></li>
-        <li><a href="http://p.qiao.baidu.com//im/index?siteid=9278899&ucid=21281138"><img src="images/user.png"
-                                                                                          bl-src="images/user-orange.png"
-
-                                                                                          width="35"/><span
-                class="am-navbar-label">在线客服</span></a></li>
-    </ul>
-</div>
-<div>
-    <div class="am-container">
-
-        <div class="mobile-index">
-            <div class="mb-header">
-
-                <form class="form-wrapper cf">
-                    <input type="text" id="unquie_code" placeholder="输入识别码..." required>
-                    <div class="saoyisao">
-                        <a href="#" data-am-modal="{target: '#my-actions'}"></a>
-                    <!--二维码扫码结果页/qr.html--></div>
-                    <button type="button" id="search">搜索</button>
-                </form>
-                <!--这是弹出层-->
-                <div class="am-modal-actions" id="my-actions">
-                    <div class="am-modal-actions-group">
-                        <ul class="am-list">
-                            <li>
-                                <div class="am-form-file am-btn-primary">
-                                    <button type="button" class="am-btn am-btn-primary" style="width:100%;">
-                                        <i class="am-icon-cloud-upload"></i> 请选择要上传识别的二维码图片文件
-                                    </button>
-                                    <input type="file" name="myFile" onchange="selectImage(this);"/>
-                                </div>
-
-                            </li>
-
-                            <li class="am-modal-actions-danger">
-                                <img src="images/315kcma.gif">
-                            </li>
-                            <li id="ajaxLoadResult"><a class="am-btn am-btn-success" id="a1">恭喜：识别成功-查看结果</a></li>
-                            <li id="ajaxLoadFail"><a class="am-btn am-btn-danger">请注意，非法数据</a></li>
-
-                            <!--	  <li> <a class="am-btn am-btn-warning am-btn" href="#">很遗憾：识别失败-请上传正确的二维码！</a></li>-->
-                        </ul>
-                    </div>
-                    <div class="am-modal-actions-group">
-                        <button class="am-btn am-btn-secondary am-btn-block" data-am-modal-close>取消</button>
-                    </div>
-                </div>
-                <!--这是弹出层结束-->
-
-                <div style="width:auto; height:23px; clear:both;"></div>
-                <div class="mb-company tongji" id="queryMainInfo"></div>
-            </div>
-
-            <div class="mb-company"><h2 class="am-titlebar-title "><a href="#">识别码查询结果</a></h2>
-
-                <div class="panel bggray">
-                    <span style="text-align:center" id="result">
-                    </span>
-                </div>
-
-            </div>
-
-            <div class="am-alert am-alert-secondary" style="color:#FF0000;" data-am-alert>
-                温馨提示：一物一码防伪溯源信息查询，如因查询次数过多，导致对信息有疑问请联系相关企业。
-            </div>
-
-        </div>
-    </div>
-</div>
-<script src="js/jquery.min.js"></script>
-<script src="js/amazeui.min.js"></script>
+<script src="js/jquery.js"></script>
 <script>
-    var global_contextPath = '/gb';
-    //function to fix height of iframe!
-    var calcHeight = function () {
-        var headerDimensions = $('#header-bar').outerHeight();
-        $('#preview-frame').height($(window).height() - headerDimensions);
-    }
-    $(window).load(function () {
-        calcHeight();
-        $('#header-bar a.close').mouseover(function () {
-            $('#header-bar a.close').addClass('activated');
-        }).mouseout(function () {
-            $('#header-bar a.close').removeClass('activated');
-        });
-    });
-
-    $(window).resize(function () {
-        calcHeight();
-    }).load(function () {
-        calcHeight();
-    });
+	$(function(){
+		//动态替换placeholder值
+		var u = window.location.href.split("?")[1];
+		$("#unquie_code").attr("placeholder",u);
+		$.get("/webQueryServlet"+"?uniqueKey="+u,function(data){
+			if(data){
+				$("#result").html(data.replace("?",""));
+			}else{
+				$("#result").html("<a class='STYLE1'>错误</a>，数据不存在!");
+			}
+		});
+		$("#search").click(function(){
+			var unquie_code = $("#unquie_code").val();
+			window.location.href = "ok.html?"+unquie_code;
+		})
+	})
 </script>
-<div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
-    <a href="#top" title="">
-        <img class="am-gotop-icon-custom" src="images/goTop.gif"/>
-    </a>
+<body>
+    <div class="backgroound_315kc">
+        <div class="hrdengd">
+            <div class="kuand index_quanju clear">
+                <h2 class="fl">您好，欢迎来中国315快查联盟官方网站!</h2>
+                <div class="fr" style="float:right;">
+               <iframe width="350" scrolling="no" height="18" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=1&color=%23&icon=1&wind=0&num=2"></iframe>
+            </div>
+            </div>
+        </div>
+        <div class="background_warry">
+	<div class="index_quanju">
+		<div class="logo">
+			<a href="http://www.315kc.com/"><img src="images/logopic.png" alt="快查-315快查官网" /></a>
+			</div>
+		<div class="clear index_i">
+			<form action="ok.html" method="POST" id="Query">
+			  <div class="opkius input fl">
+					<input id="unquie_code" name="unquie_code" maxlength="30" placeholder="43f523fsfg4221" required="" autofocus="" type="text">
+				</div>
+				<div class="opkius suoshou fl">
+					<input class="bent" type="button" id="search">
+				</div>
+			</form>
+		</div>
+		<div class="liucheng2"><span style="font-size:14px; text-align:center; line-height:30px;">
+		查询结果：
+				</span>
+			<span style="text-align:center" id="result"></span>
+
+		</div>
+	</div>
 </div>
+        
+    </div>
 
-</body>
 
-</html>
+<div  style="clear:both;width:100%;height:50px;text-align:center;margin-top:50px;border-top:2px #C4C4FC solid; line-height:30px;">
+    <p>Copyright 2010-2016&nbsp;&nbsp;版权所有:315快查联盟&nbsp;<a href="http://shop.315kc.com/article.php?id=21 " target="_blank">关于我们</a>&nbsp;&nbsp;国家工业信息化部网站备案号：<a href="http://www.miitbeian.gov.cn/" target="_blank">苏ICP备16010616号</a>
+</p>
+</div>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?12476fd246e64bad29d4a178bbb21a50";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</body></html>

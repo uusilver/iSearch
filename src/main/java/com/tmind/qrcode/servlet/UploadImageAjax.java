@@ -62,7 +62,7 @@ public class UploadImageAjax extends HttpServlet {
         }
         System.out.println(result.getText());
         //一律不返回任何警告
-        if(true) {
+        if(result.getText().indexOf("315kc")>0) {
             resp.getWriter().print(new Gson().toJson(wrapJSON("success",result.getText())));
         }
         else{
