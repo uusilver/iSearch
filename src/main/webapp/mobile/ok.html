@@ -61,11 +61,15 @@
                                     $("#ajaxLoadFail").hide();
                                     $("#ajaxLoadResult").show();
                                     $('#successLink').attr('href', data.url);
+                                    $(".am-modal-actions-danger").html("");
+
 
                                 } else {
                                     $("#ajaxLoadResult").hide();
                                     $("#ajaxLoadFail").show();
                                     $("#failedLink").attr('href', data.url);
+                                    $(".am-modal-actions-danger").html("");
+
                                 }
 
                             },

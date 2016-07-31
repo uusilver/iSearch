@@ -66,7 +66,7 @@ public class UploadImageAjax extends HttpServlet {
             resp.getWriter().print(new Gson().toJson(wrapJSON("success",result.getText())));
         }
         else{
-            resp.getWriter().print(new Gson().toJson(wrapJSON("fail", "")));
+            resp.getWriter().print(new Gson().toJson(wrapJSON("fail", result.getText())));
         }
 
     }

@@ -31,6 +31,7 @@
     <script>
         function selectImage(that) {
             // 隐藏结果
+
             $("#ajaxLoadResult").hide();
             $("#ajaxLoadFail").hide();
             var filepath = $(that).val();
@@ -63,11 +64,14 @@
                                     $("#ajaxLoadFail").hide();
                                     $("#ajaxLoadResult").show();
                                     $('#successLink').attr('href', data.url);
+                                    $(".am-modal-actions-danger").html("");
 
                                 } else {
                                     $("#ajaxLoadResult").hide();
                                     $("#ajaxLoadFail").show();
                                     $("#failedLink").attr('href', data.url);
+                                    $(".am-modal-actions-danger").html("");
+
                                 }
 
                             },
@@ -79,6 +83,7 @@
         }
 
         $(function(){
+
             $("#ajaxLoadResult").hide();
             $("#ajaxLoadFail").hide();
 
