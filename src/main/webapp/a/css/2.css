@@ -1,0 +1,106 @@
+@charset "utf-8";
+/* CSS Document */
+/* 产品开发一部 溯源平台 */
+/* 2014.03-31 design by tuy */
+
+
+body{
+	margin:0;
+	padding:0;
+	font-size:12px;
+	color:#333333;
+	background-color:#fff;
+	text-decoration:none;
+	font-family:"微软雅黑"
+	}
+a {	text-decoration:none;}
+ul {list-style:none;}	
+h1.header{text-align:left;font-weight:normal;font-size:18px;color:#fff; letter-spacing:0.1em;padding-left:78px;line-height:95px;}
+
+
+@media screen and (max-width:469px){
+h1.header{padding-top:32px;line-height:25px;}
+}
+header.d{background:url(../images/logo4.jpg) 18px  no-repeat;background-color:#0E69BB;height:95px;line-height:25px;}
+
+aside.result{color:#0E69BB;font-size:18px;text-align:right;padding:10px 0}
+
+article {border:none;width:95%;margin:0 auto;padding: 0.5em 0;}
+article .panel {letter-spacing:0.1em;border-top:1px solid #0E69BB;font-size:12px;margin-bottom:35px;padding:20px 20px 0 20px;position:relative}
+article .bggray{background:#ebebeb;padding-bottom:10px;}
+article .panel h2 {position:absolute;top:-13px;left:10px;width:200px;height:25px;line-height:25px;border-radius:15px;background:#0E69BB;color:#fff;font-size:15px;font-weight:normal;text-align:center}
+article .panel h3 {position:absolute;top:5px;left:10px;color:#0E69BB;font-size:16px;font-weight:normal;text-align:left;}
+
+article .panel input{
+    width:100%;
+	height:30px;
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 1px rgba(0,0,0,.2);
+	box-shadow: 0 1px 1px rgba(0,0,0,.2);
+
+}
+article .panel input:focus{outline:none}
+article .panel li{line-height:25px;color:#333333}
+article .panel li.s_title{width:100%;text-align:center;padding-bottom:6px;color:#000;font-size:14px;}
+article .panel li.s_button{width:100%;text-align:center;padding-bottom:15px;padding-top:11px;color:#000;font-size:12px;}
+article .panel li.s_button .align{margin-left:-30px}
+
+article span.tips{width:100%;padding: 0.5em 0;font-size:1.2em;letter-spacing:0.1em;color:red;display:block}
+.button {
+    width:100%;
+	margin-top:0.5em;
+	
+	display: inline-block;
+	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+	*display: inline;
+	vertical-align: baseline;	
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font: 1.2em/100% "微软雅黑";
+	padding: 0.5em 0;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+.button:hover {
+	text-decoration: none;
+}
+.button:active {
+	position: relative;
+	top: 1px;
+	
+}
+a.login {
+	color: #000;
+	border: solid 1px #d27d00;
+	letter-spacing:0.1em;
+	background: #f78d1d;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f6e4a9), to(#faa506));
+	background: -moz-linear-gradient(top,  #f6e4a9,  #faa506);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6e4a9', endColorstr='#faa506');
+}
+a.login:hover {
+	background: #f47c20;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f8bc42), to(#fd8d28));
+	background: -moz-linear-gradient(top,  #f8bc42,  #fd8d28);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f8bc42', endColorstr='#fd8d28');
+}
+a.login:active {
+	color: #000;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
+	background: -moz-linear-gradient(top,  #f47a20,  #faa51a);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
+}
+.w50 {width:70px;margin-left:30px;}
+footer{height:50px;padding-top:20px;line-height:20px;color:#0E69BB;font-size:12px;}
+footer a{color:#f07302;font-size:15px;margin-left:10px;text-decoration:underline}
+footer a:hover{color:#d76702;}

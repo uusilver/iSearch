@@ -1,439 +1,99 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-
-    <meta content="telephone=no,email=no" name="format-detection">
-
-    <meta name="keywords" content="快查-315快查-中国315快查联盟移动搜索引擎">
-
-    <meta name="description" content="快查-315快查-中国315快查联盟移动搜索引擎">
-
-    <title>快查-315快查-中国315快查联盟移动搜索引擎</title>
-
-    <link href="css/amazeui.min.css" rel="stylesheet" type="text/css">
-
-    <link rel="stylesheet" href="css/315kc.css">
-
-    <script language="JavaScript" type="text/javascript" src="js/globaltext_cn.js"></script>
-
-    <!--二维码识别-->
-    <script src="js2/jquery.js"></script>
-    <script src="js2/dist/lrz.bundle.js"></script>
-    <script src="js2/xcConfirm.js"></script>
-    <script>
-        function selectImage(that) {
-            // 隐藏结果
-
-            $("#ajaxLoadResult").hide();
-            $("#ajaxLoadFail").hide();
-            var filepath = $(that).val();
-            if (filepath == "") {
-                return;
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width"></meta>
+    <title>中国315快查联盟防伪溯源信息查询</title>
+    <link rel="stylesheet" type="text/css" href="css/1.css"/>
+    <link rel="stylesheet" type="text/css" href="css/2.css"/>
+    <link rel="stylesheet" href="css/3.css">
+    <script src="../js/jquery.js"></script>
+    <script language="javascript">
+        $(document).ready(function () {
+            function RWidth() {
+                var W = $(window).width();
+                $(".list_in").find("li.right").css("width", parseInt(W) - 20 - 90);
+                $(".content").css("width", parseInt(W) - 20);
+                $("h1.header").css("width", parseInt(W) - 90);
             }
-            var extStart = filepath.lastIndexOf(".");
-            var ext = filepath.substring(extStart, filepath.length).toUpperCase();
-            if (".jpg|.jpeg".toUpperCase().indexOf(ext.toUpperCase()) == -1) {
-                alert("只允许上传jpg、jpeg格式的图片");
-                return false;
-            }
-            //以图片宽度为800进行压缩
-            lrz(that.files[0], {
-                width: 800
-            })
-                    .then(function (rst) {
-                        //压缩后异步上传
-                        $.ajax({
-                            url: "../ajax/uploadimage",
-                            type: "POST",
-                            data: {
-                                image: rst.base64//压缩后的base值
-                            },
-                            dataType: "json",
-                            cache: false,
-                            async: false,
-                            success: function (data) {
-                                if (data.status == "success") {
-                                    $("#ajaxLoadFail").hide();
-                                    $("#ajaxLoadResult").show();
-                                    $('#successLink').attr('href', data.url);
-                                    $(".am-modal-actions-danger").html("");
 
-                                } else {
-                                    $("#ajaxLoadResult").hide();
-                                    $("#ajaxLoadFail").show();
-                                    $("#failedLink").attr('href', data.url);
-                                    $(".am-modal-actions-danger").html("");
-
-                                }
-
-                            },
-                            error: function () {
-                                alert("上传失败");
-                            }
-                        });
-                    });
-        }
-
-        $(function(){
-
-            $("#ajaxLoadResult").hide();
-            $("#ajaxLoadFail").hide();
+            RWidth()
+            $(window).resize(function () {
+                RWidth()
+            });
 
             $("#search").click(function () {
                 var unquie_code = $("#unquie_code").val();
                 window.location.href = "ok.html?" + unquie_code;
             })
-
-            //get system main info
-            $.get("queryMainInfo",function(data){
-                $("#queryMainInfo").html(data);
-            })
         });
     </script>
+    <style type="text/css">
+        <!--
+        .STYLE1 {
+            color: #FF0000
+        }
+
+        -->
+    </style>
 </head>
-
-
 <body>
+<header class='d'>
+    <h1 class="header">中国315快查联盟官方查询云平台</h1>
+</header>
 
-<div class="toptitle">
-    <div class="zdtitle"><a href="index.html" title="首页">315快查-中立-公正的物联网大数据第三方平台</a><img src="images/logo315.png"
-                                                                                         class="am-fl logo-white"
-                                                                                         width="20px" height="20px"/>
-    </div>
-    <nav data-am-widget="menu" class="am-menu am-menu-offcanvas1" data-am-menu-offcanvas><a href="javascript: void(0)"
-                                                                                            class="am-menu-toggle"><i
-            class="am-menu-toggle-icon am-icon-bars am-icon-sm"></i></a>
+<article style="padding:0 10px">
+    <aside class="result">在线查询</aside>
+    <div class="panel bggray">
+        <h2>防伪溯源查询</h2>
 
-        <div class="am-offcanvas">
-            <div class="am-offcanvas-bar" style="background:#005990;background-color:rgba(0,0,0,0.8);">
-                <ul class="am-menu-nav sm-block-grid-1">
-                    <li class="nav-title">
-                        <div class="userpic">
-                            <div class="img-contain">
+        <form action="ok.html" method="POST" id="Query">
+            <ul>
+                <li class="s_title" style="text-align:left">验证真伪，请先扫描二维码，然后查看货品身份标识ID，输入ID防伪溯源码。</li>
+                <li>
+                    <input id="unquie_code" name="unquie_code" maxlength="30" placeholder="防伪码由20位数字和字母组成" required="true" autofocus="" type="text">
+                </li>
 
-                                <img src="images/user1728.gif" class="am-round">
-
-                            </div>
-                        </div>
-                        <span>您好， 来宾 </span>
-                    </li>
-                    <li style="background-color:#005993"><a href="index.html" style="color: #fff"><span
-                            class="am-icon-home"></span>官方首页 </a></li>
-                    <li><a href="baoguang.html"><span class="am-icon-spinner"></span>投诉曝光</a></li>
-                    <li><a href="liebiao.html"><span class="am-icon-yelp"></span> 专题资讯</a></li>
-                    <li><a href="shuju.html"><span class="am-icon-forumbee"></span> 数据接入</a></li>
-                    <li><a href="hezuo.html"><span class="am-icon-puzzle-piece"></span> 联盟合作</a></li>
-                    <li><a href="about.html"><span class="am-icon-plus"></span> 关于我们</a></li>
-                </ul>
-
-            </div>
-        </div>
-    </nav>
-</div>
-<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default" id="footernav">
-    <ul class="am-navbar-nav am-cf am-avg-sm-4">
-        <li class="active"><a href="index.html"><img src="images/home.png"
-
-                                                     bl-src="images/home-orange.png"
-
-                                                     width="35"/><span class="am-navbar-label">首页</span></a></li>
-        <li><a href="liebiao.html"><img src="images/tags.png"
-
-                                        bl-src="images/tags-orange.png"
-
-                                        width="35"/><span class="am-navbar-label">发现</span></a></li>
-        <li><a href="shuju.html"><img src="images/find.png"
-
-                                      bl-src="images/find-orange.png" width="35"/><span
-                class="am-navbar-label">数据接入</span></a></li>
-        <li><a href="http://p.qiao.baidu.com//im/index?siteid=9278899&ucid=21281138"><img src="images/user.png"
-                                                                                          bl-src="images/user-orange.png"
-
-                                                                                          width="35"/><span
-                class="am-navbar-label">在线客服</span></a></li>
-    </ul>
-</div>
-<div>
-    <div class="am-container">
-
-        <div class="mobile-index">
-            <div class="mb-header">
-
-                <form class="form-wrapper cf">
-                    <input type="text" id="unquie_code" placeholder="输入识别码..." required>
-
-                    <div class="saoyisao">
-                        <a href="#" data-am-modal="{target: '#my-actions'}"></a>
-                        <!--二维码扫码结果页/qr.html--></div>
-                    <button type="button" id="search">搜索</button>
-                    <!--识别码搜索结果页/ok.html-->
-                </form>
-                <!--这是弹出层-->
-                <div class="am-modal-actions" id="my-actions">
-                    <div class="am-modal-actions-group">
-                        <ul class="am-list">
-                            <li>
-                                <div class="am-form-file am-btn-primary">
-                                    <button type="button" class="am-btn am-btn-primary" style="width:100%;">
-                                        <i class="am-icon-cloud-upload"></i> 请选择要上传识别的二维码图片文件
-                                    </button>
-                                    <input type="file" name="myFile" onchange="selectImage(this);"/>
-                                </div>
-
-                            </li>
-
-                            <li class="am-modal-actions-danger">
-                                <img src="images/315kcma.gif">
-                            </li>
-                            <li id="ajaxLoadResult">
-                                <div class="site_header_con">
-                                    检测综合评定结果：90%(安全) <!--安全90%-普通60%-可疑50%-危险10%-->
-                                    <br/><br/>
-                                    <a id="successLink" class="am-btn am-btn-success am-round" href="http://www.315kc.com">点击访问</a>
-
-                                    <br/>
-                                    <br/>
-                                    <table class="am-table" style="text-align:left;">
-                                        <thead>
-                                        <tr>
-                                            <th>安全检测项目</th>
-                                            <th>结果</th>
-                                            <th>备注</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>二维码安全检测</td>
-                                            <td><span class="am-badge am-badge-success am-round">已认证</span>
-                                                <!--	<span class="am-badge am-badge-default am-round">未认证</span> 后台选项分配网站链接是否认证-->
-                                            </td>
-                                            <td>
-                                                <script language=Javascript>
-                                                    var now = new Date()
-                                                    document.write(1900 + now.getYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds())
-                                                </script>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>二维码发行机构</td>
-                                            <td>315快查官方</td>
-                                            <td>www.315kc.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>网址备案号</td>
-                                            <td>苏ICP备16010616号</td>
-                                            <td>2013-10-01</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>二维码IP地址</td>
-                                            <td>116.255.187.216</td>
-                                            <td>中国-大陆</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-
-
-                                </div>
-
-                                <!--输出结果结束-->
-                            </li>
-                            <li id="ajaxLoadFail">
-                                <!--输出结果开始-->
-                                <div class="site_header_con">
-                                    检测综合评定结果：60%(一般)<br/>
-                                    我们无法确认该网页是否安全，它可能包含未知的安全隐患。
-                                    <!--安全90%-普通60%-可疑50%-危险10%-->
-                                    <br/><br/>
-                                    <a id="failedLink" class="am-btn am-btn-warning am-round" href="http://www.315kc.com">继续访问</a>
-
-                                    <br/>
-                                    <br/>
-                                    <table class="am-table" style="text-align:left;">
-                                        <thead>
-                                        <tr>
-                                            <th>安全检测项目</th>
-                                            <th>结果</th>
-                                            <th>备注</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>二维码安全检测</td>
-                                            <td><span class="am-badge am-badge-warning am-round">未认证</span>
-                                                <!--	<span class="am-badge am-badge-default am-round">未认证</span> 后台选项分配网站链接是否认证-->
-                                            </td>
-                                            <td>
-                                                <script language=Javascript>
-                                                    var now = new Date()
-                                                    document.write(1900 + now.getYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds())
-                                                </script>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>二维码发行机构</td>
-                                            <td>未知</td>
-                                            <td>未知</td>
-                                        </tr>
-                                        <tr>
-                                            <td>网址备案号</td>
-                                            <td>未知</td>
-                                            <td>未知</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>二维码IP地址</td>
-                                            <td>未知</td>
-                                            <td>未知</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-
-
-                                </div>
-
-                                <!--输出结果结束-->
-                            </li>
-                            <!--	  <li> <a class="am-btn am-btn-warning am-btn" href="#">很遗憾：识别失败-请上传正确的二维码！</a></li>-->
-                        </ul>
+                <li class="s_button">
+                    <div class='align'>
+                        <a id="wait" href="javascript:void(0)" class="button login w50" style="display:none;width:150px;background:gray;"></a>
+                        <a id="search" href="javascript:void(0)" class="button login w50">查&nbsp;询</a>
                     </div>
-                    <div class="am-modal-actions-group">
-                        <button class="am-btn am-btn-secondary am-btn-block" data-am-modal-close>取消</button>
-                    </div>
-                </div>
-                <!--这是弹出层结束-->
-                <div style="width:auto; height:23px; clear:both;"></div>
-                <div class="mb-company tongji" id="queryMainInfo"></div>
-            </div>
+                </li>
+            </ul>
+        </form>
+        <div class="panel" id="fwm2" style="display: none">
+            <h3>在线查询</h3>
+            <ul>
+                <li>&nbsp;</li>
+                <li id="fwinfo"></li>
 
-            <div class="mb-company"><h2 class="am-titlebar-title "><a href="#">快捷通道</a></h2>
-                <ul class="lists">
-                    <li><a href="baoguang.html" class="title"><img src="images/cyb.png">
-
-                        投诉曝光
-
-                    </a></li>
-                    <li><a href="shuju.html" class="title"><img src="images/xsb.png">
-
-                        数据接入
-
-                    </a></li>
-                    <li><a href="hezuo.html" class="title"><img src="images/zb.png">
-
-                        联盟合作
-
-                    </a></li>
-                    <li><a href="ma.html" class="title"><img src="images/hw.png">
-
-                        一物一码
-
-                    </a></li>
-                </ul>
-            </div>
-
-            <!--质量新闻注销-->
-            <!--<div class="mb-company" style="margin-top:10px;">-->
-                <!--<h2 class="am-titlebar-title ">-->
-                    <!--<a href="#">质量安全播报：数据推送</a>-->
-                <!--</h2>-->
-            <!--</div>-->
-            <!--<div class="liebiao123">-->
-                <!--<div data-am-widget="list_news">-->
-                    <!--<div class="am-list-news-bd">-->
-                        <!--<ul class="am-avg-sm-3 am-thumbnails">-->
-                            <!--<li>-->
-                                <!--<div class="indexslt"><a href="wenzhang.html"><img src="images/136408210.png"></a></div>-->
-                                <!--<div class="indexlbwz">-->
-                                    <!--<h3><a href="wenzhang.html" style="font-size:14px;">每日快查：军用AR市场将达13亿美元，百度宣布杀入云计算市场，布雷耶/IDG共建10亿美元基金</a>-->
-                                    <!--</h3>-->
-
-                                    <!--<div class="am-list-item-text">315快查-快照 2016-07-14</div>-->
-                                <!--</div>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<div class="indexslt"><a href="wenzhang.html"><img src="images/136408210.png"></a></div>-->
-                                <!--<div class="indexlbwz">-->
-                                    <!--<h3><a href="wenzhang.html" style="font-size:14px;">每日快查：军用AR市场将达13亿美元，百度宣布杀入云计算市场，布雷耶/IDG共建10亿美元基金</a>-->
-                                    <!--</h3>-->
-
-                                    <!--<div class="am-list-item-text">315快查-快照 2016-07-14</div>-->
-                                <!--</div>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<div class="indexslt"><a href="wenzhang.html"><img src="images/136408210.png"></a></div>-->
-                                <!--<div class="indexlbwz">-->
-                                    <!--<h3><a href="wenzhang.html" style="font-size:14px;">每日快查：军用AR市场将达13亿美元，百度宣布杀入云计算市场，布雷耶/IDG共建10亿美元基金</a>-->
-                                    <!--</h3>-->
-
-                                    <!--<div class="am-list-item-text">315快查-快照 2016-07-14</div>-->
-                                <!--</div>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<div class="indexslt"><a href="wenzhang.html"><img src="images/136408210.png"></a></div>-->
-                                <!--<div class="indexlbwz">-->
-                                    <!--<h3><a href="wenzhang.html" style="font-size:14px;">每日快查：军用AR市场将达13亿美元，百度宣布杀入云计算市场，布雷耶/IDG共建10亿美元基金</a>-->
-                                    <!--</h3>-->
-
-                                    <!--<div class="am-list-item-text">315快查-快照 2016-07-14</div>-->
-                                <!--</div>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<div class="indexslt"><a href="wenzhang.html"><img src="images/136408210.png"></a></div>-->
-                                <!--<div class="indexlbwz">-->
-                                    <!--<h3><a href="wenzhang.html" style="font-size:14px;">每日快查：军用AR市场将达13亿美元，百度宣布杀入云计算市场，布雷耶/IDG共建10亿美元基金</a>-->
-                                    <!--</h3>-->
-
-                                    <!--<div class="am-list-item-text">315快查-快照 2016-07-14</div>-->
-                                <!--</div>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                        <!--<div><a href="liebiao.html"-->
-                                <!--style="margin:0px auto; display:block; width:110px; line-height:30px; height:30px;font-size:14px; font-weight:bold;">点击查看更多...</a>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
+            </ul>
         </div>
     </div>
-</div>
-<script src="js/jquery.min.js"></script>
-<script src="js/amazeui.min.js"></script>
-<script>
-    var global_contextPath = '/gb';
-    //function to fix height of iframe!
-    var calcHeight = function () {
-        var headerDimensions = $('#header-bar').outerHeight();
-        $('#preview-frame').height($(window).height() - headerDimensions);
-    }
-    $(window).load(function () {
-        calcHeight();
-        $('#header-bar a.close').mouseover(function () {
-            $('#header-bar a.close').addClass('activated');
-        }).mouseout(function () {
-            $('#header-bar a.close').removeClass('activated');
-        });
-    });
 
-    $(window).resize(function () {
-        calcHeight();
-    }).load(function () {
-        calcHeight();
-    });
-</script>
-<div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
-    <a href="#top" title="">
-        <img class="am-gotop-icon-custom" src="images/goTop.gif"/>
-    </a>
-</div>
+
+    <div class='align'>
+        <a href="index1.html" class="button login ">点击进入315快查官网</a>
+    </div>
+    <footer><p>温馨提示：一物一码防伪溯源信息查询，如因查询次数过多，导致对信息有疑问请联系相关企业。</p>
+
+        <p>中国315快查联盟官网:WWW.315KC.COM</p>
+    </footer>
+
+</article>
 
 </body>
-
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?f8840ab1ec5d1cb5f521a9063d3639a0";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 </html>
