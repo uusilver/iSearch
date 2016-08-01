@@ -61,7 +61,6 @@ article span.tips{width:100%;padding: 0.5em 0;font-size:1.2em;letter-spacing:0.1
 .foodInfo2 img {
 	width: 245px;
 	height: 245px;
-	overflow: hidden;
 	display: block;
   -webkit-box-shadow: 3px 3px 3px;  
   -moz-box-shadow: 3px 3px 3px;  
@@ -69,8 +68,7 @@ article span.tips{width:100%;padding: 0.5em 0;font-size:1.2em;letter-spacing:0.1
 }
 .foodInfo3 li {
 	width: 350px;
-	height: 350px;
-overflow: hidden;
+	height: auto;
 	text-align:center;
 	display:block;
 	float:left;
@@ -79,9 +77,8 @@ overflow: hidden;
 	margin-bottom:15px;
 	}
 .foodInfo3 img {
-
-	overflow: hidden;
 	display: block;
+	width:100%;
   -webkit-box-shadow: 3px 3px 3px;  
   -moz-box-shadow: 3px 3px 3px;  
   box-shadow: 3px 3px 3px; 
