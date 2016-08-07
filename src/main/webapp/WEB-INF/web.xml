@@ -23,6 +23,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>GeneralQrCodeQueryServletVersion2</servlet-name>
+        <servlet-class>com.tmind.qrcode.servlet.GenerQrCodeQueryServletVersion2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GeneralQrCodeQueryServletVersion2</servlet-name>
+        <url-pattern>/generalQrCodeQueryServletVersion2</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
         <servlet-name>MakeOrderViaEmailServlet</servlet-name>
         <servlet-class>com.tmind.qrcode.servlet.MakeOrderViaEmailServlet</servlet-class>
     </servlet>

@@ -13,7 +13,7 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script src="../../../js/xcConfirm.js"></script>
 	<script charset="gbk" language="JavaScript" type="application/javascript"
-			src="../../../general-js/common-template.js"></script>
+			src="../../../general-js/common-template2.js"></script>
 	<script language="javascript">
 		$(document).ready(function(){
 		function RWidth(){
@@ -42,11 +42,11 @@
    <div class="panel">
     <h2>西班牙犀牛瓷砖正品信息</h2>
    <ul id="foodInfo">
-		<li><strong>商品名称/Product：</strong>AGATHA阿加莎</li>
+		<li><strong>商品名称/Product：</strong><span id="productName"></span></li>
 		<li><strong>品牌/Brand：</strong>PERONDA（西班牙犀牛瓷砖）</li>
-		<li><strong>中国地区总经销商/China regional distributor:</strong><br/>荣联国际贸易（上海）有限公司</li>
-		<li><strong>原产地/Producer：</strong>ORDA Spain（西班牙安达）</li>
-		<li><strong>客服电话/TEL：</strong>400 821 9568</li>			
+		<li><strong>中国地区总经销商/China regional distributor:</strong><br/><span id="productFactory"></span></li>
+		<li><strong>原产地/Producer：</strong><span id="productOriginalAddress"></span></li>
+		<li><strong>客服电话/TEL：</strong><span id="telNo"></span></li>
 	</ul>
    </div>
    
@@ -57,7 +57,7 @@
 		<li><strong>原产地证明/Certificate of origin：</strong><a href="jk.html"><br/>点击查看/click</a></li>
 		<li><strong>产品信息与效果图展示/Product description and Designs:</strong><br/>
 		<!--此处需要自定义链接参数	-->
-		<a href="htmlfiles/product1.html">点击查看/click</a></li>
+		<a id="productAddress" href="">点击查看/click</a></li>
 		
 		<li><strong>授权经销商/Authorized dealer:</strong><br/><a href="jx.html">点击查看/click</a></li>		
 	</ul>
