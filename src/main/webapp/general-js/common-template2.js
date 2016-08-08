@@ -17,6 +17,7 @@ $(function () {
                         case "productOriginalAddress" : $("#productOriginalAddress").html(dataObj[o].result);break;
                         case "telNo" : $("#telNo").html(dataObj[o].result);break;
                         case "productAddress" :     $("#productAddress").attr("href", dataObj[o].result);break;
+                        case "queryTimes" : $("#queryTimes").html(dataObj[o].result); break;
                     }
                 }
             }
