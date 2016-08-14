@@ -7,6 +7,7 @@ $(function () {
     $("#info").hide();
     try {
         var uniqueKey = window.location.href.split("?")[1];
+        $("#unquieKey").html(uniqueKey);
         $.get("../../../generalQrCodeQueryServletVersion2"+"?uniqueKey="+uniqueKey,function(result){
             if(result) {
                 var dataObj=eval("("+result+")");
