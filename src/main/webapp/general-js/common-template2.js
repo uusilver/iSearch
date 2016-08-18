@@ -5,6 +5,7 @@
 $(function () {
     $("#FloatDIV").hide();
     $("#info").hide();
+    $("#warn").hide();
     try {
         var uniqueKey = window.location.href.split("?")[1];
         $("#unquieKey").html(uniqueKey);
@@ -18,7 +19,13 @@ $(function () {
                         case "productOriginalAddress" : $("#productOriginalAddress").html(dataObj[o].result);break;
                         case "telNo" : $("#telNo").html(dataObj[o].result);break;
                         case "productAddress" :     $("#productAddress").attr("href", dataObj[o].result);break;
-                        case "queryTimes" : $("#queryTimes").html(dataObj[o].result); break;
+                        case "queryTimes" :
+                            if(parseInt(dataObj[o].result) >=3 ){
+                                $("#warn").show();
+                                $("#green").hide();
+                            }
+                            $("#queryTimes").html(dataObj[o].result);
+                            break;
                     }
                 }
             }
