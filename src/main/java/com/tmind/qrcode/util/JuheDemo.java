@@ -18,8 +18,11 @@ import net.sf.json.JSONObject;
 
 /**
  * Created by lijunying on 16/8/11.
+ *
+ * <p>用于接入360对网站进行安全分析</p>
  */
 public class JuheDemo {
+
 
     public static final String DEF_CHATSET = "UTF-8";
     public static final int DEF_CONN_TIMEOUT = 30000;
@@ -104,16 +107,16 @@ public class JuheDemo {
      * @param args
      */
 
-    public static void main(String[] args) {
-        try {
-            AnalyzeUrlModel resultModel = getRequestResult("www.baidu.com");
-            if(resultModel.getErrorCode() == 0){
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args) {
+//        try {
+//            AnalyzeUrlModel resultModel = getRequestResult("www.baidu.com");
+//            if(resultModel.getErrorCode() == 0){
+//                String resultMsg = resultModel.getMessage();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * @param strUrl 请求地址

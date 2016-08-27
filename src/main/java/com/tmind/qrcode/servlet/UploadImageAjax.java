@@ -3,6 +3,8 @@ package com.tmind.qrcode.servlet;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.zxing.Result;
 import com.tmind.qrcode.model.UploadResultModel;
+import com.tmind.qrcode.util.DBUtil;
 import com.tmind.qrcode.util.QrcodeUtil;
 import sun.misc.BASE64Decoder;
 
@@ -22,6 +25,7 @@ import sun.misc.BASE64Decoder;
 
 /**
  * 上传图片。
+ * 解析并且通过360安全认证
  */
 public class UploadImageAjax extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -66,6 +70,22 @@ public class UploadImageAjax extends HttpServlet {
             resp.getWriter().print(new Gson().toJson(wrapJSON("success",result.getText())));
         }
         else{
+            //将非315KC的数据纪录到数据库
+            Connection connection  = null;
+            PreparedStatement ps = null;
+            try {
+                connection = DBUtil.getConnection();
+                String sql = "insert into m_qrcode_upload_result (url) values (?)";
+                ps = connection.prepareStatement(sql);
+                ps.setString(1, result.getText());
+                ps.execute();
+
+
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }finally {
+                DBUtil.closeConnect(null, ps, connection);
+            }
             resp.getWriter().print(new Gson().toJson(wrapJSON("fail", result.getText())));
         }
 
