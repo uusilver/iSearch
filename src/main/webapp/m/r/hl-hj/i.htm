@@ -140,8 +140,9 @@
             </div>
             <div id="bg" class="bg" style="display:none;">
             </div>
+			
             <div style="text-align:center; font-size:12px;" id="green">提示：当前查询次数正常，请放心购买!</div>
-            <div style="text-align:center; font-size:12px; color:#F10314;" id="warn"><span class="blink">当前扫码次数异常，请用户仔细核验!</span>
+            <div style="text-align:center; font-size:12px; color:#F10314;" id="warn"><span id="abc">当前扫码次数异常，请用户仔细核验!</span>
             </div>
         </div>
 
@@ -490,6 +491,31 @@
 </div>
 
 </div>
+<script>
+ //字体闪光
+var i = 0;
+
+function getColor(){
+ i++;
+ switch(i){ 
+  case 1:return "#ff0000";
+  case 2:return "#ff6600";
+  case 3:return "#3366cc";
+  default:return "black";
+ }
+}
+
+function colorful(){
+ var o =document.getElementById('abc');
+ o.style.color=getColor();
+ if(i==3)i=0;
+ setTimeout('colorful()',1000);
+}
+
+colorful();
+
+</script>
+
 <script>
     //点击种类
     $(".type").bind("touchstart", function (e) {
