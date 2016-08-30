@@ -40,6 +40,9 @@
         .control-group {
             margin-top: 10px;
         }
+		/*定义页面基础CSS*/
+
+
     </style>
     <script type="text/javascript" src="js/my_lab.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
@@ -70,7 +73,19 @@
         }
 
     </script>
-
+	
+<script language="javascript" type="text/javascript">  //弹出层
+function showDiv(){  
+document.getElementById('popDiv').style.display='block';  
+document.getElementById('popIframe').style.display='block';  
+document.getElementById('bg').style.display='block';  
+}  
+function closeDiv(){  
+document.getElementById('popDiv').style.display='none';  
+document.getElementById('bg').style.display='none';  
+document.getElementById('popIframe').style.display='none';  
+}  
+</script> 
 
 </head>
 
@@ -96,10 +111,15 @@
                     <li><strong>查询次数:</strong><span id="queryTimes"></span></li>
                 </ul>
             </div>
-            <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI2MzQzNTkyNQ==&scene=110#wechat_redirect"
-               style="width:149px;height:44px;  margin:0px auto; display:block; background-image:url(images/buttom.jpg); border:none;"></a>
+    <a href="javascript:showDiv()"  style="width:149px;height:44px;  margin:0px auto; display:block; background-image:url(images/buttom.jpg); border:none;" ></a>
+<div id="popDiv" class="mydiv" style="display:none;">
+<div style="width:250px; height:424px; "><img src="images/wx-subscribe.jpg">  </div>
+<div><a href="javascript:closeDiv()" style="width:250px; height:26px; display:block; background-color:#FF0000; color:#FFFFFF; line-height:26px;">关闭窗口</a>  </div>
+</div>  
+<div id="bg" class="bg" style="display:none;">  
+</div>  
             <div style="text-align:center; font-size:12px;" id="green">提示：当前查询次数正常，请放心购买!</div>
-            <div style="text-align:center; font-size:12px; color:#F10314;" id="warn">当前扫码次数异常，请用户仔细核验!</div>
+            <div style="text-align:center; font-size:12px; color:#F10314;" id="warn"><span class="blink">当前扫码次数异常，请用户仔细核验!</span></div>
         </div>
 
     </div>
@@ -151,10 +171,38 @@
                                 class="float_l W65">如何获得认证呢？<br/>
 								要满足两个条件，一是原料是有机葡萄园出产的有机葡萄；二是酿造方式必须是有机的。
 								<br/>
-								有机葡萄园的认证一方面要经过土壤的有机认证，葡萄园的土壤不允许含有任何的杀虫剂、杀真菌剂及无机肥料，只有在3年或3年以上没有施放过上述化学物质的葡萄园才可被确认为有机耕作地！</span>
-                        </div>
+								有机葡萄园的认证一方面要经过土壤的有机认证，葡萄园的土壤不允许含有任何的杀虫剂、杀真菌剂及无机肥料，只有在3年或3年以上没有施放过上述化学物质的葡萄园才可被确认为有机耕作地！
+								
+								</span>
+								
+								<span class="float_l"> 《有机认证简介》<br/>
+								遵照有机产品标准生产、加工、销售的供人类消费、动物食用的产品就是有机产品，通常包括有机食品，如粮食、蔬菜、水果、奶制品、禽畜产品、蜂蜜和蜂产品、水产品、调料等；除有机食品外，还有有机化妆品、纺织品、林产品、生物农药、有机肥料等。
+有机产品是所有产品中，特别是食品中要求最高的级别。有机产品也更是一种理念，将自然、环保、共生、协调发展运用与生产中，希望在满足所有人对优质食品的需求的同时，做到保护土壤和提高其肥力，并且尽可能降低环境污染和不可再生资源的消耗。有机产品主要涉及3个方面：
+有机产品的基础农业生产禁止或限制使用化学合成物质；禁止使用转基因、胚胎移植和辐射技术；强调生产操作对生态环境无不良影响；
+有机产品的加工过程的原料必须来自有机农业生产体系，或采用有机方式采集的野生天然产品，在整个生产过程中严格遵循有机产品的加工、包装、储藏、运输标准；
+有机产品的整个生产、加工、流通过程中，要有完善的质量控制和跟踪审查体系，有完整的生产和销售记录档案。
+欧盟、美国、日本等各个国家对有机产品生产要求略有不同，标准也各有差异。2005年1月19日，根据中国国情，在各国标准和国际有机运动联盟（IFOAM）基本标准的基础上，我国《有机产品》标准发布，并于2005年4月1日正式实施。
+<br/>
+标准特点：<br/>
+自愿性原则
+强调对土壤、大气、水、配料、添加物等基础条件的高要求
+关注有机产品生产、加工、流通整个过程的有机完整性，而不单单是产品检测。
+强调生态环境的可持续发展。
+强调有机标识的管理。
+强调质量管理体系的要求，文件记录的重要。
+<br/>
+实施意义：<br/>
+改进生态环境，建立人与自然和谐发展的生存状态
+满足人们对健康、安全、环保产品的需求
+对传统农业系统加以保护和选择性继承，从中学习和发展，形成自己的特色品牌
+建立完整的生产、加工及流通链，同时兼顾社会公正和生态责任
+提高企业管理水平，为企业提供严格按照有机标准生产管理、持续发展的科学管理机制
+ </span>                       </div>
                         <div class="txtPic clearfix"><i class="float_l W35"><img src="images/pic3.png"/></i> <span
-                                class="float_l W65">另一方面，葡萄的种植也必须符合条件。首先葡萄树要按照生物节律种植；其次是没有经过合成化学物质处理。认证为有机的葡萄园中，严禁采用被葡萄树吸收（内吸）的化学物质，如农药、除草剂、杀草剂、杀虫剂和化学肥料等。在有机葡萄园中只能采用天然的物质作肥料，如海藻、牲口粪便和植物混合肥料。</span></div>
+                                class="float_l W65">另一方面，葡萄的种植也必须符合条件。首先葡萄树要按照生物节律种植；其次是没有经过合成化学物质处理。认证为有机的葡萄园中，严禁采用被葡萄树吸收（内吸）的化学物质，如农药、除草剂、杀草剂、杀虫剂和化学肥料等。在有机葡萄园中只能采用天然的物质作肥料，如海藻、牲口粪便和植物混合肥料。</span>
+						
+								
+								</div>
                     </dd>
                 </dl>
 
@@ -248,38 +296,37 @@
                     </dt>
                     <dd>
                         <div class="txtPic2">
-                            <h6><span class="brR10">如何品尝白酒?</span></h6>
+						  <h6><span class="brR10">开瓶技巧</span></h6>
+
+                             <div class="txtPic clearfix">
+                            <img class="fullW" src="images/kaiping.jpg"/>
+                        </div>
+
+                            <h6><span class="brR10">如何品尝葡萄酒?</span></h6>
 
                             <p>方法及步骤:</p>
                             <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td><i class="num brR">1</i></td>
-                                    <td>望：</td>
-                                    <td>将酒倒入杯中，观其色泽。
-                                        端起酒杯，观望杯中那水晶一般的液体轻轻荡漾，晶莹剔透接着，再逆时针转动酒杯。
-                                        但见酒体均匀挂于杯壁，款款下落，如丝绸般柔顺、润滑……越好，有机红酒的酒体更为粘绸润滑。
+                                    <td>观色：</td>
+                                    <td>将酒杯在纯白色的背景前倾斜45度，以分辨色调和浓淡。葡萄酒贴近杯壁最外缘的区域称为酒缘，通常越浓厚的酒，酒缘越窄，越清淡或越老的酒，酒缘会越宽。有机葡萄酒尤为明显。   
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><i class="num brR">2</i></td>
-                                    <td>闻：</td>
-                                    <td>酒杯微微倾斜，轻嗅其香味。
-                                        酒杯呈30度角靠近鼻尖，自然吸气，但闻一股浓郁幽雅的芳香飘然钻入鼻息，伴随着幽雅芬芳的酱香陈香，心神如繁花绚烂，层层绽放…
+                                    <td>闻香：</td>
+                                    <td>重点分为浓度、品质和种类三方面。用以感受葡萄的香气、浓郁度、细致与否以及是否丰富多变。只要将酒杯靠近鼻端，将鼻端贴近杯口边缘处缓慢吸气即可。有时会同时出现水果香、花香及其他各种香气，而这也正是有机葡萄酒迷人之处。
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><i class="num brR">3</i></td>
-                                    <td>品：</td>
-                                    <td>先以纯净水清口，让味蕾焕然一新。
-                                        轻酌一口酒液，让酒香溢满嘴巴口腔，香气在蔓延，细细品味感受味蕾间尽情绽放。
-                                        真正的顶级有机红酒就像一曲完美和谐的交响乐，每一个音符、每一个音调的精妙神韵都清晰可辨……
+                                    <td>品尝：</td>
+                                    <td>好葡萄酒入口圆润，在口腔中感觉良好，酒味和涩味感觉很和谐。口感很舒适，正真的顶级有机葡萄酒就像一曲完美和谐的交响乐，每一个音符、每一个音调的精妙神韵都清晰可辨..........                                                                                           注意事项：昂贵的、好的葡萄酒是艺术品，不要“喝”，而是慢慢“品”。品味精髓，物尽芳华
+....
                                     </td>
                                 </tr>
                             </table>
-                            <h6><span class="brR10">注意事项</span></h6>
-
-                            <p>不能猛喝，应该一小口一小口的慢慢品味。品味精髓，物尽芳华。</p>
-
+                          
                         </div>
                     </dd>
                 </dl>
