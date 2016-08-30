@@ -40,7 +40,8 @@
         .control-group {
             margin-top: 10px;
         }
-		/*定义页面基础CSS*/
+
+        /*定义页面基础CSS*/
 
 
     </style>
@@ -73,19 +74,28 @@
         }
 
     </script>
-	
-<script language="javascript" type="text/javascript">  //弹出层
-function showDiv(){  
-document.getElementById('popDiv').style.display='block';  
-document.getElementById('popIframe').style.display='block';  
-document.getElementById('bg').style.display='block';  
-}  
-function closeDiv(){  
-document.getElementById('popDiv').style.display='none';  
-document.getElementById('bg').style.display='none';  
-document.getElementById('popIframe').style.display='none';  
-}  
-</script> 
+    <script>
+        $(function () {
+            $('body').click(function () {
+                document.getElementById('popDiv').style.display = 'none';
+                document.getElementById('bg').style.display = 'none';
+                document.getElementById('popIframe').style.display = 'none';
+                return false;
+            });
+        });
+    </script>
+    <script language="javascript" type="text/javascript">  //弹出层
+    function showDiv() {
+        document.getElementById('popDiv').style.display = 'block';
+        document.getElementById('popIframe').style.display = 'block';
+        document.getElementById('bg').style.display = 'block';
+    }
+    function closeDiv() {
+        document.getElementById('popDiv').style.display = 'none';
+        document.getElementById('bg').style.display = 'none';
+        document.getElementById('popIframe').style.display = 'none';
+    }
+    </script>
 
 </head>
 
@@ -104,6 +114,7 @@ document.getElementById('popIframe').style.display='none';
              id="queryResult">
 			 <span>
 			 华粮集团（蓝图）有机葡萄酒</span>
+
             <div class="panel bggray">
                 <h2 style="font-weight:bold; font-size:14px;color:#FFFFFF;">防伪查询结果</h2>
                 <ul id="queryResult" style="font-weight:bold; font-size:14px;color:#FFFFFF;">
@@ -111,15 +122,20 @@ document.getElementById('popIframe').style.display='none';
                     <li><strong>查询次数:</strong><span id="queryTimes"></span></li>
                 </ul>
             </div>
-    <a href="javascript:showDiv()"  style="width:149px;height:44px;  margin:0px auto; display:block; background-image:url(images/buttom.jpg); border:none;" ></a>
-<div id="popDiv" class="mydiv" style="display:none;">
-<div style="width:250px; height:424px; "><img src="images/wx-subscribe.jpg">  </div>
-<div><a href="javascript:closeDiv()" style="width:250px; height:26px; display:block; background-color:#FF0000; color:#FFFFFF; line-height:26px;">关闭窗口</a>  </div>
-</div>  
-<div id="bg" class="bg" style="display:none;">  
-</div>  
+            <a href="javascript:showDiv()"
+               style="width:149px;height:44px;  margin:0px auto; display:block; background-image:url(images/buttom.jpg); border:none;"></a>
+
+            <div id="popDiv" class="mydiv" style="display:none;">
+                <div style="width:250px; height:424px; "><img src="images/wx-subscribe.jpg"></div>
+                <div><a href="javascript:closeDiv()" id="closeDiv"
+                        style="width:250px; height:26px; display:block; background-color:#FF0000; color:#FFFFFF; line-height:26px;">关闭窗口</a>
+                </div>
+            </div>
+            <div id="bg" class="bg" style="display:none;">
+            </div>
             <div style="text-align:center; font-size:12px;" id="green">提示：当前查询次数正常，请放心购买!</div>
-            <div style="text-align:center; font-size:12px; color:#F10314;" id="warn"><span class="blink">当前扫码次数异常，请用户仔细核验!</span></div>
+            <div style="text-align:center; font-size:12px; color:#F10314;" id="warn"><span class="blink">当前扫码次数异常，请用户仔细核验!</span>
+            </div>
         </div>
 
     </div>
@@ -142,7 +158,6 @@ document.getElementById('popIframe').style.display='none';
 
                         <div class="txtPic clearfix">
                             <img class="fullW" src="images/pic5.jpg"/>
-
 
 
                         </div>
@@ -197,12 +212,12 @@ document.getElementById('popIframe').style.display='none';
 对传统农业系统加以保护和选择性继承，从中学习和发展，形成自己的特色品牌
 建立完整的生产、加工及流通链，同时兼顾社会公正和生态责任
 提高企业管理水平，为企业提供严格按照有机标准生产管理、持续发展的科学管理机制
- </span>                       </div>
+ </span></div>
                         <div class="txtPic clearfix"><i class="float_l W35"><img src="images/pic3.png"/></i> <span
                                 class="float_l W65">另一方面，葡萄的种植也必须符合条件。首先葡萄树要按照生物节律种植；其次是没有经过合成化学物质处理。认证为有机的葡萄园中，严禁采用被葡萄树吸收（内吸）的化学物质，如农药、除草剂、杀草剂、杀虫剂和化学肥料等。在有机葡萄园中只能采用天然的物质作肥料，如海藻、牲口粪便和植物混合肥料。</span>
-						
-								
-								</div>
+
+
+                        </div>
                     </dd>
                 </dl>
 
@@ -233,7 +248,8 @@ document.getElementById('popIframe').style.display='none';
                             src="images/tit4.png"/></span></dt>
                     <dd>
                         <div class="txtPic2">
-                            <p>为了弘扬可持续发展，华粮集团有机葡萄酒为社会，经济以及生态环境做贡献。我们有机葡萄酒酿制过程尊重环境，所以采用绿色有机酿造。我们的合作伙伴承诺根据我们的规范手册里的要求进行良好酿制操作。</p>
+                            <p>
+                                为了弘扬可持续发展，华粮集团有机葡萄酒为社会，经济以及生态环境做贡献。我们有机葡萄酒酿制过程尊重环境，所以采用绿色有机酿造。我们的合作伙伴承诺根据我们的规范手册里的要求进行良好酿制操作。</p>
                         </div>
                         <div class="txtPic clearfix"><i class="float_l W35"><img src="images/pic6.jpg"/></i>
 
@@ -259,7 +275,9 @@ document.getElementById('popIframe').style.display='none';
                         <div class="txtPic2">
                             <p>&nbsp;&nbsp;江苏华粮国际贸易（集团）有限公司（简称：华粮集团），是专业从事有机食品及相关产业开发、基地建设和有机食品进出口贸易的集团公司。公司主营产品包括国际国内有机食品、绿色无公害和名优特安全食品。种类有：粮油、果蔬、酒水饮料、副食调料、畜产品、禽蛋、农林产品、水产品、包装食品等。集团公司正在实施“三自”行动——自主品牌、自主基地、自主创新！品牌是人力、物力、智力和文化的综合体现，也是实现创新价值最大的根本途径，是一个企业整体实力的象征。
                             </p>
+
                             <p>    &nbsp;&nbsp;新形势为有机绿色食品事业提供了新的历史机遇，目前我国食品卫生安全隐患已经引起党中央国务院领导的高度重视，食品安全已成为社会的关注，为我公司的发展提供了有利因素。公司特致力于绿色、有机、生态、农业的研究，粮油食品的开发，使绿色有机食品更具特色，为消费者提供更多、更好的优质食品。我们深信我们的“华粮绿然”和“蓝图”等品牌能够有力地促进中国绿色食品及有机产品的健康发展。</p>
+
                             <p>企业文化：<br/>
                                 集团愿景：成为全球最值得信赖的食品供应商，为人类健康生活做出我们应
                                 有的贡献。
@@ -267,11 +285,13 @@ document.getElementById('popIframe').style.display='none';
                                 人才观：善于学习，坚定信念（知行合一）
                                 理念：善本、归元、循道
                             </p>
+
                             <p>
                                 企业战略：<br/>
                                 构建一个体系——一体化整体运营体系
                                 实现两个发展——品牌与基地协同发展
                             </p>
+
                             <p>
                                 企业精神：<br/>
                                 诚信：诚恳诚实、相互信任、信守承诺、遵规守法
@@ -279,6 +299,7 @@ document.getElementById('popIframe').style.display='none';
                                 高效：充满热情、积极主动、提高效率、创造价值
                                 创新：心态开放、自我提升、追求卓越、包容理解
                                 我们聚集在华粮的旗帜下，崇尚进取，甘愿奉献，忠诚事业，恪守职责；我们都是华粮的主人，以勤勉对待工作，用智慧创造价值，我为华粮构筑辉煌，华粮让我梦想成真。</p>
+
                             <p>集团标志：<br/>
                                 标志外围的圆形，形似地球，象征和谐、安全、团圆。圆形分为五块形状，体现世界是五大洲组成；圆形中间的“五角星”和变形的“H”结合，表示中国华粮产品与世界同行！华粮人通过辛勤工作，服务社会，托起心中的希望，走向美好的未来！
                             </p>                           <h6><span class="brR10">集团形象标识</span></h6>
@@ -296,11 +317,11 @@ document.getElementById('popIframe').style.display='none';
                     </dt>
                     <dd>
                         <div class="txtPic2">
-						  <h6><span class="brR10">开瓶技巧</span></h6>
+                            <h6><span class="brR10">开瓶技巧</span></h6>
 
-                             <div class="txtPic clearfix">
-                            <img class="fullW" src="images/kaiping.jpg"/>
-                        </div>
+                            <div class="txtPic clearfix">
+                                <img class="fullW" src="images/kaiping.jpg"/>
+                            </div>
 
                             <h6><span class="brR10">如何品尝葡萄酒?</span></h6>
 
@@ -309,24 +330,28 @@ document.getElementById('popIframe').style.display='none';
                                 <tr>
                                     <td><i class="num brR">1</i></td>
                                     <td>观色：</td>
-                                    <td>将酒杯在纯白色的背景前倾斜45度，以分辨色调和浓淡。葡萄酒贴近杯壁最外缘的区域称为酒缘，通常越浓厚的酒，酒缘越窄，越清淡或越老的酒，酒缘会越宽。有机葡萄酒尤为明显。   
+                                    <td>
+                                        将酒杯在纯白色的背景前倾斜45度，以分辨色调和浓淡。葡萄酒贴近杯壁最外缘的区域称为酒缘，通常越浓厚的酒，酒缘越窄，越清淡或越老的酒，酒缘会越宽。有机葡萄酒尤为明显。
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><i class="num brR">2</i></td>
                                     <td>闻香：</td>
-                                    <td>重点分为浓度、品质和种类三方面。用以感受葡萄的香气、浓郁度、细致与否以及是否丰富多变。只要将酒杯靠近鼻端，将鼻端贴近杯口边缘处缓慢吸气即可。有时会同时出现水果香、花香及其他各种香气，而这也正是有机葡萄酒迷人之处。
+                                    <td>
+                                        重点分为浓度、品质和种类三方面。用以感受葡萄的香气、浓郁度、细致与否以及是否丰富多变。只要将酒杯靠近鼻端，将鼻端贴近杯口边缘处缓慢吸气即可。有时会同时出现水果香、花香及其他各种香气，而这也正是有机葡萄酒迷人之处。
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><i class="num brR">3</i></td>
                                     <td>品尝：</td>
-                                    <td>好葡萄酒入口圆润，在口腔中感觉良好，酒味和涩味感觉很和谐。口感很舒适，正真的顶级有机葡萄酒就像一曲完美和谐的交响乐，每一个音符、每一个音调的精妙神韵都清晰可辨..........                                                                                           注意事项：昂贵的、好的葡萄酒是艺术品，不要“喝”，而是慢慢“品”。品味精髓，物尽芳华
-....
+                                    <td>
+                                        好葡萄酒入口圆润，在口腔中感觉良好，酒味和涩味感觉很和谐。口感很舒适，正真的顶级有机葡萄酒就像一曲完美和谐的交响乐，每一个音符、每一个音调的精妙神韵都清晰可辨..........
+                                        注意事项：昂贵的、好的葡萄酒是艺术品，不要“喝”，而是慢慢“品”。品味精髓，物尽芳华
+                                        ....
                                     </td>
                                 </tr>
                             </table>
-                          
+
                         </div>
                     </dd>
                 </dl>
@@ -448,7 +473,8 @@ document.getElementById('popIframe').style.display='none';
 
                 </div>
             </div>
-            <p style="text-align:center;color:#909090; line-height:30px; font-size:14px;">Copyright © 2016江苏华粮集团有限公司版权所有 <br/>
+            <p style="text-align:center;color:#909090; line-height:30px; font-size:14px;">Copyright © 2016江苏华粮集团有限公司版权所有
+                <br/>
                 中国315快查联盟技术支持（www.315kc.com） <br/>
                 All
                 Rights Reserved</p>
