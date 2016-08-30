@@ -47,6 +47,7 @@
     </style>
     <script type="text/javascript" src="js/my_lab.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="http://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.js"></script>
     <script charset="gbk" language="JavaScript" type="application/javascript"
             src="../../../general-js/common-template2.js"></script>
     <script type="text/javascript">
@@ -76,12 +77,18 @@
     </script>
     <script>
         $(function () {
-            $('body').click(function () {
+            $('body').on("tap",function(){
                 document.getElementById('popDiv').style.display = 'none';
                 document.getElementById('bg').style.display = 'none';
                 document.getElementById('popIframe').style.display = 'none';
-                return false;
-            });
+                return false;            });
+
+//            $('body').click(function () {
+//                document.getElementById('popDiv').style.display = 'none';
+//                document.getElementById('bg').style.display = 'none';
+//                document.getElementById('popIframe').style.display = 'none';
+//                return false;
+//            });
         });
     </script>
     <script language="javascript" type="text/javascript">  //弹出层
