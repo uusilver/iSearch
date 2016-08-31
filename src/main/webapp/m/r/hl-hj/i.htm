@@ -41,6 +41,9 @@
             margin-top: 10px;
         }
 
+        .ui-loader-default{ display:none}
+        .ui-mobile-viewport{ border:none;}
+        .ui-page {padding: 0; margin: 0; outline: 0}
         /*定义页面基础CSS*/
 
 
@@ -81,7 +84,16 @@
                 document.getElementById('popDiv').style.display = 'none';
                 document.getElementById('bg').style.display = 'none';
                 document.getElementById('popIframe').style.display = 'none';
-                return false;            });
+                return false;
+            });
+
+            $('body').on("taphold",function(){
+                document.getElementById('popDiv').style.display = 'block';
+                document.getElementById('popIframe').style.display = 'block';
+                document.getElementById('bg').style.display = 'block';
+                return false;
+            });
+
 
 //            $('body').click(function () {
 //                document.getElementById('popDiv').style.display = 'none';
