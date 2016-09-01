@@ -1,24 +1,22 @@
 package com.tmind.qrcode.servlet;
 
-import com.tmind.qrcode.service.WeChatCoreService;
+import com.tmind.qrcode.service.RedWineWeChatCoreService;
 import com.tmind.qrcode.util.SignUtil;
 import org.apache.log4j.Logger;
-
-import javax.servlet.http.HttpServlet;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 
 /**
- * @author Junying Li
- * @Desc: 315kc微信访问接口的Servlet
+ * Created by lijunying on 16/9/1.
+ * 江苏华粮集团红酒 公共号服务
  */
-public class WeChatServlet extends HttpServlet {
+public class RedWineWeChatServlet extends HttpServlet {
 
     private  static Logger log = Logger.getLogger(WeChatServlet.class);
     /**
@@ -55,7 +53,7 @@ public class WeChatServlet extends HttpServlet {
         // 调用核心业务类接收消息、处理消息
         String respMessage = null;
         try {
-            respMessage = WeChatCoreService.processRequest(request);
+            respMessage = RedWineWeChatCoreService.processRequest(request);
         }
         catch (SQLException e) {
             log.error(e.getMessage());

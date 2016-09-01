@@ -59,6 +59,17 @@
         <url-pattern>/weChatServlet</url-pattern>
     </servlet-mapping>
 
+    <!--江苏华粮集团微信公共号 -->
+    <servlet>
+        <servlet-name>RedWineWechatServlet</servlet-name>
+        <servlet-class>com.tmind.qrcode.servlet.RedWineWeChatServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RedWineWechatServlet</servlet-name>
+        <url-pattern>/redWineWechatServlet</url-pattern>
+    </servlet-mapping>
+
+
     <servlet>
         <servlet-name>LoadImagieServlet</servlet-name>
         <servlet-class>com.tmind.qrcode.servlet.LoadImagieServlet</servlet-class>

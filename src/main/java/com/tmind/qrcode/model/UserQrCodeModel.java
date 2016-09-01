@@ -18,6 +18,7 @@ public class UserQrCodeModel {
     private String lottery_flag = null;
     private String lottery_desc = null;
     private String lottery_check_flag = null;
+    private String get_lottery_flag = null;
 
     public int getQueryTimes() {
         return queryTimes;
@@ -105,6 +106,14 @@ public class UserQrCodeModel {
 
     public void setLottery_check_flag(String lottery_check_flag) {
         this.lottery_check_flag = lottery_check_flag;
+    }
+
+    public String getGet_lottery_flag() {
+        return get_lottery_flag;
+    }
+
+    public void setGet_lottery_flag(String get_lottery_flag) {
+        this.get_lottery_flag = get_lottery_flag;
     }
 
     @Override

@@ -22,7 +22,7 @@ import java.util.Random;
 
 /**
  * @author Vani Li
- * @Desc: 所有微信请求过来的处理内容
+ * @Desc: 所有微信请求过来的处理内容, 315kc公共号使用
  */
 public class WeChatCoreService {
 
