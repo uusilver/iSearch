@@ -112,62 +112,73 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                             //http://weixin.qq.com/r/Vj-i_pDE0M2vrdSZ92pE/99 {99代表唯一码}{前面是微信公共号的关注链接}
                             //获取唯一识别码
                             uniqueCode = url.split("\\?")[1];
-
-                            //实际查询
-                            //init
-                            Map responseMap = new HashMap();
                             //获取唯一标示码
-                            // 最终返回结果
                             String result = "错误，数据不存在!";
                             String productResult = null;
                             //华粮红酒的公共号cache服务一律作废
                                 Connection conn = null;
-                                try {
+                                PreparedStatement ps = null;
+                            try {
                                     conn = DBUtil.getConnection();
+                                    //必须使用一个transaction来做这些服务
+                                    conn.setAutoCommit(false);
+
                                     UserQrCodeModel userQrCodeModel = null;
                                     userQrCodeModel = QueryService.getInstance().findUserQrCodeByUniqueId(conn, uniqueCode);
-                                    //TODO 判断get_lottery_flag //查看有没有领过奖, 如果领过奖，直接返回结果
+                                    //N 表示该标签没有领过奖， 可以继续操作
+                                    if("N".equals(userQrCodeModel.getGet_lottery_flag())){
+                                        //获得真正的中奖信息
+                                        String lotteryResult = sendRedPackage(userQrCodeModel.getLottery_desc());
+                                        //不为空说明真的中奖了
+                                        if(lotteryResult!=null){
+                                            //更新表
+                                            String sql = "update M_USER_QRCODE set get_lottery_flag=?, lottery_desc=? where id=?";
+                                            ps = conn.prepareStatement(sql);
+                                            ps.setString(1, "Y");
+                                            ps.setString(2, lotteryResult);
+                                            ps.setInt(3, userQrCodeModel.getId());
+                                            ps.executeUpdate();
+                                            ps.clearParameters();
 
-                                    /*
-                                        领奖规则
-                                        1:  1元现金红包
-                                        2:  2元现金红包
-                                        3:  3元现金红包
-                                        5:  5元现金红包
-                                        10: 10元现金红包
-                                        50: 50元现金红包
-                                        90: 山地自行车
-                                        91: 手机
-                                        92: 泰国六日双飞游
-                                     */
+                                            //保存追踪信息
+                                            sql = "insert into 315kc_log_trace (operation, opt_desc, remarks, open_id) values (?,?,?,?)";
+                                            ps = conn.prepareStatement(sql);
+                                            ps.setString(1, "江苏华粮集团微信公共号抽奖活动");
+                                            ps.setString(2, lotteryResult);
+                                            ps.setString(3, uniqueCode);
+                                            ps.setString(4, fromUserName);
+                                            ps.execute();
 
-                                    //将lottery_desc替换掉
+                                            //TODO 真正的发送红包数据
+                                            log.warn("真正的发送数据:"+userQrCodeModel.getLottery_desc());
+                                            //commit
+                                            conn.commit();
 
-                                    //TODO 调用发送红包接口
+                                            respContent = lotteryResult;
 
-                                    //获得用户IP
-                                    String vistorIP = CommonService.getInstance().getRemoteUserIpAddr(request);
-                                    //TODO add logger
+                                        }else{
+                                            respContent = "很遗憾，您未能中奖!";
+                                        }
+                                        conn.commit();
+                                    }else{
+                                        //领过奖，返回推送消息
+                                        respContent = "您已经参与过抽奖活动，感谢您的支持!";
+                                    }
 
                                 }
                                 catch (Exception e) {
-                                    System.out.println(e.getMessage());
-
+                                    //回滚
+                                    conn.rollback();
+                                    log.error(e.getMessage());
                                 }
                                 finally {
-                                    DBUtil.closeConnect(null, null, conn);
+                                    //关闭数据库链接
+                                    DBUtil.closeConnect(null, ps, conn);
                                 }
-
-
-                            //
-                            String finalResult = (String) responseMap.get("productResult") + responseMap.get("queryResult");
-                            respContent = finalResult;
                         }
                         catch (Exception e) {
-                            respContent = "非法数据，请检查";
-
+                            respContent = "非法数据";
                         }
-
                     }
                     // 自定义菜单点击事件
                     else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
@@ -176,13 +187,6 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
 
                         if (eventKey.equals("11")) {
                             respContent = "点击事件";
-                        }
-                        else if (eventKey.equals("31")) {
-                            respContent = "江西省\n江西省搭手网络科技有限公司\n" +
-                                    "\n" +
-                                    "河北省\n保定东信电子科技有限公司(服务地区:河北)\n" +
-                                    "\n" +
-                                    "江苏省\n苏州爱威尔信息科技有限公司(服务地区:苏州)\n无锡安可信信息技术有限公司(服务地区:无锡)";
                         }
                         else if (eventKey.equals("32")) {
                             respContent = "即将开放！";
@@ -199,6 +203,7 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
             return respMessage;
         }
 
+        //获取商品信息
         private static StringBuilder getProductInfo(StringBuilder originalStringBuilder, Integer id, String productId, UserProductModel productModel){
             Connection conn = null;
             PreparedStatement ps = null;
@@ -232,4 +237,34 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                 DBUtil.closeConnect(rs, ps, conn);
             }
         }
+
+
+    /**
+     *   领奖规则<br/>
+         1:  1元现金红包<br/>
+         2:  2元现金红包<br/>
+         3:  3元现金红包<br/>
+         5:  5元现金红包<br/>
+         10: 10元现金红包<br/>
+         50: 50元现金红包<br/>
+         90: 山地自行车<br/>
+         91: 手机<br/>
+         92: 泰国六日双飞游<br/>
+     * @param lotteryDesc
+     * @return
+     *
+     */
+    private static String sendRedPackage(String lotteryDesc){
+        String result = null;
+        if("1".equals(lotteryDesc)){
+            //发送一元红包
+            result = "恭喜您获得了一元现金红包奖励";
+        }else if("2".equals(lotteryDesc)){
+            //发送两元红包
+            result = "恭喜您获得了两元现金红包奖励";
+        }
+        return  result;
+    }
+
+    //TODO 建立真正的发送红包程序
 }

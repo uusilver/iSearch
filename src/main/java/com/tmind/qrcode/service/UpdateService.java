@@ -1,5 +1,6 @@
 package com.tmind.qrcode.service;
 
+import com.tmind.qrcode.model.UserQrCodeModel;
 import com.tmind.qrcode.util.DBUtil;
 
 import java.sql.Connection;
@@ -22,6 +23,13 @@ public class UpdateService {
     private UpdateService() {
     }
 
+    /**
+     * 更新查询次数信息<br/>
+     * @param currentQueryTimes
+     * @param id
+     * @param ipAddr
+     * @return
+     */
     public boolean updateQueryTimes(Integer currentQueryTimes, Integer id, String ipAddr){
         Connection conn = null;
         PreparedStatement ps = null;
@@ -52,4 +60,6 @@ public class UpdateService {
             DBUtil.closeConnect(rs, ps, conn);
         }
     }
+
+
 }
