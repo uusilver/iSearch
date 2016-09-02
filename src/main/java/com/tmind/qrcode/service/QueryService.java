@@ -43,6 +43,7 @@ public class QueryService {
                 userQrCodeModel.setLottery_desc(rs.getString("lottery_desc"));
                 userQrCodeModel.setLottery_check_flag(rs.getString("lottery_check_flag"));
                 userQrCodeModel.setUserId(rs.getInt("user_id"));
+                userQrCodeModel.setGet_lottery_flag(rs.getString("get_lottery_flag"));
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
