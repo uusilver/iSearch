@@ -31,7 +31,7 @@ public class MoneyRunner {
 		map.put("mch_id", "1343381101");//商户号
 		map.put("wxappid", "wx3f6a7a3ab9e7c065");//商户appid
 		map.put("nick_name", "南京安查通信息技术有限公司");//提供方名称
-		map.put("send_name", "南京安查通");//用户名
+		map.put("send_name", "315快查");//用户名
 		map.put("re_openid", openId);//用户openid
 		map.put("total_amount", money);//付款金额
 		map.put("min_value", money);//最小红包

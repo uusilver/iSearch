@@ -132,7 +132,7 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                                     }
                                     else if("N".equals(userQrCodeModel.getGet_lottery_flag()) && "Y".equals(userQrCodeModel.getLottery_flag())){
                                         //获得真正的中奖信息
-                                        String lotteryResult = sendRedPackage(userQrCodeModel.getLottery_desc());
+                                        String lotteryResult = sendRedPackage(userQrCodeModel.getLottery_desc(), uniqueCode);
                                         //不为空说明真的中奖了
                                         if(lotteryResult!=null){
                                             //更新表
@@ -270,7 +270,7 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
      * @return
      *
      */
-    private static String sendRedPackage(String lotteryDesc){
+    private static String sendRedPackage(String lotteryDesc, String uniqueCode){
         String result = null;
         if("1".equals(lotteryDesc)){
             //发送一元红包
@@ -280,7 +280,7 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
             result = "恭喜您获得了两元现金红包奖励";
         }else if("99".equals(lotteryDesc)){
             //发送两元红包
-            result = "恭喜您获得了泰国双飞六日游，请保留好此条消息";
+            result = "恭喜您获得了泰国双飞六日游，识别码:"+uniqueCode+"，请保留好此条消息，凭完好的酒瓶和中奖二维码标签实物联系官方对付，联系电话:025-XXXXXXX";
         }
 
         return  result;
