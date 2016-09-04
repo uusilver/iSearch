@@ -49,14 +49,8 @@ public class MoneyRunner {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Map<String, String> resultMap = MessageUtil.parseXml4Result(result);
-		String return_code = resultMap.get("return_code").toString();
-		if("SUCCESS".equals(return_code)){
-			InsertService.getInstance().insertIntoLog(result, unquieKey, openId);
+		if(result.indexOf("SUCCESS")>0){
 			return true;
-		}else {
-			log.error("江苏华粮集团红酒微信红包错误:" + result);
-			InsertService.getInstance().insertIntoLog(result, unquieKey, openId);
 		}
 		return false;
 	}

@@ -32,6 +32,19 @@ public class TestResource {
 
         }
 
+        String xml = "<xml><ToUserName><![CDATA[gh_e136c6e50636]]></ToUserName>\n" +
+                "<FromUserName><![CDATA[ogD5KxAnA1BSDquFE5qrCiRXebJs]]></FromUserName>\n" +
+                "<CreateTime>1408090606</CreateTime>\n" +
+                "<MsgType><![CDATA[SUCCESS]]></MsgType>\n" +
+                "<Event><![CDATA[scancode_waitmsg]]></Event>\n" +
+                "<EventKey><![CDATA[6]]></EventKey>\n" +
+                "<ScanCodeInfo><ScanType><![CDATA[http://a.315kc.com/m/r/a/i.htm?1461115255661k1gBF8WU]]></ScanType>\n" +
+                "<ScanResult><![CDATA[http://a.315kc.com/m/r/a/i.htm?00120160903J02mB4RV]]></ScanResult>\n" +
+                "</ScanCodeInfo>\n" +
+                "</xml>";
+
+        System.out.println(xml.indexOf("ssssssssssss")>2);
+
     }
     // instance data
     // constructor

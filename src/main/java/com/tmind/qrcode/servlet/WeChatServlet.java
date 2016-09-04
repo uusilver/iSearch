@@ -1,5 +1,6 @@
 package com.tmind.qrcode.servlet;
 
+import com.tmind.qrcode.service.RedWineWeChatCoreService;
 import com.tmind.qrcode.service.WeChatCoreService;
 import com.tmind.qrcode.util.SignUtil;
 import org.apache.log4j.Logger;
@@ -55,7 +56,8 @@ public class WeChatServlet extends HttpServlet {
         // 调用核心业务类接收消息、处理消息
         String respMessage = null;
         try {
-            respMessage = WeChatCoreService.processRequest(request);
+            //替换成红酒的代码服务，进行测试和演示
+            respMessage = RedWineWeChatCoreService.processRequest(request);
         }
         catch (SQLException e) {
             log.error(e.getMessage());

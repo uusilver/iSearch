@@ -37,7 +37,7 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
             String respMessage = null;
             try {
                 // 默认返回的文本消息内容
-                String respContent = "请求处理异常，请稍候尝试！";
+                String respContent = "收取消息！";
 
                 // xml请求解析
 
@@ -128,7 +128,7 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                                     userQrCodeModel = QueryService.getInstance().findUserQrCodeByUniqueId(conn, uniqueCode);
                                     //N 表示该标签没有领过奖， 可以继续操作, 并且用户的lottery flag要为Y
                                     if("N".equals(userQrCodeModel.getLottery_flag())){
-                                        respContent = "感谢您的关注!";
+                                        respContent = "未中奖，感谢您的关注!";
                                     }
                                     else if("N".equals(userQrCodeModel.getGet_lottery_flag()) && "Y".equals(userQrCodeModel.getLottery_flag())){
                                         //获得真正的中奖信息
@@ -154,16 +154,17 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                                             ps.execute();
 
                                             //TODO 真正的发送红包数据
-                                            log.warn("真正的发送数据:"+userQrCodeModel.getLottery_desc());
                                             //李俊英的openid: ogD5KxAnA1BSDquFE5qrCiRXebJs
                                             //张信的openid: ogD5KxLT9J30V7kiijjkB_QKxrc8
                                             //发送一元红包
                                             if("1".equals(userQrCodeModel.getLottery_desc())){
                                                 if(MoneyRunner.sendRealRedPackage(fromUserName, 100, uniqueCode)){
                                                     respContent = lotteryResult;
-                                                }else {
+                                                }else{
                                                     respContent = "很遗憾，您未能中奖!";
                                                 }
+                                            }else if("99".equals(userQrCodeModel.getLottery_desc())){
+                                                respContent = lotteryResult;
                                             }
 
                                             //-----------------------------------------------------------------------
@@ -182,9 +183,9 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
 
                                 }
                                 catch (Exception e) {
-                                    //回滚
-                                    conn.rollback();
-                                    log.error(e.getMessage());
+                                    //不再roll back
+                                    respContent = "很遗憾，您未能中奖!";
+                                    log.error("红包Error:"+e.getMessage());
                                 }
                                 finally {
                                     //关闭数据库链接
