@@ -1,5 +1,6 @@
 package com.tmind.qrcode.service;
 
+import com.tmind.qrcode.hongbao.MoneyRunner;
 import com.tmind.qrcode.model.UserProductModel;
 import com.tmind.qrcode.model.UserQrCodeModel;
 import com.tmind.qrcode.resp.TextMessage;
@@ -154,10 +155,21 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
 
                                             //TODO 真正的发送红包数据
                                             log.warn("真正的发送数据:"+userQrCodeModel.getLottery_desc());
+                                            //李俊英的openid: ogD5KxAnA1BSDquFE5qrCiRXebJs
+                                            //张信的openid: ogD5KxLT9J30V7kiijjkB_QKxrc8
+                                            //发送一元红包
+                                            if("1".equals(userQrCodeModel.getLottery_desc())){
+                                                if(MoneyRunner.sendRealRedPackage(fromUserName, 100, uniqueCode)){
+                                                    respContent = lotteryResult;
+                                                }else {
+                                                    respContent = "很遗憾，您未能中奖!";
+                                                }
+                                            }
+
+                                            //-----------------------------------------------------------------------
                                             //commit
                                             conn.commit();
 
-                                            respContent = lotteryResult;
 
                                         }else{
                                             respContent = "很遗憾，您未能中奖!";
@@ -265,7 +277,11 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
         }else if("2".equals(lotteryDesc)){
             //发送两元红包
             result = "恭喜您获得了两元现金红包奖励";
+        }else if("99".equals(lotteryDesc)){
+            //发送两元红包
+            result = "恭喜您获得了泰国双飞六日游，请保留好此条消息";
         }
+
         return  result;
     }
 

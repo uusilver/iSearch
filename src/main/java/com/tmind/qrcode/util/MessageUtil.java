@@ -150,6 +150,63 @@ public class MessageUtil {
     }
 
     /**
+     * 解析微信的结果信息（XML）
+     *
+     * @param result
+     * @return
+     * @throws Exception
+     */
+    @SuppressWarnings("unchecked")
+    public static Map<String, String> parseXml4Result(String result) {
+        // 将解析结果存储在HashMap中
+        Map<String, String> map = new HashMap<String, String>();
+
+        // 从request中取得输入流
+        InputStream inputStream = new ByteArrayInputStream(result.getBytes());
+
+        try {
+            // 读取输入流
+            SAXReader reader = new SAXReader();
+            Document document = reader.read(inputStream);
+            // 得到xml根元素
+            Element root = document.getRootElement();
+            // 得到根元素的所有子节点
+            List<Element> elementList = root.elements();
+
+            // 遍历所有子节点
+            for (Element e : elementList) {
+                if ("ScanCodeInfo".equals(e.getName())) {
+                    Element root1 = e;
+                    List<Element> elementList1 = root1.elements();
+                    for (Element element : elementList1) {
+                        map.put(element.getName(), element.getText());
+    //                    System.out.println(element.getName()+"===>"+element.getText());
+                    }
+                }
+                else {
+                    map.put(e.getName(), e.getText());
+    //                System.out.println(e.getName()+"===>"+ e.getText());
+                }
+            }
+
+            // 释放资源
+
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }finally {
+            try {
+                inputStream.close();
+            } catch (IOException ex) {
+                log.error("关闭流出错:" + ex.getMessage());
+            }
+        }
+        inputStream = null;
+
+        return map;
+    }
+
+    /**
      * 文本消息对象转换成xml
      *
      * @param textMessage 文本消息对象
