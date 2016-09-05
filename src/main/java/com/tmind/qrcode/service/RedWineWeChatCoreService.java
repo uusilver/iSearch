@@ -125,8 +125,11 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
 
                                     UserQrCodeModel userQrCodeModel = null;
                                     userQrCodeModel = QueryService.getInstance().findUserQrCodeByUniqueId(conn, uniqueCode);
-                                    //N 表示该标签没有领过奖， 可以继续操作
-                                    if("N".equals(userQrCodeModel.getGet_lottery_flag())){
+                                    //N 表示该标签没有领过奖， 可以继续操作, 并且用户的lottery flag要为Y
+                                    if("N".equals(userQrCodeModel.getLottery_flag())){
+                                        respContent = "感谢您的关注!";
+                                    }
+                                    else if("N".equals(userQrCodeModel.getGet_lottery_flag()) && "Y".equals(userQrCodeModel.getLottery_flag())){
                                         //获得真正的中奖信息
                                         String lotteryResult = sendRedPackage(userQrCodeModel.getLottery_desc());
                                         //不为空说明真的中奖了
