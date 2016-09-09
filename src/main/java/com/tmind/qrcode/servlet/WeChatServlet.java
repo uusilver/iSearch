@@ -22,6 +22,11 @@ import javax.servlet.http.HttpServletResponse;
 public class WeChatServlet extends HttpServlet {
 
     private  static Logger log = Logger.getLogger(WeChatServlet.class);
+
+
+    // 与接口配置信息中的Token要一致
+    private static String token = "315kcCom";
+
     /**
      * 确认请求来自微信服务器
      */
@@ -37,7 +42,7 @@ public class WeChatServlet extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         // 通过检验signature对请求进行校验，若校验成功则原样返回echostr，表示接入成功，否则接入失败
-        if (SignUtil.checkSignature(signature, timestamp, nonce)) {
+        if (SignUtil.checkSignature(signature, timestamp, nonce, token)) {
             out.print(echostr);
         }
         out.close();
@@ -57,7 +62,7 @@ public class WeChatServlet extends HttpServlet {
         String respMessage = null;
         try {
             //替换成红酒的代码服务，进行测试和演示
-            respMessage = RedWineWeChatCoreService.processRequest(request);
+            respMessage = WeChatCoreService.processRequest(request);
         }
         catch (SQLException e) {
             log.error(e.getMessage());

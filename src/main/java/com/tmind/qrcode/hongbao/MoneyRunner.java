@@ -46,10 +46,12 @@ public class MoneyRunner {
 		String result = "";
 		try {
 			result = MoneyUtils.doSendMoney(url, MoneyUtils.createXML(map));
+//			System.out.println(result);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
-		if(result.indexOf("SUCCESS")>0){
+		String resultAfterSplit = result.substring(result.indexOf("result_code"), result.lastIndexOf("result_code"));
+		if(resultAfterSplit.indexOf("SUCCESS")>0){
 			return true;
 		}
 		return false;

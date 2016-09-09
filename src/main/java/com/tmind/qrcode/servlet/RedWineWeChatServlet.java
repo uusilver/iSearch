@@ -19,6 +19,9 @@ import java.sql.SQLException;
 public class RedWineWeChatServlet extends HttpServlet {
 
     private  static Logger log = Logger.getLogger(WeChatServlet.class);
+
+    // 与接口配置信息中的Token要一致
+    private static String token = "hlhj";
     /**
      * 确认请求来自微信服务器
      */
@@ -34,7 +37,7 @@ public class RedWineWeChatServlet extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         // 通过检验signature对请求进行校验，若校验成功则原样返回echostr，表示接入成功，否则接入失败
-        if (SignUtil.checkSignature(signature, timestamp, nonce)) {
+        if (SignUtil.checkSignature(signature, timestamp, nonce, token)) {
             out.print(echostr);
         }
         out.close();

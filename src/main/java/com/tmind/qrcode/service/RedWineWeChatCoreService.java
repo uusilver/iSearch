@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +28,7 @@ public class RedWineWeChatCoreService{
 
 private static Logger log = Logger.getLogger(WeChatCoreService.class);
 
+    private static final String NO_WIN = "谢谢惠顾，感谢您对华粮集团的支持与厚爱，我们将以您的名义捐助1元钱到华粮集团爱心基金会，到时会邀您一起参加爱心捐助活动！";
         /**
          * 处理微信发来的请求
          *
@@ -104,6 +106,20 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                     else if (eventType.equals(MessageUtil.SCANCODE_WAITMSG)) {
                         //事件推送
                         log.info("江苏华粮红酒扫码账号:"+fromUserName);
+
+                        //判断时间:
+                        Calendar cal = Calendar.getInstance();// 当前日期
+                        int hour = cal.get(Calendar.HOUR_OF_DAY);// 获取小时
+                        int minute = cal.get(Calendar.MINUTE);// 获取分钟
+                        int minuteOfDay = hour * 60 + minute;// 从0:00分开是到目前为止的分钟数
+                        final int start = 0* 60;// 起始时间 00:00的分钟数
+                        final int end = 8 * 60;// 结束时间 8:00的分钟数
+                        if (minuteOfDay >= start && minuteOfDay <= end) {
+                                respContent = "请您于早上八点到晚间12点参与兑奖活动！";
+                                textMessage.setContent(respContent);
+                                respMessage = MessageUtil.textMessageToXml(textMessage);
+                            return respMessage;
+                        }
                         //将扫码账号保存在缓存里
 
                         try {
@@ -122,13 +138,11 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                             try {
                                     conn = DBUtil.getConnection();
                                     //必须使用一个transaction来做这些服务
-                                    conn.setAutoCommit(false);
-
                                     UserQrCodeModel userQrCodeModel = null;
                                     userQrCodeModel = QueryService.getInstance().findUserQrCodeByUniqueId(conn, uniqueCode);
                                     //N 表示该标签没有领过奖， 可以继续操作, 并且用户的lottery flag要为Y
                                     if("N".equals(userQrCodeModel.getLottery_flag())){
-                                        respContent = "未中奖，感谢您的关注!";
+                                        respContent = NO_WIN;
                                     }
                                     else if("N".equals(userQrCodeModel.getGet_lottery_flag()) && "Y".equals(userQrCodeModel.getLottery_flag())){
                                         //获得真正的中奖信息
@@ -161,21 +175,53 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                                                 if(MoneyRunner.sendRealRedPackage(fromUserName, 100, uniqueCode)){
                                                     respContent = lotteryResult;
                                                 }else{
-                                                    respContent = "很遗憾，您未能中奖!";
+                                                    respContent = NO_WIN;
                                                 }
+                                            }else if("2".equals(userQrCodeModel.getLottery_desc())){
+                                                if(MoneyRunner.sendRealRedPackage(fromUserName, 100*2, uniqueCode)){
+                                                    respContent = lotteryResult;
+                                                }else{
+                                                    respContent = NO_WIN;
+                                                }
+                                            }else if("3".equals(userQrCodeModel.getLottery_desc())){
+                                                if(MoneyRunner.sendRealRedPackage(fromUserName, 100*3, uniqueCode)){
+                                                    respContent = lotteryResult;
+                                                }else{
+                                                    respContent = NO_WIN;
+                                                }
+                                            }else if("5".equals(userQrCodeModel.getLottery_desc())){
+                                                if(MoneyRunner.sendRealRedPackage(fromUserName, 100*5, uniqueCode)){
+                                                    respContent = lotteryResult;
+                                                }else{
+                                                    respContent = NO_WIN;
+                                                }
+                                            }else if("10".equals(userQrCodeModel.getLottery_desc())){
+                                                if(MoneyRunner.sendRealRedPackage(fromUserName, 100*10, uniqueCode)){
+                                                    respContent = lotteryResult;
+                                                }else{
+                                                    respContent = NO_WIN;
+                                                }
+                                            }else if("50".equals(userQrCodeModel.getLottery_desc())){
+                                                if(MoneyRunner.sendRealRedPackage(fromUserName, 100*50, uniqueCode)){
+                                                    respContent = lotteryResult;
+                                                }else{
+                                                    respContent = NO_WIN;
+                                                }
+                                            }else if("90".equals(userQrCodeModel.getLottery_desc())){
+                                                respContent = lotteryResult;
+                                            }else if("91".equals(userQrCodeModel.getLottery_desc())){
+                                                respContent = lotteryResult;
                                             }else if("99".equals(userQrCodeModel.getLottery_desc())){
+                                                respContent = lotteryResult;
+                                            }else if("10000".equals(userQrCodeModel.getLottery_desc())){
                                                 respContent = lotteryResult;
                                             }
 
                                             //-----------------------------------------------------------------------
-                                            //commit
-                                            conn.commit();
-
 
                                         }else{
-                                            respContent = "很遗憾，您未能中奖!";
+                                            respContent = NO_WIN;
                                         }
-                                        conn.commit();
                                     }else{
                                         //领过奖，返回推送消息
                                         respContent = "您已经参与过抽奖活动，感谢您的支持!";
@@ -184,7 +230,7 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                                 }
                                 catch (Exception e) {
                                     //不再roll back
-                                    respContent = "很遗憾，您未能中奖!";
+                                    respContent = NO_WIN;
                                     log.error("红包Error:"+e.getMessage());
                                 }
                                 finally {
@@ -266,6 +312,7 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
          90: 山地自行车<br/>
          91: 手机<br/>
          92: 泰国六日双飞游<br/>
+         10000: 无任何中奖信息<br/>
      * @param lotteryDesc
      * @return
      *
@@ -278,9 +325,30 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
         }else if("2".equals(lotteryDesc)){
             //发送两元红包
             result = "恭喜您获得了两元现金红包奖励";
+        }else if("3".equals(lotteryDesc)){
+            //发送两元红包
+            result = "恭喜您获得了三元现金红包奖励";
+        }else if("5".equals(lotteryDesc)){
+            //发送两元红包
+            result = "恭喜您获得了五元现金红包奖励";
+        }else if("10".equals(lotteryDesc)){
+            //发送两元红包
+            result = "恭喜您获得了十元现金红包奖励";
+        }else if("50".equals(lotteryDesc)){
+            //发送两元红包
+            result = "恭喜您获得了五十元现金红包奖励";
+        }else if("90".equals(lotteryDesc)){
+            //发送两元红包
+            result = "恭喜您获得了山地自行车一辆，识别码:\"+uniqueCode+\"，请保留好此条消息，凭完好的酒瓶和中奖二维码标签实物联系官方对付，联系电话:025-XXXXXXX";
+        }else if("91".equals(lotteryDesc)){
+            //发送两元红包
+            result = "恭喜您获得了手机一台，识别码:\"+uniqueCode+\"，请保留好此条消息，凭完好的酒瓶和中奖二维码标签实物联系官方对付，联系电话:025-XXXXXXX";
         }else if("99".equals(lotteryDesc)){
             //发送两元红包
             result = "恭喜您获得了泰国双飞六日游，识别码:"+uniqueCode+"，请保留好此条消息，凭完好的酒瓶和中奖二维码标签实物联系官方对付，联系电话:025-XXXXXXX";
+        }else if("10000".equals(lotteryDesc)){
+            //未中奖
+            result = NO_WIN;
         }
 
         return  result;
