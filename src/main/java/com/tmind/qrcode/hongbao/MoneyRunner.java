@@ -28,16 +28,16 @@ public class MoneyRunner {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("nonce_str", MoneyUtils.buildRandom());//随机字符串
 		map.put("mch_billno", orderNNo);//商户订单
-		map.put("mch_id", "1343381101");//商户号
-		map.put("wxappid", "wx3f6a7a3ab9e7c065");//商户appid
-		map.put("nick_name", "南京安查通信息技术有限公司");//提供方名称
-		map.put("send_name", "315快查");//用户名
+		map.put("mch_id", "1383507002");//商户号
+		map.put("wxappid", "wxb3958b46e398b477");//商户appid
+		map.put("nick_name", "江苏省华粮集团");//提供方名称
+		map.put("send_name", "江苏华粮");//用户名
 		map.put("re_openid", openId);//用户openid
 		map.put("total_amount", money);//付款金额
 		map.put("min_value", money);//最小红包
 		map.put("max_value", money);//最大红包
 		map.put("total_num", 1);//红包发送总人数
-		map.put("wishing", "欢迎光临");//红包祝福语
+		map.put("wishing", "购物抽奖");//红包祝福语
 		map.put("client_ip", "127.0.0.1");//ip地址
 		map.put("act_name", "购物抽奖");//活动名称
 		map.put("remark", "购物抽奖");//备注

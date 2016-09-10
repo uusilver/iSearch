@@ -36,10 +36,10 @@ import org.apache.http.util.EntityUtils;
 
 
 public class MoneyUtils {
-	private static String appid = "wx3f6a7a3ab9e7c065";// 应用ID
-	private static String appsecret = "90ab422d5a2c61880fe5bd238b96522b";// 应用密钥
-	private static String partner = "1343381101";// 微信支付商户号
-	private static String partnerkey = "5jbz1pzpbfwrbp2itn8zxs5cv6rsah7c";// 微信支付内的API KEY, 建议重置后使用
+	private static String appid = "wxb3958b46e398b477";// 应用ID
+	private static String appsecret = "beb85dd4b786ee5753b0a7ad794954ec";// 应用密钥
+	private static String partner = "1383507002";// 微信支付商户号
+	private static String partnerkey = "n7jPj8DGVEThBlgilj225ahIWwpRLYAs";// 微信支付内的API KEY, 建议重置后使用
 	private static String charset = "UTF-8";
 
 	/**
@@ -133,12 +133,12 @@ public class MoneyUtils {
 	 */
 
 	final static String KEYSTORE_FILE = "E:/apiclient_cert.p12";
-	final static String KEYSTORE_PASSWORD = "1343381101"; //这里写密码..默认是你的MCHID
+	final static String KEYSTORE_PASSWORD = "1383507002"; //这里写密码..默认是你的MCHID
 	
 	public static String doSendMoney(String url, String data) throws Exception {
 		KeyStore keyStore  = KeyStore.getInstance("PKCS12");
 		//  FileInputStream instream = new FileInputStream(new File(KEYSTORE_FILE));//P12文件目录
-		InputStream instream = MoneyUtils.class.getResourceAsStream("/315kc_apiclient_cert.p12");
+		InputStream instream = MoneyUtils.class.getResourceAsStream("/hl_hj_apiclient_cert.p12");
         try {
             keyStore.load(instream, KEYSTORE_PASSWORD.toCharArray());//这里写密码..默认是你的MCHID
         } finally {
