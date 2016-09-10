@@ -28,7 +28,7 @@ public class MenuService {
 
         if (null != at) {
             // 调用接口创建菜单
-            int result = WeixinUtil.createMenu(getMenu(), at.getToken());
+            int result = WeixinUtil.createMenu(getHlHjMenu(), at.getToken());
 
             // 判断菜单创建结果
             if (0 == result)
@@ -45,7 +45,7 @@ public class MenuService {
      *
      * @return
      */
-    private static Menu getMenu() {
+    private static Menu get315KCMenu() {
         CommonButton btn11 = new CommonButton();
         btn11.setName("\ue212扫一扫");
 //        btn11.setType("scancode_push");
@@ -99,6 +99,67 @@ public class MenuService {
          */
         Menu menu = new Menu();
         menu.setButton(new Button[] { btn11, mainBtn2, mainBtn3 });
+        return menu;
+    }
+
+    //华粮集团菜单创建
+    private static Menu getHlHjMenu() {
+
+
+        CommonButton btn11 = new CommonButton();
+        btn11.setName("关于我们");
+        btn11.setType("click");
+        btn11.setKey("11");
+//
+        CommonButton btn12 = new CommonButton();
+        btn12.setName("合作加盟");
+        btn12.setType("click");
+        btn12.setKey("12");
+
+        CommonButton btn13 = new CommonButton();
+        btn13.setName("产品中心");
+        btn13.setType("view");
+        btn13.setUrl("http://h.eqxiu.com/s/02Hr1Nhe");
+
+        CommonButton btn14 = new CommonButton();
+        btn14.setName("联系我们");
+        btn14.setType("click");
+        btn14.setKey("13");
+
+        CommonButton btn15 = new CommonButton();
+        btn15.setName("华粮酒学堂");
+        btn15.setType("click");
+        btn15.setKey("14");
+
+        //联购商城
+        CommonButton btn21 = new CommonButton();
+        btn21.setName("联购商城");
+        btn21.setType("view");
+        btn21.setUrl("http://weidian.com/?userid=707090");
+
+        //扫一扫按钮
+        CommonButton btn31 = new CommonButton();
+        btn31.setName("\ue212扫一扫");
+//        btn11.setType("scancode_push");
+        btn31.setType("scancode_waitmsg");
+        btn31.setKey("31");
+
+
+        ComplexButton mainBtn1 = new ComplexButton();
+        mainBtn1.setName("@点我");
+        mainBtn1.setSub_button(new Button[] { btn11, btn12, btn13, btn14, btn15});
+//
+
+
+        /**
+         * 这是公众号xiaoqrobot目前的菜单结构，每个一级菜单都有二级菜单项<br>
+         *
+         * 在某个一级菜单下没有二级菜单的情况，menu该如何定义呢？<br>
+         * 比如，第三个一级菜单项不是“更多体验”，而直接是“幽默笑话”，那么menu应该这样定义：<br>
+         * menu.setButton(new Button[] { mainBtn1, mainBtn2, btn33 });
+         */
+        Menu menu = new Menu();
+        menu.setButton(new Button[] { mainBtn1, btn21, btn31 });
         return menu;
     }
 }

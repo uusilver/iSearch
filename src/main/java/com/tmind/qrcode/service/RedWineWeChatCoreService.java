@@ -3,6 +3,7 @@ package com.tmind.qrcode.service;
 import com.tmind.qrcode.hongbao.MoneyRunner;
 import com.tmind.qrcode.model.UserProductModel;
 import com.tmind.qrcode.model.UserQrCodeModel;
+import com.tmind.qrcode.resp.Article;
 import com.tmind.qrcode.resp.TextMessage;
 import com.tmind.qrcode.util.DBUtil;
 import com.tmind.qrcode.util.Ehcache;
@@ -14,10 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by lijunying on 16/9/1.
@@ -246,12 +244,46 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                     else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
                         // 事件KEY值，与创建自定义菜单时指定的KEY值对应
                         String eventKey = requestMap.get("EventKey");
-
+                        List<Article> articleList = new ArrayList<Article>();
                         if (eventKey.equals("11")) {
-                            respContent = "点击事件";
+                            //关于我们
+                            Article a = new Article();
+                            a.setTitle("华粮集团简介");
+                            a.setPicUrl("http://mmbiz.qpic.cn/mmbiz_jpg/jCTeKYNNgnep3icibUXJaIwnlUOIZEBjl5XwbstR2owMq7ohUxk7zMRq8EPRKpgHuLsyMTibS3KCSo0aOiaoDfS8Eg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1");
+                            a.setDescription("江苏华粮国际贸易（集团）有限公司（简称：华粮集团），是专业从事有机食品及相关产业开发");
+                            a.setUrl("http://mp.weixin.qq.com/s?__biz=MzI2MzQzNTkyNQ==&tempkey=NsKA8YXweSn%2FyXPUUpHtbeWcC5CMCPwEB3bAOJigdCsisDkc1wYQbU5pXdv5qGKDLcr8Ep7YdhzUqYxRWbHnxanlkMtxUm5XAsce1DU8eYsdUpx8ODTD9du1z9%2Fl5BN%2BNDHLrWNagIhDL9SWCv85LA%3D%3D&#rd");
+                            articleList.add(a);
                         }
-                        else if (eventKey.equals("32")) {
-                            respContent = "即将开放！";
+                        else if (eventKey.equals("12")) {
+                            //合作加盟
+                            Article a = new Article();
+                            a.setTitle("合作加盟");
+                            a.setPicUrl("http://mmbiz.qpic.cn/mmbiz_jpg/jCTeKYNNgnep3icibUXJaIwnlUOIZEBjl5XwbstR2owMq7ohUxk7zMRq8EPRKpgHuLsyMTibS3KCSo0aOiaoDfS8Eg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1");
+                            a.setDescription("1、有合法经营酒类产品相关手续，公司有一定规模；\n" +
+                                             "2、有一定的酒类或食品饮料销售能力及经验");
+                            a.setUrl("http://mp.weixin.qq.com/s?__biz=MzI2MzQzNTkyNQ==&mid=100000004&idx=1&sn=500b8a4747545b2aff944d396018cc7e&scene=18#wechat_redirect");
+                            articleList.add(a);
+                        }else if(eventKey.equals("13")){
+                            //联系我们
+                            Article a = new Article();
+                            a.setTitle("联系我们");
+                            a.setPicUrl("http://mmbiz.qpic.cn/mmbiz/DEELES0vbJn35gkPrHFFRhtnnRDicSBpkmQ7E7kM0jV2icgtxJDXngEt3Jficaz55rOibPm9tZy6uMeNaaMuefOMPA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1");
+                            a.setDescription("华粮微信公众号：hualiang_2005");
+                            a.setUrl("http://mp.weixin.qq.com/s?__biz=MzI2MzQzNTkyNQ==&mid=100000006&idx=1&sn=51b50e3e751e4cb206c96e4bc1c5bcec&scene=1&srcid=0910D8WixyJokYsR8rFUCGte#rd");
+                            articleList.add(a);
+                        }else if(eventKey.equals("14")){
+                            //华粮酒学堂
+                            Article a = new Article();
+                            a.setTitle("华粮酒课堂之葡萄酒该怎么品？");
+                            a.setPicUrl("http://mmbiz.qpic.cn/mmbiz/DEELES0vbJn35gkPrHFFRhtnnRDicSBpkmQ7E7kM0jV2icgtxJDXngEt3Jficaz55rOibPm9tZy6uMeNaaMuefOMPA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1");
+                            a.setDescription("葡萄酒怎么品\n" +
+                                    "（一）品酒\n" +
+                                    "品酒可区分成五个基本步骤：颜色、摇晃、闻酒、品尝、回味\n" +
+                                    "颜色\n" +
+                                    "想要看出葡萄酒的颜色");
+                            a.setUrl("http://mp.weixin.qq.com/s?__biz=MzI2MzQzNTkyNQ==&mid=100000012&idx=1&sn=3bd72218c087271de114fb1e815d417e&scene=1&srcid=09105g7YTKGoQVt7SuSJvuzX#rd");
+                            articleList.add(a);
+
                         }
                     }
                 }
