@@ -4,6 +4,7 @@ import com.tmind.qrcode.hongbao.MoneyRunner;
 import com.tmind.qrcode.model.UserProductModel;
 import com.tmind.qrcode.model.UserQrCodeModel;
 import com.tmind.qrcode.resp.Article;
+import com.tmind.qrcode.resp.NewsMessage;
 import com.tmind.qrcode.resp.TextMessage;
 import com.tmind.qrcode.util.DBUtil;
 import com.tmind.qrcode.util.Ehcache;
@@ -283,9 +284,19 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                                     "想要看出葡萄酒的颜色");
                             a.setUrl("http://mp.weixin.qq.com/s?__biz=MzI2MzQzNTkyNQ==&mid=100000012&idx=1&sn=3bd72218c087271de114fb1e815d417e&scene=1&srcid=09105g7YTKGoQVt7SuSJvuzX#rd");
                             articleList.add(a);
-
                         }
-                    }
+                        NewsMessage newsMessage = new NewsMessage();
+                        newsMessage.setToUserName(fromUserName);
+                        newsMessage.setFromUserName(toUserName);
+                        newsMessage.setCreateTime(new Date().getTime());
+                        newsMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
+                        newsMessage.setFuncFlag(0);
+                        newsMessage.setArticleCount(articleList.size());
+                        newsMessage.setArticles(articleList);
+                        respMessage = MessageUtil.newsMessageToXml(newsMessage);
+                        return respMessage;
+
+                    }//end of click function
                 }
                 textMessage.setContent(respContent);
                 respMessage = MessageUtil.textMessageToXml(textMessage);

@@ -19,7 +19,8 @@ public class MenuService {
 
     public static void main(String[] args) {
         // 第三方用户唯一凭证
-        String appId = "wx3f6a7a3ab9e7c065";
+
+        String appId = "wxb3958b46e398b477";
         // 第三方用户唯一凭证密钥
         String appSecret = "90ab422d5a2c61880fe5bd238b96522b";
 
