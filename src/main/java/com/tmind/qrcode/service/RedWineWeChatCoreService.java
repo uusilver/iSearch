@@ -366,7 +366,7 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
          50: 50元现金红包<br/>
          90: 山地自行车<br/>
          91: 手机<br/>
-         92: 泰国六日双飞游<br/>
+         99: 泰国六日双飞游<br/>
          10000: 无任何中奖信息<br/>
      * @param lotteryDesc
      * @return
