@@ -132,11 +132,13 @@ public class MenuService {
         btn15.setType("click");
         btn15.setKey("14");
 
+
         //联购商城
         CommonButton btn21 = new CommonButton();
         btn21.setName("联购商城");
         btn21.setType("view");
         btn21.setUrl("http://weidian.com/?userid=707090");
+
 
         //扫一扫按钮
         CommonButton btn31 = new CommonButton();

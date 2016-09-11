@@ -88,7 +88,7 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                     // 订阅
                     if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
                         log.info("关注账号:"+fromUserName);
-                        respContent = "感谢您关注315快查公共号\n点击下方扫一扫按钮\n重新扫码即可查询产品信息";
+                        respContent = "感谢您关注江苏华粮集团公共号\n点击下方扫一扫按钮\n重新扫码即可在线抽奖";
                     }
                     // 取消订阅
                     else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
@@ -252,7 +252,7 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                             a.setTitle("华粮集团简介");
                             a.setPicUrl("http://mmbiz.qpic.cn/mmbiz_jpg/jCTeKYNNgnep3icibUXJaIwnlUOIZEBjl5XwbstR2owMq7ohUxk7zMRq8EPRKpgHuLsyMTibS3KCSo0aOiaoDfS8Eg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1");
                             a.setDescription("江苏华粮国际贸易（集团）有限公司（简称：华粮集团），是专业从事有机食品及相关产业开发");
-                            a.setUrl("http://mp.weixin.qq.com/s?__biz=MzI2MzQzNTkyNQ==&tempkey=NsKA8YXweSn%2FyXPUUpHtbeWcC5CMCPwEB3bAOJigdCsisDkc1wYQbU5pXdv5qGKDLcr8Ep7YdhzUqYxRWbHnxanlkMtxUm5XAsce1DU8eYsdUpx8ODTD9du1z9%2Fl5BN%2BNDHLrWNagIhDL9SWCv85LA%3D%3D&#rd");
+                            a.setUrl("http://mp.weixin.qq.com/s?__biz=MzI2MzQzNTkyNQ==&mid=100000002&idx=1&sn=df1128233cb70343be98ad2923783fd0&scene=1&srcid=0910JIqhPjnjyiQllksShl6Q#rd");
                             articleList.add(a);
                         }
                         else if (eventKey.equals("12")) {
@@ -276,6 +276,18 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                             //华粮酒学堂
                             Article a = new Article();
                             a.setTitle("华粮酒课堂之葡萄酒该怎么品？");
+                            a.setPicUrl("http://mmbiz.qpic.cn/mmbiz/DEELES0vbJn35gkPrHFFRhtnnRDicSBpkmQ7E7kM0jV2icgtxJDXngEt3Jficaz55rOibPm9tZy6uMeNaaMuefOMPA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1");
+                            a.setDescription("葡萄酒怎么品\n" +
+                                    "（一）品酒\n" +
+                                    "品酒可区分成五个基本步骤：颜色、摇晃、闻酒、品尝、回味\n" +
+                                    "颜色\n" +
+                                    "想要看出葡萄酒的颜色");
+                            a.setUrl("http://mp.weixin.qq.com/s?__biz=MzI2MzQzNTkyNQ==&mid=100000012&idx=1&sn=3bd72218c087271de114fb1e815d417e&scene=1&srcid=09105g7YTKGoQVt7SuSJvuzX#rd");
+                            articleList.add(a);
+                        }else if(eventKey.equals("15")){
+                            //华粮酒学堂
+                            Article a = new Article();
+                            a.setTitle("活动中心");
                             a.setPicUrl("http://mmbiz.qpic.cn/mmbiz/DEELES0vbJn35gkPrHFFRhtnnRDicSBpkmQ7E7kM0jV2icgtxJDXngEt3Jficaz55rOibPm9tZy6uMeNaaMuefOMPA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1");
                             a.setDescription("葡萄酒怎么品\n" +
                                     "（一）品酒\n" +
