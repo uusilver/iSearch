@@ -22,7 +22,7 @@ public class MenuService {
 
         String appId = "wxb3958b46e398b477";
         // 第三方用户唯一凭证密钥
-        String appSecret = "90ab422d5a2c61880fe5bd238b96522b";
+        String appSecret = "beb85dd4b786ee5753b0a7ad794954ec";
 
         // 调用接口获取access_token
         AccessToken at = WeixinUtil.getAccessToken(appId, appSecret);
