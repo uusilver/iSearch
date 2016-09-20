@@ -1,0 +1,87 @@
+@charset "utf-8";
+/* CSS Document */
+
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, abbr, address, cite, code, del, dfn, em, img, sub, sup, var, i, dl, dd, dt, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, hgroup, menu, nav, section, time, mark, audio, video { padding: 0; margin: 0; border: 0; outline: 0; background: transparent;}
+
+textarea { margin:0;}
+
+/*html5 for html5.js*/
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block;} 
+
+ol, ul, li { list-style: none;}
+h1,h2,h3,h4,h5,h6 { font-weight:normal;}
+input, select { vertical-align:middle; border:medium none; outline:none;}
+table { border-collapse:collapse; border-spacing:0; /*table-layout:fixed;*/}
+
+a { text-decoration:none; padding:0; margin:0;}
+a{ blr:expression(this.onFocus=this.blur());  /* IE Opera */ outline:none;   /* FF Opera */ }
+a:focus{ -moz-outline-style: none; }  /* FF */
+
+/*清除浮动*/
+.clear { clear: both; width: 0; height: 0; padding:0; margin:0; overflow: 0; font-size: 0; line-height: 0;}
+.clearfix { zoom:1; _height:1px;}
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+
+.clearBox { clear:both; display:block; width:100%; padding:15px 0; font-size:16px; line-height:1.5em; text-align:center; color:#666; font-weight:bold;}
+.clearBox span { color:#ccc;}
+.orange_color { color:orange;}
+
+/*清楚文字内容
+兼容：√ ie6.0 、 7.0 、8.0、firefox 3.010 
+*/
+.txtHide { line-height:0; font-size:0; overflow:hidden;}
+
+/*用于seo不显示的内容*/
+.seo { position: absolute; visibility: hidden; top: 0; left: 0; width: 0; height: 0; overflow: hidden;}
+.seo, .hideImg { position: absolute; visibility: hidden; top: 0; left: 0; width: 0; height: 0; overflow: hidden;}
+.hideImg { overflow: hidden;}
+.hideImg img { width: 0; height: 0; overflow: hidden;}
+
+/*左浮动和右浮动*/
+.float_l { float: left; }
+.float_r { float: right;}
+
+body, html { font-family:Microsoft YaHei,'宋体'; width:100%; color:#ccc;}
+/*点击弹出层*/
+.mydiv {  
+background-color: #FFCC66;  
+border: 1px solid #f00;  
+text-align: center;  
+line-height: 40px;  
+font-size: 12px;  
+font-weight: bold;  
+z-index:999;  
+width: 250px;  
+height: 450px;  
+left:50%;  
+top:20%;  
+margin-left:-120px!important;/*FF IE7 该值为本身宽的一半 */  
+margin-top:-60px!important;/*FF IE7 该值为本身高的一半*/  
+margin-top:0px;  
+position:fixed!important;/* FF IE7*/  
+position:absolute;/*IE6*/  
+_top:       expression(eval(document.compatMode &&  
+document.compatMode=='CSS1Compat') ?  
+documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/  
+document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);/*IE5 IE5.5*/  
+}  
+.bg,.popIframe {  
+background-color: #666; display:none;  
+width: 100%;  
+height: 100%;  
+left:0;  
+top:0;/*FF IE7*/  
+filter:alpha(opacity=50);/*IE*/  
+opacity:0.5;/*FF*/  
+z-index:1;  
+position:fixed!important;/*FF IE7*/  
+position:absolute;/*IE6*/  
+_top:       expression(eval(document.compatMode &&  
+document.compatMode=='CSS1Compat') ?  
+documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/  
+document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);  
+}  
+.popIframe {  
+filter:alpha(opacity=0);/*IE*/  
+opacity:0;/*FF*/  
+}  
