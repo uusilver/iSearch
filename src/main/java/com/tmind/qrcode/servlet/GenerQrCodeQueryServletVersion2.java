@@ -51,7 +51,7 @@ public class GenerQrCodeQueryServletVersion2 extends HttpServlet {
             Connection conn = null;
             try{
                 conn = DBUtil.getConnection();
-                UserQrCodeModel userQrCodeModel = QueryService.getInstance().findUserQrCodeByUniqueId(conn, unique);
+                UserQrCodeModel userQrCodeModel = QueryService.getInstance().findUserQrCodeByUniqueId(unique);
                 //获得用户IP
                 String vistorIP = CommonService.getInstance().getRemoteUserIpAddr(request);
                 //TODO add logger

@@ -145,7 +145,7 @@ public class WeChatCoreService {
                                     if(encodeFlag) {
                                         userQrCodeModel = QueryService.getInstance().findUserQrCodeByPass(conn, getPassCode);
                                     }else{
-                                        userQrCodeModel = QueryService.getInstance().findUserQrCodeByUniqueId(conn, uniqueCode);
+                                        userQrCodeModel = QueryService.getInstance().findUserQrCodeByUniqueId(uniqueCode);
                                     }
                                 }
                                 //获得用户IP

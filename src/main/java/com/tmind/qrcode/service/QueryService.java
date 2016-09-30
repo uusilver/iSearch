@@ -25,13 +25,17 @@ public class QueryService {
     private QueryService() {
     }
 
-    public UserQrCodeModel findUserQrCodeByUniqueId(Connection conn, String uniqueId) throws SQLException {
+    public UserQrCodeModel findUserQrCodeByUniqueId(String uniqueId) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         UserQrCodeModel userQrCodeModel = new UserQrCodeModel();
-        String sql = "select id, user_id, query_times, product_id, query_date, product_batch, cache_flag, get_lottery_flag ,lottery_flag, lottery_desc, lottery_check_flag from M_USER_QRCODE where query_match=?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, uniqueId);
-        ResultSet rs = ps.executeQuery();
         try{
+            conn = DBUtil.getConnection();
+            String sql = "select id, user_id, query_times, product_id, query_date, product_batch, cache_flag, get_lottery_flag ,lottery_flag, lottery_desc, lottery_check_flag from M_USER_QRCODE where query_match=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, uniqueId);
+            rs = ps.executeQuery();
             if(rs.next()){
                 userQrCodeModel.setId(rs.getInt("id"));
                 userQrCodeModel.setQueryTimes(rs.getInt("query_times"));
