@@ -127,7 +127,7 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
 
                             //http://weixin.qq.com/r/Vj-i_pDE0M2vrdSZ92pE/99 {99代表唯一码}{前面是微信公共号的关注链接}
                             //获取唯一识别码
-                            uniqueCode = url.split("\\?")[1];
+                            uniqueCode = url.split("\\?")[1].trim();
                             //获取唯一标示码
                             String result = "错误，数据不存在!";
                             String productResult = null;
