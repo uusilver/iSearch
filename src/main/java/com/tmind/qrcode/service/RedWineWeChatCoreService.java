@@ -139,13 +139,17 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                                     //必须使用一个transaction来做这些服务
                                     UserQrCodeModel userQrCodeModel = null;
                                     userQrCodeModel = QueryService.getInstance().findUserQrCodeByUniqueId(conn, uniqueCode);
+                                    log.info(fromUserName+"中奖信息:"+userQrCodeModel.getGet_lottery_flag()+", "+userQrCodeModel.getLottery_flag());
+                                log.info("唯一识别码:"+uniqueCode +" 长度:"+uniqueCode.length());
                                     //N 表示该标签没有领过奖， 可以继续操作, 并且用户的lottery flag要为Y
                                     if("N".equals(userQrCodeModel.getLottery_flag())){
                                         respContent = NO_WIN;
                                     }
                                     else if("N".equals(userQrCodeModel.getGet_lottery_flag()) && "Y".equals(userQrCodeModel.getLottery_flag())){
                                         //获得真正的中奖信息
+
                                         String lotteryResult = sendRedPackage(userQrCodeModel.getLottery_desc(), uniqueCode);
+                                        log.info("中奖结果:"+lotteryResult);
                                         //不为空说明真的中奖了
                                         if(lotteryResult!=null){
                                             //更新表
@@ -394,10 +398,10 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
             result = "恭喜您获得了五十元现金红包奖励";
         }else if("90".equals(lotteryDesc)){
             //发送两元红包
-            result = "恭喜您获得了山地自行车一辆，识别码:\"+uniqueCode+\"，请保留好此条消息，凭完好的酒瓶和中奖二维码标签实物联系官方对付，联系电话:025-87157039";
+            result = "恭喜您获得了山地自行车一辆，识别码:"+uniqueCode+"，请保留好此条消息，凭完好的酒瓶和中奖二维码标签实物联系官方对付，联系电话:025-87157039";
         }else if("91".equals(lotteryDesc)){
             //发送两元红包
-            result = "恭喜您获得了华为手机一台，识别码:\"+uniqueCode+\"，请保留好此条消息，凭完好的酒瓶和中奖二维码标签实物联系官方对付，联系电话:025-87157039";
+            result = "恭喜您获得了华为手机一台，识别码:"+uniqueCode+"，请保留好此条消息，凭完好的酒瓶和中奖二维码标签实物联系官方对付，联系电话:025-87157039";
         }else if("99".equals(lotteryDesc)){
             //发送两元红包
             result = "恭喜您获得了泰国双飞六日游，识别码:"+uniqueCode+"，请保留好此条消息，凭完好的酒瓶和中奖二维码标签实物联系官方对付，联系电话:025-87157039";
