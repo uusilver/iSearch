@@ -19,9 +19,9 @@ h1.header{text-align:left;font-weight:normal;font-size:18px;color:#fff; letter-s
 
 
 @media screen and (max-width:469px){
-h1.header{padding-top:32px;line-height:25px;}
+h1.header{padding-top:32px;}
 }
-header.d{background:url(../images/logotipo-peronda.png) 18px  no-repeat;background-color:#EFD737;height:95px;line-height:25px;}
+header.d{background:url(../images/logotipo-peronda.png)no-repeat center;background-color:#FFE401;height:350px;}
 
 aside.result{color:#0E69BB;font-size:12px;text-align:right;padding:10px 0}
 

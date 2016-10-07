@@ -8,7 +8,7 @@ $(function () {
     $("#warn").hide();
     try {
         var uniqueKey = window.location.href.split("?")[1];
-        if (uniqueKey.length>16) {
+        if (uniqueKey.length>19) {
             $("#warn").show();
             $("#green").hide();
         } else {
