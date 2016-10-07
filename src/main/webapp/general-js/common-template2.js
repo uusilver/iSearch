@@ -8,29 +8,46 @@ $(function () {
     $("#warn").hide();
     try {
         var uniqueKey = window.location.href.split("?")[1];
-        $("#unquieKey").html(uniqueKey);
-        $.get("../../../generalQrCodeQueryServletVersion2"+"?uniqueKey="+uniqueKey,function(result){
-            if(result) {
-                var dataObj=eval("("+result+")");
-                for(var o in dataObj){
-                    switch(dataObj[o].key){
-                        case "productName" : $("#productName").html(dataObj[o].result);break;
-                        case "productFactory" : $("#productFactory").html(dataObj[o].result);break;
-                        case "productOriginalAddress" : $("#productOriginalAddress").html(dataObj[o].result);break;
-                        case "telNo" : $("#telNo").html(dataObj[o].result);break;
-                        case "productAddress" :     $("#productAddress").attr("href", dataObj[o].result);break;
-                        case "queryTimes" :
-                            if(parseInt(dataObj[o].result) >=3 ){
-                                $("#warn").show();
-                                $("#green").hide();
-                            }
-                            $("#queryTimes").html(dataObj[o].result);
-                            break;
+        if (uniqueKey.length>16) {
+            $("#warn").show();
+            $("#green").hide();
+        } else {
+            $("#unquieKey").html(uniqueKey);
+            $.get("../../../generalQrCodeQueryServletVersion2" + "?uniqueKey=" + uniqueKey, function (result) {
+                if (result) {
+                    var dataObj = eval("(" + result + ")");
+                    for (var o in dataObj) {
+                        switch (dataObj[o].key) {
+                            case "productName" :
+                                $("#productName").html(dataObj[o].result);
+                                break;
+                            case "productFactory" :
+                                $("#productFactory").html(dataObj[o].result);
+                                break;
+                            case "productOriginalAddress" :
+                                $("#productOriginalAddress").html(dataObj[o].result);
+                                break;
+                            case "telNo" :
+                                $("#telNo").html(dataObj[o].result);
+                                break;
+                            case "productAddress" :
+                                $("#productAddress").attr("href", dataObj[o].result);
+                                break;
+                            case "queryTimes" :
+                                if (parseInt(dataObj[o].result) >= 3) {
+                                    $("#warn").show();
+                                    $("#green").hide();
+                                }
+                                $("#queryTimes").html(dataObj[o].result);
+                                break;
+                        }
                     }
                 }
-            }
-        })
+
+            })
+        }
     } catch (e) {
         alert("Error");
     }
 })
+

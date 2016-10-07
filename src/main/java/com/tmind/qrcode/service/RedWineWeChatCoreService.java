@@ -224,7 +224,7 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                                         }
                                     }else{
                                         //领过奖，返回推送消息
-                                        respContent = "您已经参与过抽奖活动，感谢您的支持!";
+                                        respContent = "谢谢惠顾，感谢你的支持!";
                                     }
 
                                 }
@@ -395,13 +395,13 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
             result = "恭喜您获得了五十元现金红包奖励";
         }else if("90".equals(lotteryDesc)){
             //发送两元红包
-            result = "恭喜您获得了山地自行车一辆，识别码:"+uniqueCode+"，请保留好此条消息，凭完好的酒瓶和中奖二维码标签实物联系官方对付，联系电话:025-87157039";
+            result = "恭喜您获得了山地自行车一辆，识别码:"+uniqueCode+"，请保留好此条消息，凭完好的酒瓶和中奖二维码标签实物联系当地经销商，或者拨打客服热线电话:400-697-1799,025-87157039";
         }else if("91".equals(lotteryDesc)){
             //发送两元红包
-            result = "恭喜您获得了华为手机一台，识别码:"+uniqueCode+"，请保留好此条消息，凭完好的酒瓶和中奖二维码标签实物联系官方对付，联系电话:025-87157039";
+            result = "恭喜您获得了华为手机一台，识别码:"+uniqueCode+"，请保留好此条消息，凭完好的酒瓶和中奖二维码标签实物联系当地经销商，或者拨打客服热线电话:400-697-1799,025-87157039";
         }else if("99".equals(lotteryDesc)){
             //发送两元红包
-            result = "恭喜您获得了泰国双飞六日游，识别码:"+uniqueCode+"，请保留好此条消息，凭完好的酒瓶和中奖二维码标签实物联系官方对付，联系电话:025-87157039";
+            result = "恭喜您获得了泰国双飞六日游，识别码:"+uniqueCode+"，请保留好此条消息，凭完好的酒瓶和中奖二维码标签实物联系当地经销商，或者拨打客服热线电话:400-697-1799,025-87157039";
         }else if("10000".equals(lotteryDesc)){
             //未中奖
             result = NO_WIN;
