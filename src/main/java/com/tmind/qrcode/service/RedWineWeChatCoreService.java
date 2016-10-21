@@ -224,7 +224,7 @@ private static Logger log = Logger.getLogger(WeChatCoreService.class);
                                         }
                                     }else{
                                         //领过奖，返回推送消息
-                                        respContent = "谢谢惠顾，感谢你的支持!";
+                                        respContent = "谢谢惠顾，感谢您的支持!";
                                     }
 
                                 }

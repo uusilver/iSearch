@@ -35,10 +35,10 @@ public class MakeOrderViaEmailServlet extends HttpServlet {
         if(numberA.length()>0 || numberB.length()>0) {
             if (Integer.valueOf(numberA) > 0) {
                 sb.append("客户:" + receivePerson);
-                sb.append("订购价格为258的柚子:" + numberA + "箱,");
+                sb.append("订购价格为288元的蓝图有机优选:" + numberA + "箱,");
             }
             if (Integer.valueOf(numberB) > 0) {
-                sb.append("价格为358柚子:" + numberB + "箱,");
+                sb.append("价格为588的蓝图有机特选:" + numberB + "箱,");
             }
         }
         sb.append("客户地址是:" + receiveAddr + ",");
@@ -89,7 +89,7 @@ public class MakeOrderViaEmailServlet extends HttpServlet {
             ps.setInt(1, userId);
             rs = ps.executeQuery();
             if (rs.next()) {
-                System.out.println("找到厂家");
+//                System.out.println("找到厂家");
                 String smtp = "smtp.163.com";
                 String from = "13851483034@163.com";
                 String to = rs.getString("user_email");
