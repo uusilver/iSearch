@@ -31,6 +31,16 @@
         <url-pattern>/generalQrCodeQueryServletVersion2</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>HotTraceServlet</servlet-name>
+        <servlet-class>com.tmind.qrcode.servlet.HotTraceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HotTraceServlet</servlet-name>
+        <url-pattern>/hotTraceServlet</url-pattern>
+    </servlet-mapping>
+
+
 
     <servlet>
         <servlet-name>MakeOrderViaEmailServlet</servlet-name>
