@@ -67,6 +67,11 @@ public class GenerQrCodeQueryServletVersion2 extends HttpServlet {
                         String queryTimesFromDatabase = String.valueOf(userQrCodeModel.getQueryTimes());
                         queryTimesModel.setResult(queryTimesFromDatabase);
                     }
+
+                    if(userQrCodeModel.getUserId()==0){
+                        queryTimesModel.setResult("数据库无此数据，谨防假冒");
+                    }
+
                     //拼接动态参数
                     UserProductModel userProductModel = QueryService.getInstance().findUserProductByParams(conn, userQrCodeModel.getProductId(), userQrCodeModel.getBatchNo());
                     List<GeneralResponseModel> list = getProductInfo(productInformationBuilder, userQrCodeModel.getUserId(), userQrCodeModel.getProductId(), userProductModel);
