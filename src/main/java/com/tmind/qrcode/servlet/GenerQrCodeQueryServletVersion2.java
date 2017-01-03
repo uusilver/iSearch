@@ -71,7 +71,10 @@ public class GenerQrCodeQueryServletVersion2 extends HttpServlet {
                     if(userQrCodeModel.getUserId()==0){
                         queryTimesModel.setResult("数据库无此数据，谨防假冒");
                     }
-
+                    //定制信息
+                    GeneralResponseModel lotterDescModel = new GeneralResponseModel();
+                    lotterDescModel.setKey("lotteryDesc");
+                    lotterDescModel.setResult(userQrCodeModel.getLottery_desc());
                     //拼接动态参数
                     UserProductModel userProductModel = QueryService.getInstance().findUserProductByParams(conn, userQrCodeModel.getProductId(), userQrCodeModel.getBatchNo());
                     List<GeneralResponseModel> list = getProductInfo(productInformationBuilder, userQrCodeModel.getUserId(), userQrCodeModel.getProductId(), userProductModel);
@@ -82,6 +85,7 @@ public class GenerQrCodeQueryServletVersion2 extends HttpServlet {
                     //最终结果
                     responseList.add(generalResponseModel);
                     responseList.add(queryTimesModel);
+                    responseList.add(lotterDescModel);
                     responseList.addAll(list);
 //					System.out.println(queryResultStringBuilder.toString());
 
