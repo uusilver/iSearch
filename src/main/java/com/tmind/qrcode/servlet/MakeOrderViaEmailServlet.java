@@ -22,28 +22,41 @@ public class MakeOrderViaEmailServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         response.setContentType("text/html;charset=UTF-8");
-        String numberA = request.getParameter("numberA");
-        String numberB = request.getParameter("numberB");
+        String product = request.getParameter("product");
+        String number = request.getParameter("number");
         String receivePerson = request.getParameter("receivePerson");
         String telno = request.getParameter("telno");
         String receiveAddr = request.getParameter("receiveAddr");
         String comment = request.getParameter("comment");
         String uniqueKey = request.getParameter("uniqueKey");
-
-
         StringBuilder sb = new StringBuilder();
-        if(numberA.length()>0 || numberB.length()>0) {
-            if (Integer.valueOf(numberA) > 0) {
-                sb.append("客户:" + receivePerson);
-                sb.append("订购价格为288元的蓝图有机优选:" + numberA + "箱,");
+
+        if(product!=null && number!=null && product.length()>0 && number.length()>0){
+            sb.append("客户:" + receivePerson);
+            sb.append("订购产品:"+product+"  " + number + "箱,");
+            sb.append("客户的电话是:" + telno + ",");
+            sb.append("客户备注内容:" + comment + "。");
+
+        }else{
+            String numberA = request.getParameter("numberA");
+            String numberB = request.getParameter("numberB");
+            if(numberA.length()>0 || numberB.length()>0) {
+                if (Integer.valueOf(numberA) > 0) {
+                    sb.append("客户:" + receivePerson);
+                    sb.append("订购价格为288元的蓝图有机优选:" + numberA + "箱,");
+                }
+                if (Integer.valueOf(numberB) > 0) {
+                    sb.append("价格为588的蓝图有机特选:" + numberB + "箱,");
+                }
             }
-            if (Integer.valueOf(numberB) > 0) {
-                sb.append("价格为588的蓝图有机特选:" + numberB + "箱,");
-            }
+            sb.append("客户地址是:" + receiveAddr + ",");
+            sb.append("客户的电话是:" + telno + ",");
+            sb.append("客户备注内容:" + comment + "。");
         }
-        sb.append("客户地址是:" + receiveAddr + ",");
-        sb.append("客户的电话是:" + telno + ",");
-        sb.append("客户备注内容:" + comment + "。");
+
+
+
+
         //把数据存入数据库
         Connection conn = null;
         PreparedStatement ps = null;
@@ -93,7 +106,7 @@ public class MakeOrderViaEmailServlet extends HttpServlet {
                 String smtp = "smtp.163.com";
                 String from = "13851483034@163.com";
                 String to = rs.getString("user_email");
-                String subject = "商品订购信息:"+productName;
+                String subject = "来自315快查的商品订购信息";
                 String content = sb.toString();
                 String username = "13851483034@163.com";
                 String password = "19850924";
