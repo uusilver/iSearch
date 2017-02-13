@@ -104,12 +104,12 @@ public class MakeOrderViaEmailServlet extends HttpServlet {
             if (rs.next()) {
 //                System.out.println("找到厂家");
                 String smtp = "smtp.163.com";
-                String from = "13851483034@163.com";
+                String from = "kuaicha315@163.com";
                 String to = rs.getString("user_email");
                 String subject = "来自315快查的商品订购信息";
                 String content = sb.toString();
-                String username = "13851483034@163.com";
-                String password = "19850924";
+                String username = "kuaicha315@163.com";
+                String password = "315kc888315";
                 Mail.send(smtp, from, to, subject, content, username, password);
                 System.out.println("邮件发送成功");
             }

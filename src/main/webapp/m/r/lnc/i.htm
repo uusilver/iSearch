@@ -472,19 +472,23 @@ colorful();
                 var telno = $("#telno").val();
                 var comment = $("#comment").val();
                 var uniqueKey = window.location.href.split("?")[1];
+                if(telno.length>5){
+                    $.post("../y/makeOrderViaEmailServlet",
+                            {
+                                product : product,
+                                number: number,
+                                receivePerson: receivePerson,
+                                telno: telno,
+                                comment: comment,
+                                uniqueKey: uniqueKey
+                            },
+                            function (data) {
+                                alert("订购邮件发送成功!");
+                            })
+                }else{
+                    alert("请输入正确的联系方式!");
+                }
 
-                $.post("../y/makeOrderViaEmailServlet",
-                        {
-                            product : product,
-                            number: number,
-                            receivePerson: receivePerson,
-                            telno: telno,
-                            comment: comment,
-                            uniqueKey: uniqueKey
-                        },
-                        function (data) {
-                            alert("订购邮件发送成功!");
-                        })
 
         })
     });
